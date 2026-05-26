@@ -1,6 +1,6 @@
 # ProEnglish — Victorine
 
-Application d'apprentissage de l'anglais professionnel pour archivistes 
+Application d'apprentissage de l'anglais professionnel
 
 
 ## Modules
