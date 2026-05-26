@@ -1,0 +1,2670 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>ProEnglish — Victorine</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0f9b8e">
+<meta name="description" content="Coaching anglais professionnel pour archivistes — BAD, ONU, UNESCO">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="ProEnglish">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: #f0f4f8;
+    color: #1a1a2e;
+    min-height: 100vh;
+  }
+
+  :root {
+    --ink: #1a1a2e;
+    --ink2: #4a4a6a;
+    --teal: #0f9b8e;
+    --teal-l: #e0f5f3;
+    --teal-d: #097a6f;
+    --gold: #c9861a;
+    --gold-l: #fdf3e3;
+    --rose: #c0385a;
+    --rose-l: #fceef2;
+    --surface: #f0f4f8;
+    --card: #ffffff;
+    --border: rgba(0,0,0,0.09);
+    --radius: 16px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.07);
+  }
+
+  .app {
+    max-width: 780px;
+    margin: 0 auto;
+    background: var(--card);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 40px rgba(0,0,0,0.08);
+  }
+
+  /* TOPBAR */
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--card);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px; color: var(--teal);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .logo-tag {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; font-weight: 600;
+    color: var(--ink2); letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .topbar-right { display: flex; align-items: center; gap: 10px; }
+  .score-pill {
+    font-size: 13px; font-weight: 600; color: var(--gold);
+    background: var(--gold-l); padding: 5px 13px;
+    border-radius: 20px; border: 1px solid #f0d89a;
+  }
+  .mute-btn {
+    cursor: pointer; font-size: 18px;
+    background: none; border: 1px solid var(--border);
+    border-radius: 8px; padding: 5px 11px;
+    color: var(--ink2); transition: background .2s;
+  }
+  .mute-btn:hover { background: var(--teal-l); }
+
+  /* NAV */
+  .nav {
+    display: flex; background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px; overflow-x: auto;
+    position: sticky; top: 57px; z-index: 9;
+  }
+  .nav::-webkit-scrollbar { height: 0; }
+  .nav-tab {
+    padding: 13px 16px; font-size: 13px; font-weight: 600;
+    color: var(--ink2); cursor: pointer;
+    border: none; background: none;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: color .2s, border-color .2s;
+  }
+  .nav-tab:hover { color: var(--teal); }
+  .nav-tab.active { color: var(--teal); border-bottom-color: var(--teal); }
+
+  /* BODY */
+  .body { padding: 24px; flex: 1; }
+
+  .scene { display: none; }
+  .scene.active { display: block; }
+
+  .sec-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px; color: var(--ink); margin-bottom: 4px;
+  }
+  .sec-sub { font-size: 13px; color: var(--ink2); margin-bottom: 20px; line-height: 1.5; }
+
+  /* HOME */
+  .module-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
+  }
+  .mod-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 22px 20px;
+    cursor: pointer;
+    transition: transform .15s, border-color .2s, box-shadow .2s;
+    box-shadow: var(--shadow);
+  }
+  .mod-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--teal);
+    box-shadow: 0 8px 28px -8px rgba(15,155,142,.22);
+  }
+  .mod-icon { font-size: 34px; margin-bottom: 10px; display: block; }
+  .mod-name { font-weight: 600; font-size: 15px; margin-bottom: 5px; }
+  .mod-desc { font-size: 12px; color: var(--ink2); line-height: 1.55; }
+  .mod-count { font-size: 11px; font-weight: 600; color: var(--teal); margin-top: 10px; }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 10px 22px; border-radius: 999px;
+    font-size: 14px; font-weight: 600; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; border: none;
+    transition: transform .12s, opacity .2s;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn:active { transform: scale(.98); }
+  .btn-primary { background: var(--teal); color: #fff; }
+  .btn-ghost { background: var(--card); color: var(--teal); border: 1.5px solid var(--teal); }
+  .btn-sm { font-size: 12px; padding: 6px 14px; }
+
+  /* CAT PILLS */
+  .cat-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+  .cat-btn {
+    font-size: 12px; padding: 6px 14px; border-radius: 999px;
+    background: #f0f4f8; border: 1px solid var(--border);
+    cursor: pointer; color: var(--ink2); font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  .cat-btn.active, .cat-btn:hover { background: var(--teal); color: #fff; border-color: var(--teal); }
+
+  /* FLASHCARDS */
+  .flash-progress { text-align: center; font-size: 13px; color: var(--ink2); margin-bottom: 8px; }
+  .flash-bar { height: 4px; background: #e8eaf0; border-radius: 2px; margin-bottom: 20px; }
+  .flash-bar-fill { height: 100%; background: var(--teal); border-radius: 2px; transition: width .35s; }
+  .flash-card {
+    background: linear-gradient(135deg, #f8fbff 0%, #e8f8f6 100%);
+    border: 1px solid var(--border);
+    border-radius: 24px; padding: 36px 28px;
+    text-align: center; max-width: 480px; margin: 0 auto 20px;
+    cursor: pointer; transition: transform .2s, box-shadow .2s;
+    min-height: 220px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 10px;
+    box-shadow: var(--shadow);
+  }
+  .flash-card:hover { transform: scale(1.01); box-shadow: 0 8px 32px -8px rgba(15,155,142,.18); }
+  .flash-emoji { font-size: 56px; display: block; }
+  .flash-word {
+    font-family: 'DM Serif Display', serif;
+    font-size: 38px; color: var(--teal); line-height: 1.1;
+  }
+  .flash-hint { font-size: 12px; color: var(--ink2); }
+  .flash-translation {
+    font-size: 16px; font-weight: 600; color: var(--gold);
+    background: var(--gold-l); padding: 7px 16px;
+    border-radius: 10px; display: none;
+  }
+  .flash-translation.visible { display: inline-block; }
+  .flash-ctx {
+    font-size: 13px; color: var(--ink2);
+    font-style: italic; line-height: 1.5; display: none;
+    max-width: 360px; text-align: center;
+  }
+  .flash-ctx.visible { display: block; }
+  .flash-controls {
+    display: flex; align-items: center; gap: 14px;
+    justify-content: center; flex-wrap: wrap;
+  }
+  .speak-btn {
+    background: var(--teal-l); border: none; border-radius: 50%;
+    width: 44px; height: 44px; cursor: pointer; font-size: 20px;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: background .2s, transform .15s;
+  }
+  .speak-btn:hover { background: var(--teal); transform: scale(1.05); }
+
+  /* QUIZ */
+  .quiz-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .quiz-progress { font-size: 13px; color: var(--ink2); }
+  .quiz-score-badge {
+    font-size: 12px; font-weight: 600; padding: 4px 12px;
+    border-radius: 20px; background: #e8f9f3; color: #065a30;
+  }
+  .quiz-q-box {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 22px 24px; margin-bottom: 14px;
+    box-shadow: var(--shadow);
+  }
+  .quiz-q-label {
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .12em; color: var(--teal); margin-bottom: 8px;
+  }
+  .quiz-q-text { font-size: 18px; font-weight: 600; color: var(--ink); line-height: 1.4; }
+  .quiz-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+  .quiz-opt {
+    background: var(--card); border: 1.5px solid var(--border);
+    border-radius: 12px; padding: 14px 16px;
+    font-size: 14px; font-weight: 500; cursor: pointer;
+    transition: all .15s; text-align: left;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .quiz-opt:hover { border-color: var(--teal); background: var(--teal-l); }
+  .quiz-opt.correct { background: #e4f9ee; border-color: #0d9950; color: #065a30; }
+  .quiz-opt.wrong { background: var(--rose-l); border-color: var(--rose); color: var(--rose); }
+  .quiz-opt:disabled { cursor: default; }
+  .quiz-feedback {
+    padding: 12px 16px; border-radius: 12px;
+    font-size: 13px; font-weight: 500; margin-bottom: 12px;
+    display: none; line-height: 1.5;
+  }
+  .quiz-feedback.ok { background: #e4f9ee; color: #065a30; display: block; }
+  .quiz-feedback.ko { background: var(--rose-l); color: var(--rose); display: block; }
+  .quiz-done {
+    text-align: center; padding: 40px 20px;
+    font-family: 'DM Serif Display', serif; font-size: 24px; color: var(--teal);
+  }
+  .quiz-done p { font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--ink2); margin-top: 8px; }
+
+  /* INTERVIEW */
+  .itw-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 22px; margin-bottom: 14px;
+    box-shadow: var(--shadow);
+  }
+  .itw-q {
+    font-size: 16px; font-weight: 600; color: var(--ink);
+    margin-bottom: 12px; display: flex; gap: 12px; align-items: flex-start;
+    line-height: 1.5;
+  }
+  .itw-q-num {
+    min-width: 28px; height: 28px; border-radius: 50%;
+    background: var(--teal); color: #fff;
+    font-size: 12px; font-weight: 700;
+    display: inline-flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .itw-speak {
+    background: none; border: none; cursor: pointer;
+    font-size: 18px; vertical-align: middle; padding: 0 4px;
+  }
+  .itw-toggle {
+    background: var(--card); color: var(--teal);
+    border: 1.5px solid var(--teal); border-radius: 999px;
+    padding: 6px 16px; font-size: 12px; font-weight: 600;
+    cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: background .15s;
+  }
+  .itw-toggle:hover { background: var(--teal-l); }
+  .itw-tips { display: none; }
+  .itw-tips.visible { display: block; margin-top: 14px; border-top: 1px solid var(--border); padding-top: 14px; }
+  .itw-tip {
+    background: var(--gold-l); border-radius: 10px;
+    padding: 11px 14px; margin-bottom: 10px; font-size: 13px;
+    color: var(--ink); line-height: 1.55;
+  }
+  .itw-tip strong { color: var(--gold); }
+  .itw-example {
+    background: var(--teal-l); border-radius: 10px;
+    padding: 11px 14px; font-size: 13px;
+    font-style: italic; color: var(--teal-d); line-height: 1.55;
+  }
+
+  /* COACH */
+  .coach-topic-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .provider-tab {
+    font-size: 12px; padding: 5px 13px; border-radius: 999px;
+    background: #f0f4f8; border: 1px solid var(--border);
+    cursor: pointer; color: var(--ink2); font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  .provider-tab.active { background: var(--teal); color: #fff; border-color: var(--teal); }
+  .topic-btn {
+    font-size: 12px; padding: 7px 14px; border-radius: 999px;
+    background: #f0f4f8; border: 1px solid var(--border);
+    cursor: pointer; color: var(--ink2); font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  .topic-btn:hover { background: var(--teal-l); border-color: var(--teal); color: var(--teal); }
+  .topic-btn.active { background: var(--teal); color: #fff; border-color: var(--teal); }
+  .coach-chat {
+    display: flex; flex-direction: column; gap: 12px;
+    max-height: 340px; overflow-y: auto;
+    margin-bottom: 14px; padding-right: 4px;
+  }
+  .coach-chat::-webkit-scrollbar { width: 4px; }
+  .coach-chat::-webkit-scrollbar-thumb { background: #ddd; border-radius: 2px; }
+  .chat-msg { display: flex; gap: 10px; }
+  .chat-msg.user { flex-direction: row-reverse; }
+  .chat-bubble {
+    max-width: 78%; padding: 12px 16px; border-radius: 18px;
+    font-size: 14px; line-height: 1.55;
+  }
+  .chat-msg.bot .chat-bubble {
+    background: #f0f4f8; color: var(--ink);
+    border-bottom-left-radius: 4px;
+  }
+  .chat-msg.user .chat-bubble {
+    background: var(--teal); color: #fff;
+    border-bottom-right-radius: 4px;
+  }
+  .chat-avatar {
+    width: 34px; height: 34px; border-radius: 50%;
+    font-size: 17px; display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0;
+    background: var(--teal-l);
+  }
+  .coach-input-row { display: flex; gap: 10px; }
+  .coach-input {
+    flex: 1; border: 1.5px solid var(--border); border-radius: 999px;
+    padding: 11px 18px; font-size: 14px;
+    font-family: 'DM Sans', sans-serif; outline: none;
+    transition: border-color .2s;
+  }
+  .coach-input:focus { border-color: var(--teal); }
+
+  /* RESPONSIVE */
+  @media (max-width: 540px) {
+    .module-grid { grid-template-columns: 1fr; }
+    .quiz-opts { grid-template-columns: 1fr; }
+    .topbar { padding: 12px 16px; }
+    .body { padding: 16px; }
+    .logo-tag { display: none; }
+    .flash-word { font-size: 30px; }
+    .flash-emoji { font-size: 44px; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <div class="logo">
+      🎯 ProEnglish
+      <span class="logo-tag">Archivists &amp; AI Pros</span>
+    </div>
+    <div class="topbar-right">
+      <div class="score-pill">⭐ <span id="totalScore">0</span> pts</div>
+      <button class="mute-btn" id="muteBtn" title="Couper/activer le son">🔊</button>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <button class="nav-tab active" onclick="showTab('home')">🏠 Accueil</button>
+    <button class="nav-tab" onclick="showTab('flash')">🗂️ Flashcards</button>
+    <button class="nav-tab" onclick="showTab('quiz')">⚡ Quiz</button>
+    <button class="nav-tab" onclick="showTab('fillin')">✍️ Fill-in</button>
+    <button class="nav-tab" onclick="showTab('itw')">🎤 Entretiens</button>
+    <button class="nav-tab" onclick="showTab('exam')">🎯 Examen</button>
+    <button class="nav-tab" onclick="showTab('coach')">💬 Coaching</button>
+    <button class="nav-tab" onclick="showTab('shadow')">🗣️ Shadow</button>
+    <button class="nav-tab" onclick="showTab('pronun')">🎙️ Prononciation</button>
+  </nav>
+
+  <div class="body">
+
+    <!-- HOME -->
+    <div class="scene active" id="scene-home">
+      <div class="sec-title">Bonjour Victorine 👋</div>
+      <div class="sec-sub">Ton espace d'anglais professionnel — 100% offline, voix intégrée, 8 modules. Ouvre ce fichier dans Chrome ou Edge pour la meilleure expérience vocale.</div>
+
+      <!-- Bouton démarrer (fix mobile : voix nécessite un geste utilisateur) -->
+      <div id="startBanner" style="background:var(--teal-l);border-radius:16px;padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <div style="font-size:14px;color:var(--teal-d);font-weight:600;">🔊 Active la voix pour la meilleure expérience</div>
+        <button class="btn btn-primary" onclick="startAudio()">▶ Démarrer avec la voix</button>
+      </div>
+
+      <!-- Tableau de bord progression -->
+      <div id="progressDashboard" style="margin-bottom:20px;">
+        <div style="font-size:13px;font-weight:600;color:var(--ink2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.08em;">Ma progression</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;" id="progressCards">
+          <div style="background:var(--surface);border-radius:12px;padding:14px 10px;text-align:center;">
+            <div style="font-size:22px;font-weight:700;color:var(--teal)" id="statScore">0</div>
+            <div style="font-size:11px;color:var(--ink2);margin-top:4px;">Points total</div>
+          </div>
+          <div style="background:var(--surface);border-radius:12px;padding:14px 10px;text-align:center;">
+            <div style="font-size:22px;font-weight:700;color:var(--gold)" id="statMastered">0</div>
+            <div style="font-size:11px;color:var(--ink2);margin-top:4px;">Mots maîtrisés</div>
+          </div>
+          <div style="background:var(--surface);border-radius:12px;padding:14px 10px;text-align:center;">
+            <div style="font-size:22px;font-weight:700;color:var(--rose)" id="statSrsDue">0</div>
+            <div style="font-size:11px;color:var(--ink2);margin-top:4px;">À réviser</div>
+          </div>
+          <div style="background:var(--surface);border-radius:12px;padding:14px 10px;text-align:center;">
+            <div style="font-size:22px;font-weight:700;color:var(--ink)" id="statStreak">0</div>
+            <div style="font-size:11px;color:var(--ink2);margin-top:4px;">Jours de suite</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-grid">
+        <div class="mod-card" onclick="showTab('flash')">
+          <span class="mod-icon">🗂️</span>
+          <div class="mod-name">Flashcards + SRS</div>
+          <div class="mod-desc">Vocabulaire pro avec répétition espacée. Le système apprend ce que tu oublies et le remet devant toi au bon moment.</div>
+          <div class="mod-count">60 mots · 4 catégories · algorithme SM-2</div>
+        </div>
+        <div class="mod-card" onclick="showTab('quiz')">
+          <span class="mod-icon">⚡</span>
+          <div class="mod-name">Quiz</div>
+          <div class="mod-desc">QCM sur le vocabulaire. Teste ta mémorisation avec des corrections contextualisées.</div>
+          <div class="mod-count">60 questions</div>
+        </div>
+        <div class="mod-card" onclick="showTab('fillin')">
+          <span class="mod-icon">✍️</span>
+          <div class="mod-name">Fill-in-the-blank <span style="font-size:11px;background:var(--teal);color:#fff;padding:2px 8px;border-radius:20px;vertical-align:middle;margin-left:6px;">NOUVEAU</span></div>
+          <div class="mod-desc">Complète des phrases professionnelles réelles en tapant le mot manquant. Ancre le vocabulaire en contexte.</div>
+          <div class="mod-count">60 phrases · correction instantanée</div>
+        </div>
+        <div class="mod-card" onclick="showTab('itw')">
+          <span class="mod-icon">🎤</span>
+          <div class="mod-name">Entretien + minuterie</div>
+          <div class="mod-desc">Questions UN/UNESCO/AfDB avec timer 90s par question. Entraîne-toi à répondre sous pression comme en vrai.</div>
+          <div class="mod-count">20 questions · 3 niveaux · minuterie</div>
+        </div>
+        <div class="mod-card" onclick="showTab('exam')">
+          <span class="mod-icon">🎯</span>
+          <div class="mod-name">Mode examen <span style="font-size:11px;background:var(--rose);color:#fff;padding:2px 8px;border-radius:20px;vertical-align:middle;margin-left:6px;">NOUVEAU</span></div>
+          <div class="mod-desc">5 questions aléatoires sans conseils visibles. Simule un vrai entretien et mesure ton niveau de confiance réel.</div>
+          <div class="mod-count">Session complète · score final</div>
+        </div>
+        <div class="mod-card" onclick="showTab('coach')">
+          <span class="mod-icon">💬</span>
+          <div class="mod-name">Coaching + correcteur</div>
+          <div class="mod-desc">Pratique guidée avec feedback sur le fond ET sur ta grammaire. Erreurs détectées et expliquées en contexte.</div>
+          <div class="mod-count">6 scénarios · correcteur grammatical</div>
+        </div>
+        <div class="mod-card" onclick="showTab('shadow')">
+          <span class="mod-icon">🗣️</span>
+          <div class="mod-name">Shadow Speaking <span style="font-size:11px;background:var(--gold);color:#fff;padding:2px 8px;border-radius:20px;vertical-align:middle;margin-left:6px;">NOUVEAU</span></div>
+          <div class="mod-desc">Écoute une phrase complète puis répète-la immédiatement. La meilleure technique pour casser l'accent et gagner en fluidité.</div>
+          <div class="mod-count">20 phrases d'entretien · rythme naturel</div>
+        </div>
+        <div class="mod-card" onclick="showTab('pronun')" style="grid-column: 1 / -1;">
+          <span class="mod-icon">🎙️</span>
+          <div class="mod-name">Pronunciation Trainer</div>
+          <div class="mod-desc">Prononce le mot à voix haute, l'app compare et te donne un score mot par mot. Chrome/Edge uniquement.</div>
+          <div class="mod-count">60 mots · reconnaissance vocale native</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLASHCARDS -->
+    <div class="scene" id="scene-flash">
+      <div class="sec-title">Flashcards</div>
+      <div class="cat-row" id="flashCats"></div>
+
+      <!-- SRS mode toggle -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
+        <div class="flash-progress" id="flashProgress" style="margin:0"></div>
+        <button id="srsToggleBtn" onclick="toggleSrsMode()"
+          style="font-size:12px;font-weight:600;padding:6px 14px;border-radius:999px;
+                 border:1.5px solid var(--teal);background:var(--card);color:var(--teal);
+                 cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .15s;">
+          🧠 Mode répétition espacée : OFF
+        </button>
+      </div>
+
+      <!-- SRS stats (hidden by default) -->
+      <div id="srsStats" style="display:none;background:var(--teal-l);border-radius:12px;
+           padding:10px 16px;margin-bottom:14px;font-size:12px;color:var(--teal-d);
+           display:none;justify-content:space-between;flex-wrap:wrap;gap:6px;">
+        <span>📚 À revoir : <strong id="srsDue">0</strong></span>
+        <span>✅ Maîtrisés : <strong id="srsMastered">0</strong></span>
+        <span>🔄 Session : <strong id="srsSession">0</strong> revues</span>
+      </div>
+
+      <div class="flash-bar"><div class="flash-bar-fill" id="flashBarFill" style="width:0%"></div></div>
+      <div class="flash-card" onclick="revealCard()" id="flashCard">
+        <span class="flash-emoji" id="flashEmoji"></span>
+        <div class="flash-word" id="flashWord"></div>
+        <!-- SRS level badge -->
+        <div id="srsLevelBadge" style="display:none;font-size:11px;font-weight:600;
+             padding:3px 10px;border-radius:20px;background:#f0f4f8;color:var(--ink2);">
+        </div>
+        <div class="flash-hint" id="flashHint">Clique pour voir la traduction 👆</div>
+        <div class="flash-translation" id="flashTrans"></div>
+        <div class="flash-ctx" id="flashCtx"></div>
+      </div>
+
+      <!-- Normal controls (mode normal) -->
+      <div class="flash-controls" id="flashNormalControls">
+        <button class="btn btn-ghost" onclick="navCard(-1)">← Précédent</button>
+        <button class="speak-btn" onclick="speakCurrent()" title="Écouter la prononciation">🔊</button>
+        <button class="btn btn-primary" onclick="navCard(1)">Suivant →</button>
+      </div>
+
+      <!-- SRS controls (mode répétition espacée, visible après révélation) -->
+      <div class="flash-controls" id="flashSrsControls" style="display:none;">
+        <button class="btn" onclick="srsRate(1)"
+          style="background:var(--rose-l);color:var(--rose);border:1.5px solid var(--rose);">
+          😰 Difficile
+        </button>
+        <button class="speak-btn" onclick="speakCurrent()" title="Écouter la prononciation">🔊</button>
+        <button class="btn" onclick="srsRate(3)"
+          style="background:var(--gold-l);color:var(--gold);border:1.5px solid var(--gold);">
+          🤔 Hésitant
+        </button>
+        <button class="btn" onclick="srsRate(5)"
+          style="background:#e4f9ee;color:#065a30;border:1.5px solid #0d9950;">
+          ✅ Connu !
+        </button>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+    <div class="scene" id="scene-quiz">
+      <div class="sec-title">Quiz</div>
+      <div class="cat-row" id="quizCats"></div>
+      <div class="quiz-header">
+        <div class="quiz-progress" id="quizProgress"></div>
+        <div class="quiz-score-badge" id="quizScoreBadge">✓ 0</div>
+      </div>
+      <div class="quiz-q-box">
+        <div class="quiz-q-label">Quelle est la traduction en français ?</div>
+        <div class="quiz-q-text" id="quizQText">Chargement...</div>
+      </div>
+      <div class="quiz-opts" id="quizOpts"></div>
+      <div class="quiz-feedback" id="quizFeedback"></div>
+      <button class="btn btn-primary" id="quizNextBtn" onclick="nextQuiz()" style="display:none">Question suivante →</button>
+      <div id="quizDone" class="quiz-done" style="display:none">
+        🎉 Terminé !
+        <p id="quizDoneText"></p>
+        <br>
+        <button class="btn btn-primary" onclick="restartQuiz()">Recommencer ↺</button>
+      </div>
+    </div>
+
+    <!-- INTERVIEW -->
+    <div class="scene" id="scene-itw">
+      <div class="sec-title">Simulation d'entretien</div>
+      <div class="sec-sub">Questions typiques pour postes UN P2/P3, UNESCO, AfDB. Clic 🔊 pour écouter et lancer le timer. Clic sur le bouton pour voir les conseils.</div>
+      <div class="cat-row" id="itwCats"></div>
+      <!-- Timer 90s -->
+      <div id="itwTimerBox" style="display:none;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 20px;margin-bottom:16px;box-shadow:var(--shadow);">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+          <div style="font-size:13px;font-weight:600;color:var(--ink2);">⏱️ Temps de réponse</div>
+          <div id="itwTimerCount" style="font-size:24px;font-weight:700;color:var(--teal);min-width:48px;text-align:right;">1:30</div>
+        </div>
+        <div style="height:6px;background:#e8eaf0;border-radius:3px;">
+          <div id="itwTimerBar" style="height:100%;background:var(--teal);border-radius:3px;width:100%;transition:width .5s linear;"></div>
+        </div>
+        <div id="itwTimerMsg" style="font-size:12px;color:var(--ink2);margin-top:6px;text-align:center;"></div>
+      </div>
+      <div id="itwList"></div>
+    </div>
+
+    <!-- FILL IN THE BLANK -->
+    <div class="scene" id="scene-fillin">
+      <div class="sec-title">Fill-in-the-blank ✍️</div>
+      <div class="sec-sub">Complète la phrase en tapant le mot manquant en anglais. Les phrases viennent directement du vocabulaire professionnel.</div>
+      <div class="cat-row" id="fillinCats"></div>
+      <div style="text-align:center;font-size:13px;color:var(--ink2);margin-bottom:8px;" id="fillinProgress"></div>
+      <div style="height:4px;background:#e8eaf0;border-radius:2px;margin-bottom:20px;"><div id="fillinBar" style="height:100%;background:var(--teal);border-radius:2px;transition:width .3s;width:0%"></div></div>
+      <div id="fillinCard" style="background:linear-gradient(135deg,#f8fbff 0%,#e8f8f6 100%);border:1px solid var(--border);border-radius:24px;padding:32px 28px;text-align:center;max-width:480px;margin:0 auto 20px;box-shadow:var(--shadow);">
+        <div id="fillinEmoji" style="font-size:44px;margin-bottom:12px;"></div>
+        <div id="fillinSentence" style="font-size:17px;line-height:1.7;color:var(--ink);font-weight:500;margin-bottom:18px;"></div>
+        <input id="fillinInput" type="text" placeholder="Tape le mot manquant..."
+          style="width:100%;max-width:280px;border:2px solid var(--teal);border-radius:999px;padding:10px 18px;font-size:15px;font-family:'DM Sans',sans-serif;outline:none;text-align:center;"
+          onkeydown="if(event.key==='Enter')checkFillin()"/>
+        <div style="margin-top:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="checkFillin()">Valider ✓</button>
+          <button class="btn btn-ghost btn-sm" onclick="fillinHint()">💡 Indice</button>
+        </div>
+        <div id="fillinFeedback" style="margin-top:14px;padding:10px 16px;border-radius:12px;font-size:13px;display:none;"></div>
+      </div>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn btn-ghost" onclick="fillinNav(-1)">← Précédent</button>
+        <button class="btn btn-primary" id="fillinNextBtn" onclick="fillinNav(1)" style="display:none">Suivant →</button>
+      </div>
+    </div>
+
+    <!-- EXAM MODE -->
+    <div class="scene" id="scene-exam">
+      <div class="sec-title">Mode examen 🎯</div>
+      <div class="sec-sub">5 questions d'entretien aléatoires. Pas de conseils. Réponds à voix haute ou dans ta tête, puis évalue ton niveau de confiance honnêtement.</div>
+      <div id="examStart" style="text-align:center;padding:30px 0;">
+        <div style="font-size:56px;margin-bottom:16px;">🎯</div>
+        <div style="font-size:15px;color:var(--ink2);max-width:340px;margin:0 auto 24px;line-height:1.6;">Simule un vrai entretien BAD/ONU. 5 questions, une à la fois, sans filet. Tu évalues toi-même ta réponse à la fin de chaque question.</div>
+        <button class="btn btn-primary" style="font-size:16px;padding:14px 32px;" onclick="startExam()">Commencer l'examen →</button>
+      </div>
+      <div id="examSession" style="display:none;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
+          <div style="font-size:13px;color:var(--ink2);" id="examProgress">Question 1 / 5</div>
+          <div id="examTimerCount" style="font-size:18px;font-weight:700;color:var(--teal);">1:30</div>
+        </div>
+        <div style="height:4px;background:#e8eaf0;border-radius:2px;margin-bottom:16px;"><div id="examTimerBar" style="height:100%;background:var(--teal);border-radius:2px;width:100%;transition:width .5s linear;"></div></div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:16px;box-shadow:var(--shadow);">
+          <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--teal);margin-bottom:10px;" id="examCatLabel"></div>
+          <div style="font-size:18px;font-weight:600;color:var(--ink);line-height:1.5;" id="examQuestion"></div>
+          <button style="background:none;border:none;cursor:pointer;font-size:18px;margin-top:10px;" onclick="examSpeak()" title="Écouter">🔊</button>
+        </div>
+        <div id="examSelfEval" style="display:none;margin-bottom:16px;">
+          <div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:12px;text-align:center;">Comment s'est passée ta réponse ?</div>
+          <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+            <button class="btn" style="background:var(--rose-l);color:var(--rose);border:1.5px solid var(--rose);" onclick="examRate(1)">😰 Pas bien</button>
+            <button class="btn" style="background:var(--gold-l);color:var(--gold);border:1.5px solid var(--gold);" onclick="examRate(2)">🤔 Passable</button>
+            <button class="btn" style="background:#e4f9ee;color:#065a30;border:1.5px solid #0d9950;" onclick="examRate(3)">✅ Bien</button>
+            <button class="btn" style="background:var(--teal);color:#fff;" onclick="examRate(4)">🌟 Excellent</button>
+          </div>
+        </div>
+        <div style="text-align:center;">
+          <button class="btn btn-ghost" id="examRevealBtn" onclick="showExamEval()">J'ai répondu — évaluer ma réponse →</button>
+        </div>
+      </div>
+      <div id="examDone" style="display:none;text-align:center;padding:30px 20px;">
+        <div style="font-family:'DM Serif Display',serif;font-size:28px;color:var(--teal);margin-bottom:8px;">Examen terminé !</div>
+        <div id="examDoneText" style="font-size:14px;color:var(--ink2);margin-bottom:20px;line-height:1.6;"></div>
+        <div id="examScoreBar" style="max-width:360px;margin:0 auto 20px;"></div>
+        <button class="btn btn-primary" onclick="startExam()">Recommencer ↺</button>
+        <button class="btn btn-ghost" style="margin-left:10px;" onclick="showTab('itw')">Revoir les conseils →</button>
+      </div>
+    </div>
+
+    <!-- SHADOW SPEAKING -->
+    <div class="scene" id="scene-shadow">
+      <div class="sec-title">Shadow Speaking 🗣️</div>
+      <div class="sec-sub">Écoute la phrase à vitesse naturelle. Dès que le micro s'ouvre, répète-la immédiatement en copiant le rythme et l'intonation. La technique la plus efficace contre la peur de parler.</div>
+      <div style="text-align:center;font-size:13px;color:var(--ink2);margin-bottom:8px;" id="shadowProgress">1 / 20</div>
+      <div style="height:4px;background:#e8eaf0;border-radius:2px;margin-bottom:20px;"><div id="shadowBar" style="height:100%;background:var(--gold);border-radius:2px;transition:width .3s;width:5%"></div></div>
+      <div id="shadowCard" style="background:linear-gradient(135deg,#fffdf5 0%,#fdf3e3 100%);border:1px solid var(--border);border-radius:24px;padding:32px 28px;text-align:center;max-width:480px;margin:0 auto 20px;box-shadow:var(--shadow);">
+        <div id="shadowNum" style="font-size:11px;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;"></div>
+        <div id="shadowContext" style="font-size:11px;font-weight:600;color:var(--ink2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;"></div>
+        <div id="shadowSentence" style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--ink);line-height:1.5;margin-bottom:14px;"></div>
+        <div id="shadowFr" style="font-size:13px;color:var(--gold);background:var(--gold-l);padding:5px 14px;border-radius:20px;display:inline-block;"></div>
+      </div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;">
+        <button id="shadowListenBtn" style="padding:12px 24px;border-radius:999px;border:none;background:var(--teal-l);color:var(--teal-d);font-size:15px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;" onclick="shadowListen()">🔊 Écouter</button>
+        <button id="shadowRecordBtn" style="padding:12px 24px;border-radius:999px;border:none;background:var(--gold);color:#fff;font-size:15px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;opacity:.5;pointer-events:none;" onclick="shadowRecord()">🎙️ À toi !</button>
+      </div>
+      <div id="shadowStatus" style="text-align:center;font-size:13px;color:var(--ink2);margin-bottom:14px;min-height:20px;">Clique sur 🔊 Écouter pour commencer</div>
+      <div id="shadowResult" style="display:none;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 20px;max-width:480px;margin:0 auto 16px;box-shadow:var(--shadow);text-align:center;">
+        <div id="shadowResultText" style="font-size:14px;color:var(--ink);line-height:1.5;"></div>
+      </div>
+      <div style="display:flex;gap:12px;justify-content:center;">
+        <button class="btn btn-ghost btn-sm" onclick="shadowNav(-1)">← Précédent</button>
+        <button class="btn btn-primary btn-sm" onclick="shadowNav(1)">Suivant →</button>
+      </div>
+      <div id="shadowNoSupport" style="display:none;background:var(--gold-l);border:1px solid #f0d89a;border-radius:16px;padding:16px 20px;font-size:14px;color:var(--ink);margin-top:16px;">
+        ⚠️ La reconnaissance vocale nécessite <strong>Chrome</strong> ou <strong>Edge</strong>. L'écoute et la répétition fonctionnent quand même sans micro.
+      </div>
+    </div>
+
+    <!-- COACH -->
+    <div class="scene" id="scene-coach">
+      <div class="sec-title">Coaching IA</div>
+      <div class="sec-sub">Un vrai coach alimenté par Claude. Conversation libre, feedback personnalisé sur le fond ET la grammaire. La conversation continue aussi longtemps que tu le veux.</div>
+
+      <!-- Sélecteur de provider LLM -->
+      <div id="apiKeyBox" style="background:var(--gold-l);border:1px solid #f0d89a;border-radius:14px;padding:14px 18px;margin-bottom:16px;">
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:10px;">🔑 Choisis ton moteur IA</div>
+        <!-- Onglets provider -->
+        <div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;">
+          <button class="provider-tab active" onclick="selectProvider('groq')"   id="tab-groq">⚡ Groq (gratuit)</button>
+          <button class="provider-tab"        onclick="selectProvider('ollama')" id="tab-ollama">🏠 Ollama (local)</button>
+          <button class="provider-tab"        onclick="selectProvider('anthropic')" id="tab-anthropic">🤖 Anthropic</button>
+        </div>
+        <!-- Groq -->
+        <div id="panel-groq">
+          <div style="font-size:12px;color:var(--ink2);margin-bottom:8px;line-height:1.5;">
+            Tu as déjà une clé Groq — c'est l'option recommandée. Llama 3.3 70B, rapide et gratuit.
+            <a href="https://console.groq.com/keys" target="_blank" style="color:var(--teal);">Obtenir une clé →</a>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+            <input id="groqKeyInput" type="password" placeholder="gsk_..."
+              style="flex:1;min-width:180px;border:1.5px solid var(--border);border-radius:999px;padding:8px 16px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;"/>
+            <select id="groqModelSelect" style="border:1.5px solid var(--border);border-radius:999px;padding:8px 14px;font-size:12px;font-family:'DM Sans',sans-serif;outline:none;background:var(--card);">
+              <option value="llama-3.3-70b-versatile">Llama 3.3 70B</option>
+              <option value="llama-3.1-8b-instant">Llama 3.1 8B (rapide)</option>
+              <option value="mixtral-8x7b-32768">Mixtral 8x7B</option>
+            </select>
+            <button class="btn btn-primary btn-sm" onclick="saveApiKey()">Enregistrer</button>
+          </div>
+        </div>
+        <!-- Ollama -->
+        <div id="panel-ollama" style="display:none;">
+          <div style="font-size:12px;color:var(--ink2);margin-bottom:8px;line-height:1.5;">
+            Lance Ollama avec : <code style="background:#f0f4f8;padding:2px 6px;border-radius:4px;">OLLAMA_ORIGINS=* ollama serve</code><br>
+            Puis choisis ton modèle installé. Fonctionne 100% offline.
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+            <input id="ollamaUrlInput" value="http://localhost:11434"
+              style="flex:1;min-width:160px;border:1.5px solid var(--border);border-radius:999px;padding:8px 16px;font-size:12px;font-family:'DM Sans',sans-serif;outline:none;"/>
+            <input id="ollamaModelInput" placeholder="qwen2.5-coder:1.5b"
+              style="flex:1;min-width:140px;border:1.5px solid var(--border);border-radius:999px;padding:8px 16px;font-size:12px;font-family:'DM Sans',sans-serif;outline:none;"/>
+            <button class="btn btn-primary btn-sm" onclick="saveApiKey()">Enregistrer</button>
+          </div>
+        </div>
+        <!-- Anthropic -->
+        <div id="panel-anthropic" style="display:none;">
+          <div style="font-size:12px;color:var(--ink2);margin-bottom:8px;line-height:1.5;">
+            Clé Anthropic — quelques centimes par session.
+            <a href="https://console.anthropic.com/settings/keys" target="_blank" style="color:var(--teal);">Obtenir une clé →</a>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <input id="anthropicKeyInput" type="password" placeholder="sk-ant-api03-..."
+              style="flex:1;min-width:180px;border:1.5px solid var(--border);border-radius:999px;padding:8px 16px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;"/>
+            <button class="btn btn-primary btn-sm" onclick="saveApiKey()">Enregistrer</button>
+          </div>
+        </div>
+        <div id="apiKeyStatus" style="font-size:12px;margin-top:8px;color:var(--ink2);"></div>
+      </div>
+
+      <div class="coach-topic-btns" id="coachTopics"></div>
+      <div class="coach-chat" id="coachChat"></div>
+
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+        <label style="font-size:12px;color:var(--ink2);font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;">
+          <input type="checkbox" id="grammarCheck" checked>
+          🔍 Correcteur grammatical
+        </label>
+        <label style="font-size:12px;color:var(--ink2);font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;">
+          <input type="checkbox" id="autoSpeakCheck" checked>
+          🔊 Réponses lues à voix haute
+        </label>
+        <span id="coachTyping" style="font-size:12px;color:var(--teal);display:none;margin-left:auto;">✍️ Le coach rédige...</span>
+      </div>
+      <div class="coach-input-row">
+        <button id="coachMicBtn" onclick="toggleCoachMic()"
+          title="Parler en anglais"
+          style="width:44px;height:44px;border-radius:50%;border:none;background:var(--teal-l);
+                 color:var(--teal-d);font-size:20px;cursor:pointer;flex-shrink:0;
+                 display:inline-flex;align-items:center;justify-content:center;
+                 transition:background .2s,transform .15s;">🎙️</button>
+        <input class="coach-input" id="coachInput"
+          placeholder="Parle (🎙️) ou tape en anglais..."
+          onkeydown="if(event.key==='Enter'&&!event.shiftKey)sendCoach()"/>
+        <button class="btn btn-primary" onclick="sendCoach()" id="coachSendBtn">Envoyer</button>
+      </div>
+      <div id="coachMicStatus" style="font-size:12px;color:var(--ink2);margin-top:6px;min-height:16px;text-align:center;display:none;">
+        🎙️ Je t'écoute... Parle en anglais, puis arrête-toi.
+      </div>
+      <div style="text-align:right;margin-top:6px;">
+        <button style="font-size:11px;background:none;border:none;color:var(--ink2);cursor:pointer;" onclick="clearCoachHistory()">🗑️ Effacer la conversation</button>
+      </div>
+    </div>
+
+    <!-- PRONUNCIATION TRAINER -->
+    <div class="scene" id="scene-pronun">
+      <div class="sec-title">Pronunciation Trainer 🎙️</div>
+      <div class="sec-sub">Écoute le mot, puis prononce-le à voix haute. L'app compare ta prononciation et te donne un score. Nécessite Chrome ou Edge.</div>
+      <div class="cat-row" id="pronunCats"></div>
+
+      <div class="pronun-card" id="pronunCard">
+        <div class="pronun-num" id="pronunNum">1 / 15</div>
+        <div class="pronun-emoji" id="pronunEmoji">🗂️</div>
+        <div class="pronun-word" id="pronunWord">archival fonds</div>
+        <div class="pronun-phonetic" id="pronunPhonetic">/ɑːˈkaɪvəl fɒndz/</div>
+        <div class="pronun-fr" id="pronunFr">fonds d'archives</div>
+      </div>
+
+      <div class="pronun-controls">
+        <button class="pronun-btn-listen" id="pronunListenBtn" onclick="pronunListen()">
+          🔊 Écouter
+        </button>
+        <button class="pronun-btn-record" id="pronunRecordBtn" onclick="pronunToggleRecord()">
+          🎙️ Parler
+        </button>
+      </div>
+
+      <div class="pronun-status" id="pronunStatus">Écoute le mot puis clique sur 🎙️ Parler</div>
+
+      <div class="pronun-result" id="pronunResult" style="display:none">
+        <div class="pronun-result-score" id="pronunResultScore"></div>
+        <div class="pronun-result-heard" id="pronunResultHeard"></div>
+        <div class="pronun-result-words" id="pronunResultWords"></div>
+        <div class="pronun-result-tip" id="pronunResultTip"></div>
+      </div>
+
+      <div class="pronun-nav">
+        <button class="btn btn-ghost btn-sm" onclick="pronunNav(-1)">← Précédent</button>
+        <button class="btn btn-primary btn-sm" id="pronunNextBtn" onclick="pronunNav(1)">Suivant →</button>
+      </div>
+
+      <div class="pronun-progress-row">
+        <div class="pronun-bar"><div class="pronun-bar-fill" id="pronunBarFill" style="width:0%"></div></div>
+        <div class="pronun-stats" id="pronunStats">Score moyen : —</div>
+      </div>
+
+      <div class="pronun-no-support" id="pronunNoSupport" style="display:none">
+        ⚠️ La reconnaissance vocale n'est pas disponible dans ce navigateur. Ouvre ce fichier dans <strong>Chrome</strong> ou <strong>Edge</strong> pour utiliser ce module.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  /* PRONUNCIATION TRAINER */
+  .pronun-card {
+    background: linear-gradient(135deg, #f0faf9 0%, #e0f5f3 100%);
+    border: 1px solid var(--border);
+    border-radius: 24px; padding: 30px 28px;
+    text-align: center; max-width: 480px; margin: 0 auto 20px;
+    box-shadow: var(--shadow); position: relative;
+  }
+  .pronun-num {
+    font-size: 11px; font-weight: 600; color: var(--teal);
+    text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px;
+  }
+  .pronun-emoji { font-size: 50px; margin-bottom: 10px; display: block; }
+  .pronun-word {
+    font-family: 'DM Serif Display', serif;
+    font-size: 34px; color: var(--teal); line-height: 1.1; margin-bottom: 6px;
+  }
+  .pronun-phonetic {
+    font-size: 15px; color: var(--ink2); margin-bottom: 8px;
+    font-style: italic; letter-spacing: .02em;
+  }
+  .pronun-fr {
+    font-size: 13px; font-weight: 600; color: var(--gold);
+    background: var(--gold-l); padding: 4px 14px;
+    border-radius: 20px; display: inline-block;
+  }
+  .pronun-controls {
+    display: flex; gap: 14px; justify-content: center;
+    margin-bottom: 14px; flex-wrap: wrap;
+  }
+  .pronun-btn-listen {
+    padding: 12px 24px; border-radius: 999px; border: none;
+    background: var(--teal-l); color: var(--teal-d);
+    font-size: 15px; font-weight: 600; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: background .2s, transform .12s;
+  }
+  .pronun-btn-listen:hover { background: #b2ece7; transform: translateY(-1px); }
+  .pronun-btn-record {
+    padding: 12px 24px; border-radius: 999px; border: none;
+    background: var(--teal); color: #fff;
+    font-size: 15px; font-weight: 600; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: background .2s, transform .12s;
+  }
+  .pronun-btn-record:hover { background: var(--teal-d); transform: translateY(-1px); }
+  .pronun-btn-record.recording {
+    background: var(--rose); animation: pulse-rec 1s ease-in-out infinite;
+  }
+  @keyframes pulse-rec {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(192,56,90,.4); }
+    50% { box-shadow: 0 0 0 10px rgba(192,56,90,0); }
+  }
+  .pronun-status {
+    text-align: center; font-size: 13px; color: var(--ink2);
+    margin-bottom: 14px; min-height: 20px;
+  }
+  .pronun-result {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px 20px;
+    max-width: 480px; margin: 0 auto 16px; box-shadow: var(--shadow);
+  }
+  .pronun-result-score {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px; text-align: center; margin-bottom: 8px;
+  }
+  .pronun-result-heard {
+    font-size: 13px; color: var(--ink2); text-align: center;
+    margin-bottom: 10px; font-style: italic;
+  }
+  .pronun-result-words {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    justify-content: center; margin-bottom: 10px;
+  }
+  .pw-match {
+    background: #e4f9ee; color: #065a30;
+    border: 1px solid #9fe5b8; border-radius: 8px;
+    padding: 4px 10px; font-size: 13px; font-weight: 600;
+  }
+  .pw-miss {
+    background: var(--rose-l); color: var(--rose);
+    border: 1px solid #f4a0b5; border-radius: 8px;
+    padding: 4px 10px; font-size: 13px; font-weight: 600;
+  }
+  .pw-partial {
+    background: var(--gold-l); color: var(--gold);
+    border: 1px solid #f5c878; border-radius: 8px;
+    padding: 4px 10px; font-size: 13px; font-weight: 600;
+  }
+  .pronun-result-tip {
+    font-size: 12px; color: var(--ink2); text-align: center;
+    line-height: 1.5; padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+  .pronun-nav {
+    display: flex; gap: 12px; justify-content: center; margin-bottom: 16px;
+  }
+  .pronun-progress-row {
+    max-width: 480px; margin: 0 auto;
+  }
+  .pronun-bar {
+    height: 4px; background: #e8eaf0; border-radius: 2px; margin-bottom: 6px;
+  }
+  .pronun-bar-fill {
+    height: 100%; background: var(--teal); border-radius: 2px; transition: width .35s;
+  }
+  .pronun-stats {
+    font-size: 12px; color: var(--ink2); text-align: right;
+  }
+  .pronun-no-support {
+    background: var(--gold-l); border: 1px solid #f0d89a;
+    border-radius: var(--radius); padding: 16px 20px;
+    font-size: 14px; color: var(--ink); line-height: 1.6;
+    max-width: 480px; margin: 0 auto;
+  }
+</style>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const DATA = {
+  archives: {
+    name: "Archives & Records", emoji: "🗂️",
+    words: [
+      {en:"archival fonds", fr:"fonds d'archives", ctx:"The archival fonds contains 200 years of governmental records."},
+      {en:"records management", fr:"gestion des documents", ctx:"Records management ensures documents are traceable and retrievable."},
+      {en:"appraisal", fr:"évaluation (archivistique)", ctx:"Appraisal determines which records have lasting historical value."},
+      {en:"provenance", fr:"provenance", ctx:"Provenance is a core principle of archival science."},
+      {en:"finding aid", fr:"instrument de recherche", ctx:"The finding aid helps researchers locate specific documents."},
+      {en:"retention schedule", fr:"calendrier de conservation", ctx:"A retention schedule defines how long each type of record is kept."},
+      {en:"digitization", fr:"numérisation", ctx:"Digitization improves access to fragile archival collections."},
+      {en:"classification scheme", fr:"plan de classement", ctx:"The classification scheme organizes records by function and series."},
+      {en:"accrual", fr:"accroissement / versement", ctx:"The annual accrual adds new files to the permanent collection."},
+      {en:"vital records", fr:"documents essentiels", ctx:"Vital records must be protected against disaster and loss."},
+      {en:"metadata", fr:"métadonnées", ctx:"Metadata describes the context, content, and structure of each document."},
+      {en:"preservation", fr:"préservation / conservation", ctx:"Long-term preservation requires stable temperature and humidity."},
+      {en:"disposition", fr:"sort final", ctx:"The disposition of obsolete records is either destruction or permanent transfer."},
+      {en:"custody", fr:"garde / conservation légale", ctx:"The national archives has custody of all central government records."},
+      {en:"accession", fr:"entrée en archives", ctx:"Each accession receives a unique identifier upon arrival."}
+    ]
+  },
+  ai: {
+    name: "AI & Technology", emoji: "🤖",
+    words: [
+      {en:"machine learning", fr:"apprentissage automatique", ctx:"Machine learning powers automated document classification tools."},
+      {en:"natural language processing", fr:"traitement du langage naturel", ctx:"NLP enables automated indexing of large text collections."},
+      {en:"retrieval-augmented generation", fr:"génération augmentée par récupération", ctx:"RAG improves AI accuracy by grounding answers in your documents."},
+      {en:"large language model", fr:"grand modèle de langage", ctx:"A large language model can summarize and translate complex reports."},
+      {en:"embedding", fr:"représentation vectorielle", ctx:"Embeddings capture the semantic meaning of text for similarity search."},
+      {en:"inference", fr:"inférence", ctx:"Inference runs the trained model to generate a prediction or response."},
+      {en:"prompt engineering", fr:"ingénierie de prompt", ctx:"Good prompt engineering significantly improves AI output quality."},
+      {en:"fine-tuning", fr:"ajustement / affinement", ctx:"Fine-tuning adapts a pre-trained model to a specific domain."},
+      {en:"knowledge graph", fr:"graphe de connaissances", ctx:"A knowledge graph links entities and their semantic relationships."},
+      {en:"workflow automation", fr:"automatisation des flux de travail", ctx:"Workflow automation reduces manual processing time by 60%."},
+      {en:"digital transformation", fr:"transformation numérique", ctx:"Digital transformation reshapes how institutions manage information."},
+      {en:"interoperability", fr:"interopérabilité", ctx:"Interoperability allows different systems to exchange data seamlessly."},
+      {en:"open-source", fr:"open source / libre", ctx:"The tool is open-source and freely available on GitHub."},
+      {en:"offline-first", fr:"fonctionnant hors connexion", ctx:"Our offline-first application works without any internet connection."},
+      {en:"version control", fr:"contrôle de version", ctx:"Version control with Git tracks every change to the codebase."}
+    ]
+  },
+  intl: {
+    name: "International Organizations", emoji: "🌍",
+    words: [
+      {en:"terms of reference", fr:"termes de référence", ctx:"The terms of reference define the consultant's scope and deliverables."},
+      {en:"deliverable", fr:"livrable", ctx:"Each deliverable must be submitted by the agreed deadline."},
+      {en:"stakeholder", fr:"partie prenante", ctx:"All stakeholders were consulted during the needs assessment."},
+      {en:"capacity building", fr:"renforcement des capacités", ctx:"The capacity building workshop trained 40 records officers."},
+      {en:"knowledge management", fr:"gestion des connaissances", ctx:"Effective knowledge management preserves institutional memory."},
+      {en:"accountability", fr:"redevabilité / responsabilité", ctx:"Accountability mechanisms ensure transparent and auditable reporting."},
+      {en:"governance", fr:"gouvernance", ctx:"Good governance requires clearly defined roles and oversight structures."},
+      {en:"mandate", fr:"mandat", ctx:"The unit's mandate covers archival services for all member states."},
+      {en:"procurement", fr:"passation de marchés", ctx:"Procurement must follow strict competitive bidding rules."},
+      {en:"field mission", fr:"mission terrain", ctx:"The field mission assessed archival conditions at three regional offices."},
+      {en:"reporting line", fr:"ligne hiérarchique", ctx:"Her reporting line goes directly to the Regional Director."},
+      {en:"coordination mechanism", fr:"mécanisme de coordination", ctx:"A coordination mechanism aligns cross-departmental activities."},
+      {en:"inception report", fr:"rapport de démarrage", ctx:"The inception report outlines the project methodology and work plan."},
+      {en:"outcome", fr:"résultat / impact attendu", ctx:"The expected outcome is measurably improved access to records."},
+      {en:"peer review", fr:"évaluation par les pairs", ctx:"Peer review ensures the scientific quality of all publications."}
+    ]
+  },
+  pro: {
+    name: "Professional Communication", emoji: "💼",
+    words: [
+      {en:"pursuant to", fr:"conformément à / en vertu de", ctx:"Pursuant to the data protection agreement, all files must be archived."},
+      {en:"to liaise with", fr:"assurer la liaison avec", ctx:"You will liaise with partner organizations on a weekly basis."},
+      {en:"to draft", fr:"rédiger / préparer un brouillon", ctx:"Please draft a policy memo for the Director's review and signature."},
+      {en:"to endorse", fr:"approuver / avaliser", ctx:"The committee endorsed the new three-year retention policy."},
+      {en:"to flag", fr:"signaler / mettre en évidence", ctx:"Please flag any discrepancies in the submitted dataset immediately."},
+      {en:"to oversee", fr:"superviser / piloter", ctx:"She oversees the digitization of 12,000 files annually."},
+      {en:"to streamline", fr:"rationaliser / optimiser", ctx:"We aim to streamline the document approval and routing workflow."},
+      {en:"to leverage", fr:"tirer parti de / exploiter", ctx:"We leverage AI to automate metadata extraction at scale."},
+      {en:"to roll out", fr:"déployer / mettre en oeuvre", ctx:"The new records system will be rolled out across all offices in Q2."},
+      {en:"cross-functional", fr:"transversal / pluridisciplinaire", ctx:"This cross-functional team includes IT, legal, and communications staff."},
+      {en:"scalable", fr:"évolutif / adaptable à grande échelle", ctx:"We need a scalable solution that can grow with the institution."},
+      {en:"hands-on", fr:"pratique / concret", ctx:"She takes a hands-on approach to project implementation."},
+      {en:"tailored", fr:"sur mesure / adapté", ctx:"The training programme was tailored to archivists' specific workflows."},
+      {en:"turnaround", fr:"délai de traitement / redressement", ctx:"A 48-hour turnaround is expected for all urgent document requests."},
+      {en:"stakeholder engagement", fr:"engagement des parties prenantes", ctx:"Early stakeholder engagement is critical to sustainable project success."}
+    ]
+  }
+};
+
+const ITW = {
+  general: [
+    {q:"Tell me about yourself and your professional background.",
+     tip:"Structure: Present → Past → Future. Mention your 8 years at Ministère de la Culture, your archival expertise, and your coding journey as a differentiator.",
+     ex:"I am an archivist with 8 years of experience in the Ivorian Ministry of Culture, currently stationed in Dimbokro. Over the years, I have developed strong expertise in records management and, more recently, in building digital tools to modernize archival practices."},
+    {q:"Why are you applying for this position?",
+     tip:"Connect your specific skills directly to the role requirements. Show you've researched the organization's mission.",
+     ex:"This position aligns perfectly with my dual expertise in archival science and technology. I am particularly drawn to your mandate because it mirrors my own work on accessible knowledge management in under-resourced settings."},
+    {q:"What are your greatest strengths?",
+     tip:"Choose 2-3 concrete strengths supported by evidence. Avoid generic answers like 'hardworking' without proof.",
+     ex:"My key strengths are analytical thinking and resourcefulness. For example, I designed an offline library management system for my region using Python and SQLite — with no formal IT budget — which is now being piloted at our institution."},
+    {q:"Describe a challenge you faced at work and how you resolved it.",
+     tip:"Use the STAR method: Situation, Task, Action, Result. Be specific and quantify the outcome if possible.",
+     ex:"When our department lacked a proper records system, I took the initiative to build LIKOAM. I presented it to over 80 international archivists at a DPC webinar, which validated its relevance beyond our local context."},
+    {q:"Where do you see yourself in 5 years?",
+     tip:"Show ambition that aligns with the organization's mission. Reference your current professional development steps.",
+     ex:"In five years, I aim to be contributing at the international level — either through a position like this one or as a recognized consultant in archival digitization for African institutions. I am currently completing an AI certification with DeepLearning.AI to strengthen that pathway."}
+  ],
+  technical: [
+    {q:"How would you design a records management system for a field office with limited internet connectivity?",
+     tip:"Mention offline-first architecture, SQLite, local network deployment (Raspberry Pi), and a synchronization strategy for when connectivity is restored.",
+     ex:"I would build an offline-first system using Flask and SQLite on a local server such as a Raspberry Pi. Staff access it via local Wi-Fi, and data synchronizes with the central office when connectivity is available. I implemented this exact approach with my Djelycom project."},
+    {q:"How do you ensure the long-term preservation of digital records?",
+     tip:"Cover format standards (PDF/A, TIFF), consistent metadata schemas, migration planning every 5-10 years, and the 3-2-1 backup rule.",
+     ex:"Long-term preservation requires choosing sustainable formats like PDF/A for documents and TIFF for images, applying consistent metadata, and planning format migration every decade. I also follow a 3-2-1 backup strategy: three copies, two different media types, one off-site."},
+    {q:"What is your experience with AI tools in an archival context?",
+     tip:"Be specific about what you have actually built, not just theoretical knowledge. Mention Groq, Ollama, RAG, and your current learning path.",
+     ex:"I have applied AI practically — I built a Streamlit training application using the Groq API with Llama 3, and I am implementing Ollama with RAG for the second phase of Djelycom. I am also completing a DeepLearning.AI course to build a stronger theoretical foundation."},
+    {q:"How would you approach digitizing a large paper collection with limited resources?",
+     tip:"Prioritize by value and risk, establish a batch processing workflow, automate metadata extraction with OCR, and build in quality control gates.",
+     ex:"I would start with an appraisal to identify high-priority records — those most frequently requested or at greatest risk. Then I would establish a phased workflow: batch scanning, consistent file naming, automated OCR-based metadata extraction, and quality validation at each stage."},
+    {q:"Explain the difference between records management and archival management.",
+     tip:"Records management covers the active and semi-active lifecycle. Archival management takes over when records are no longer operationally needed but retain permanent value.",
+     ex:"Records management covers documents in active and semi-active use — creating, classifying, and controlling them while they support daily operations. Archival management takes over when records are no longer needed operationally but have lasting historical, legal, or evidential value. The two phases are linked through a disposition schedule."}
+  ],
+  situational: [
+    {q:"How would you handle a situation where a senior manager asks you to destroy records before their scheduled retention date?",
+     tip:"Show professional integrity, reference the legal framework, propose compliant alternatives, and explain escalation procedures.",
+     ex:"I would explain calmly that early destruction could expose the institution to legal and reputational risk. I would reference the applicable retention schedule and offer alternatives — such as restricting access while records complete their retention period. If pressure continued, I would escalate to the legal or compliance office."},
+    {q:"You are assigned to a country office where archival practices are minimal. How do you begin?",
+     tip:"Assessment first, then quick wins to build trust, then a co-designed long-term plan. Always involve local staff from the start.",
+     ex:"I would begin with a rapid assessment — understanding what records exist, how they are managed, and the biggest risks. I would identify quick wins to build credibility, such as a simple filing structure. Then I would co-develop a phased implementation plan with local staff to ensure ownership and sustainability."},
+    {q:"A colleague disagrees with your proposed classification scheme. How do you respond?",
+     tip:"Listen genuinely, explain your rationale with reference to standards, seek common ground, and propose a pilot test if needed.",
+     ex:"I would listen carefully to understand their concerns — there may be valid operational considerations I missed. I would explain my rationale, referencing applicable standards. If we cannot agree, I would propose piloting both approaches on a small subset of records and letting the results guide the decision."},
+    {q:"You discover a significant gap in the organization's data protection practices. What do you do?",
+     tip:"Document precisely, assess the risk, report through proper channels, and arrive with solutions — not just problems.",
+     ex:"I would document the gap precisely, assess its impact on the organization and affected individuals, and report through the appropriate channel — the data protection officer or my supervisor. I would also prepare a concrete set of recommendations so that I am presenting a solution, not just a problem."},
+    {q:"How do you stay current with developments in your field?",
+     tip:"Name specific professional communities and learning activities: ICA, DPC, STIA, Coursera, building tools as a form of learning.",
+     ex:"I follow the ICA and the Digital Preservation Coalition actively. I participate in networks like STIA and ICA mailing lists. I also learn by building — developing applications like LIKOAM and Djelycom forces me to engage with the latest tools. Currently I am completing a DeepLearning.AI course to formalize my AI expertise."}
+  ]
+};
+
+const COACH_SCENARIOS = [
+  {id:"pitch",   label:"Pitch professionnel 30s",   bot:"Let's practice your 30-second professional pitch. When I ask 'Tell me about yourself', give a concise, structured answer. Ready? — So, tell me briefly about your background and what makes you stand out."},
+  {id:"email",   label:"Email formel",              bot:"Let's draft a formal email together. Imagine you need to request a meeting with the Head of Archives at UNESCO to discuss a collaboration. What would your subject line and opening be?"},
+  {id:"present", label:"Présenter LIKOAM",          bot:"Practice presenting your LIKOAM project in English. Describe what it does, why you built it, and what impact it has had — in 3 to 4 sentences, as if speaking to an international audience."},
+  {id:"negociate",label:"Négocier une deadline",   bot:"You need to ask your supervisor for a 2-week extension on a project deliverable. How would you frame that request professionally and persuasively?"},
+  {id:"disagree", label:"Désaccord professionnel", bot:"Your team wants to use a cloud-only solution, but you know connectivity in the field is unreliable. How do you raise this concern professionally without dismissing your colleagues' proposal?"},
+  {id:"feedback", label:"Donner du feedback",       bot:"You need to give constructive feedback to a colleague whose report lacks clear structure. How would you open that conversation in English?"}
+];
+
+const COACH_REPLIES = {
+  pitch: [
+    {kw:["archivist","archive","records","ministry","culture","ivorian"],
+     fb:"Good foundation! Now add what makes you unique — your coding dimension. Try: 'What sets me apart is that I also build the tools I need. I developed an integrated records management system called LIKOAM which has been presented at an international DPC webinar.'"},
+    {kw:["years","experience","work","worked","background"],
+     fb:"You're addressing your experience well. Make sure to also include your current focus and a forward-looking statement: 'Currently, I am expanding into AI-assisted archival solutions and seeking international opportunities to apply this expertise at scale.'"},
+    {kw:[],
+     fb:"Good attempt. A strong 30-second pitch has three parts: 1) Who you are now, 2) Your key achievement, 3) Where you're headed. Try again with that structure in mind."}
+  ],
+  email: [
+    {kw:["subject","re:","regarding","request","meeting","collaboration"],
+     fb:"Good — you're thinking about the subject line. A strong subject for this context would be: 'Request for Meeting — Archival Technology Collaboration'. It is specific and signals a clear purpose."},
+    {kw:["dear","to whom","madam","sir","hello","greetings","ms","mr"],
+     fb:"Good opening. For formal UN/UNESCO correspondence, 'Dear Ms./Mr. [Name]' is standard. If the name is unavailable, 'Dear Madam/Sir' is acceptable — but always try to find the name first. It shows diligence."},
+    {kw:[],
+     fb:"For a formal email opening, try: 'Dear Ms. [Name], I hope this message finds you well. I am writing to request a brief meeting to discuss a potential collaboration on archival technology for West African institutions.' — then explain the value proposition in 2 sentences."}
+  ],
+  present: [
+    {kw:["likoam","system","manage","tool","built","develop","records"],
+     fb:"Excellent — you're describing the tool clearly. Now add the impact with numbers: 'Since its beta phase, LIKOAM has been tested by archivists from 3 countries and was presented at a DPC webinar attended by over 80 international professionals.' Numbers make your pitch credible."},
+    {kw:["offline","python","flask","sqlite","google","apps script"],
+     fb:"Good technical specificity. For a non-technical international audience, translate that into benefits: 'Unlike cloud-based solutions, LIKOAM works without internet access — which is essential for institutions in areas with unreliable connectivity, which describes most of our target users.'"},
+    {kw:[],
+     fb:"Try the Problem → Solution → Impact structure: 'Archivists in Côte d'Ivoire lacked affordable records management tools [Problem] → I built LIKOAM using open-source technology at zero budget [Solution] → It is now piloted locally and has received validation from the international archival community [Impact].'"}
+  ],
+  negociate: [
+    {kw:["additional","extend","extension","time","delay","week","date","deadline"],
+     fb:"You're making the request. Strengthen it by: 1) Acknowledging the original deadline, 2) Stating the specific reason concisely, 3) Proposing a precise new date. Try: 'I want to ensure this deliverable meets the quality standard we discussed. Would it be possible to move the deadline to [specific date]? I can share an interim progress update by [earlier date] if that would help.'"},
+    {kw:["sorry","apologize","unfortunately","regret"],
+     fb:"It is appropriate to acknowledge the situation, but avoid over-apologizing — it weakens your negotiating position. State the situation factually and focus on the solution: 'Due to [specific reason], I need an additional two weeks to deliver this to the required standard.'"},
+    {kw:[],
+     fb:"A professional extension request sounds like: 'I wanted to discuss the timeline for [deliverable name]. To ensure the quality we discussed, I would need until [new date]. I can share a progress update by [interim date] if that would be helpful.' Keep it factual and solution-focused."}
+  ],
+  disagree: [
+    {kw:["connectivity","offline","internet","concern","issue","risk","field","access"],
+     fb:"You're naming the concern clearly. Frame it as a risk to the mission rather than a personal preference: 'My concern is that a cloud-only solution could limit access in field offices with unreliable connectivity, which would affect the very users we are trying to serve — and undermine the project's stated objectives.'"},
+    {kw:["suggest","propose","alternative","hybrid","both","combine"],
+     fb:"Proposing an alternative is excellent professional communication. Follow with something concrete: 'I would propose piloting a hybrid approach — synchronizing with the cloud when connectivity is available, while remaining fully functional offline otherwise. This would give us the best of both solutions.'"},
+    {kw:[],
+     fb:"Try the 'Yes, and' technique: acknowledge the proposal's merits before introducing your concern. For example: 'I see real advantages to the cloud-based approach, especially for collaboration. I'd like to raise one consideration around field connectivity before we finalize — could we discuss whether a hybrid architecture might address both needs?'"}
+  ],
+  feedback: [
+    {kw:["structure","clear","section","organize","flow","heading","navigation","summary"],
+     fb:"You've identified a specific, actionable issue. Effective feedback describes the behavior (not the person) and its impact: 'I noticed the report does not have clear section headings, which makes it difficult to navigate quickly.' Then offer support: 'I'd be happy to share a template that might be useful for this type of document.'"},
+    {kw:["good","appreciate","like","however","but","although","though"],
+     fb:"You're using a balanced approach — that's professional. Make sure the constructive part is specific enough to be acted on: not just 'the structure could be clearer', but 'the key findings are embedded in the body text, which makes them easy to miss. An executive summary or highlighted section would strengthen the report significantly.'"},
+    {kw:[],
+     fb:"A strong feedback conversation has three parts: 1) Specific observable behavior, 2) Its impact, 3) A concrete suggestion. For example: 'I noticed the key findings are embedded in the narrative rather than highlighted separately [behavior]. This makes it hard for a reader to extract the main points quickly [impact]. Would it help to add a short executive summary at the beginning? [suggestion]'"}
+  ]
+};
+
+// ============================================================
+// STATE
+// ============================================================
+let muted = false, totalScore = 0;
+let flashCat = "archives", flashIdx = 0, flashRevealed = false;
+
+// ============================================================
+// SRS — Répétition Espacée (algorithme SM-2 simplifié)
+// ============================================================
+// Structure par mot : { interval, easeFactor, due, level }
+// interval  : nb de jours avant la prochaine révision
+// easeFactor: facteur de facilité (2.5 par défaut, min 1.3)
+// due       : timestamp (ms) de la prochaine révision
+// level     : 0=nouveau 1=vu 2=appris 3=maîtrisé
+let srsMode = false;
+let srsData = {};       // clé = "cat__wordIndex"
+let srsQueue = [];      // liste ordonnée des mots à revoir en session
+let srsQueueIdx = 0;
+let srsSessionCount = 0;
+
+function srsKey(cat, idx) { return cat + "__" + idx; }
+
+function srsGetCard(cat, idx) {
+  const k = srsKey(cat, idx);
+  if (!srsData[k]) srsData[k] = { interval: 1, easeFactor: 2.5, due: Date.now(), level: 0 };
+  return srsData[k];
+}
+
+// Calcul SM-2 simplifié : q = qualité de réponse (1=difficile, 3=hésitant, 5=connu)
+function srsUpdate(cat, idx, q) {
+  const c = srsGetCard(cat, idx);
+  if (q >= 3) {
+    if (c.interval === 1)      c.interval = 3;
+    else if (c.interval === 3) c.interval = 7;
+    else                        c.interval = Math.round(c.interval * c.easeFactor);
+    c.easeFactor = Math.max(1.3, c.easeFactor + 0.1 - (5 - q) * (0.08 + (5 - q) * 0.02));
+    c.level = Math.min(3, c.level + 1);
+  } else {
+    // Réponse difficile : retour au début
+    c.interval = 1;
+    c.level = Math.max(0, c.level - 1);
+  }
+  c.due = Date.now() + c.interval * 86400000;
+  srsData[srsKey(cat, idx)] = c;
+  saveSrs();
+}
+
+function saveSrs()  { try { localStorage.setItem("proenglish_srs", JSON.stringify(srsData)); } catch(e) {} }
+function loadSrs()  { try { const d = localStorage.getItem("proenglish_srs"); if (d) srsData = JSON.parse(d); } catch(e) {} }
+
+function buildSrsQueue(cat) {
+  const words = DATA[cat].words;
+  const now = Date.now();
+  // 1. Mots en retard (due <= now), triés du plus ancien au plus récent
+  const due = [];
+  const fresh = [];
+  words.forEach((w, i) => {
+    const c = srsGetCard(cat, i);
+    if (c.due <= now) due.push({ i, due: c.due, level: c.level });
+    else fresh.push({ i, due: c.due, level: c.level });
+  });
+  due.sort((a, b) => a.due - b.due);
+  fresh.sort((a, b) => a.level - b.level);
+  // File = d'abord les en retard, puis les moins connus
+  return [...due, ...fresh].map(x => x.i);
+}
+
+function updateSrsStats(cat) {
+  const words = DATA[cat].words;
+  const now = Date.now();
+  let due = 0, mastered = 0;
+  words.forEach((w, i) => {
+    const c = srsGetCard(cat, i);
+    if (c.due <= now) due++;
+    if (c.level >= 3) mastered++;
+  });
+  document.getElementById("srsDue").textContent = due;
+  document.getElementById("srsMastered").textContent = mastered;
+  document.getElementById("srsSession").textContent = srsSessionCount;
+}
+
+function toggleSrsMode() {
+  srsMode = !srsMode;
+  const btn = document.getElementById("srsToggleBtn");
+  const stats = document.getElementById("srsStats");
+  btn.textContent = srsMode ? "🧠 Mode répétition espacée : ON" : "🧠 Mode répétition espacée : OFF";
+  btn.style.background = srsMode ? "var(--teal)" : "var(--card)";
+  btn.style.color = srsMode ? "#fff" : "var(--teal)";
+  stats.style.display = srsMode ? "flex" : "none";
+  if (srsMode) {
+    srsQueue = buildSrsQueue(flashCat);
+    srsQueueIdx = 0;
+    srsSessionCount = 0;
+    updateSrsStats(flashCat);
+    flashIdx = srsQueue[0] || 0;
+  }
+  renderFlash();
+}
+
+function srsRate(q) {
+  srsUpdate(flashCat, srsQueue[srsQueueIdx], q);
+  srsSessionCount++;
+  updateSrsStats(flashCat);
+  if (q < 3) {
+    // Mot difficile : le remettre en fin de file pour revoir dans la même session
+    srsQueue.push(srsQueue[srsQueueIdx]);
+  }
+  srsQueueIdx++;
+  if (srsQueueIdx >= srsQueue.length) {
+    // Session terminée : recalcul
+    srsQueue = buildSrsQueue(flashCat);
+    srsQueueIdx = 0;
+  }
+  flashIdx = srsQueue[srsQueueIdx] || 0;
+  renderFlash();
+  addScore(q >= 5 ? 4 : q >= 3 ? 2 : 1);
+}
+
+// Charger les données SRS au démarrage
+loadSrs();
+let quizCat = "archives", quizIdx = 0, quizScore = 0, quizAnswered = false;
+let itwCat = "general";
+
+// ============================================================
+// SPEECH
+// ============================================================
+function speak(text, rate) {
+  if (muted || !window.speechSynthesis) return;
+  rate = rate || 0.88;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "en-GB";
+  u.rate = rate;
+  u.pitch = 1;
+  const voices = speechSynthesis.getVoices();
+  const pref = voices.find(v => v.lang.startsWith("en-GB") && !v.name.includes("Google"))
+            || voices.find(v => v.lang.startsWith("en-US"))
+            || voices.find(v => v.lang.startsWith("en"));
+  if (pref) u.voice = pref;
+  speechSynthesis.speak(u);
+}
+if (window.speechSynthesis) {
+  speechSynthesis.onvoiceschanged = function() {};
+}
+
+document.getElementById("muteBtn").onclick = function() {
+  muted = !muted;
+  this.textContent = muted ? "🔇" : "🔊";
+  if (muted) speechSynthesis.cancel();
+};
+
+function addScore(n) {
+  totalScore += n;
+  document.getElementById("totalScore").textContent = totalScore;
+  saveProgress();
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function showTab(tab) {
+  const tabs = ["home","flash","quiz","fillin","itw","exam","coach","shadow","pronun"];
+  document.querySelectorAll(".nav-tab").forEach((t, i) => {
+    t.classList.toggle("active", tabs[i] === tab);
+  });
+  document.querySelectorAll(".scene").forEach(s => s.classList.remove("active"));
+  document.getElementById("scene-" + tab).classList.add("active");
+  if (tab === "home")   updateDashboard();
+  if (tab === "flash")  initFlash();
+  if (tab === "quiz")   initQuiz();
+  if (tab === "fillin") initFillin();
+  if (tab === "itw")    initItw();
+  if (tab === "exam")   initExam();
+  if (tab === "coach")  initCoach();
+  if (tab === "shadow") initShadow();
+  if (tab === "pronun") initPronun();
+}
+
+// ============================================================
+// FLASHCARDS
+// ============================================================
+function initFlash() {
+  const cr = document.getElementById("flashCats");
+  if (cr.childElementCount) { renderFlash(); return; }
+  Object.entries(DATA).forEach(([k, v]) => {
+    const b = document.createElement("button");
+    b.className = "cat-btn" + (k === flashCat ? " active" : "");
+    b.textContent = v.emoji + " " + v.name;
+    b.onclick = () => {
+      flashCat = k; flashIdx = 0; flashRevealed = false;
+      if (srsMode) {
+        srsQueue = buildSrsQueue(k);
+        srsQueueIdx = 0;
+        srsSessionCount = 0;
+        flashIdx = srsQueue[0] || 0;
+        updateSrsStats(k);
+      }
+      document.querySelectorAll("#flashCats .cat-btn").forEach(x => x.classList.remove("active"));
+      b.classList.add("active");
+      renderFlash();
+    };
+    cr.appendChild(b);
+  });
+  renderFlash();
+}
+
+function renderFlash() {
+  const cat = DATA[flashCat].words;
+  const w = cat[flashIdx];
+  flashRevealed = false;
+
+  // Progression
+  if (srsMode) {
+    const pos = srsQueueIdx + 1;
+    const total = srsQueue.length;
+    document.getElementById("flashProgress").textContent = pos + " / " + total + " (file SRS)";
+    document.getElementById("flashBarFill").style.width = (pos / total * 100) + "%";
+  } else {
+    document.getElementById("flashProgress").textContent = (flashIdx + 1) + " / " + cat.length;
+    document.getElementById("flashBarFill").style.width = ((flashIdx + 1) / cat.length * 100) + "%";
+  }
+
+  document.getElementById("flashEmoji").textContent = DATA[flashCat].emoji;
+  document.getElementById("flashWord").textContent = w.en;
+  document.getElementById("flashHint").style.display = "";
+  document.getElementById("flashTrans").className = "flash-translation";
+  document.getElementById("flashTrans").textContent = w.fr;
+  document.getElementById("flashCtx").className = "flash-ctx";
+  document.getElementById("flashCtx").textContent = '"' + w.ctx + '"';
+
+  // Badge niveau SRS
+  const badge = document.getElementById("srsLevelBadge");
+  if (srsMode) {
+    const c = srsGetCard(flashCat, flashIdx);
+    const labels = ["🆕 Nouveau", "👀 Vu", "📖 Appris", "🌟 Maîtrisé"];
+    const colors = ["#f0f4f8,var(--ink2)", "var(--gold-l),var(--gold)", "var(--teal-l),var(--teal-d)", "#e4f9ee,#065a30"];
+    const [bg, col] = colors[c.level].split(",");
+    badge.textContent = labels[c.level] + (c.interval > 1 ? " · revu dans " + c.interval + "j" : "");
+    badge.style.background = bg;
+    badge.style.color = col;
+    badge.style.display = "inline-block";
+  } else {
+    badge.style.display = "none";
+  }
+
+  // Contrôles : en mode SRS on cache les boutons jusqu'à révélation
+  document.getElementById("flashNormalControls").style.display = srsMode ? "none" : "flex";
+  document.getElementById("flashSrsControls").style.display = "none";
+
+  speak(w.en);
+}
+
+function revealCard() {
+  if (!flashRevealed) {
+    flashRevealed = true;
+    document.getElementById("flashHint").style.display = "none";
+    document.getElementById("flashTrans").className = "flash-translation visible";
+    document.getElementById("flashCtx").className = "flash-ctx visible";
+    if (srsMode) {
+      document.getElementById("flashSrsControls").style.display = "flex";
+    } else {
+      addScore(1);
+    }
+  }
+}
+
+function navCard(d) {
+  const cat = DATA[flashCat].words;
+  flashIdx = (flashIdx + d + cat.length) % cat.length;
+  renderFlash();
+}
+
+function speakCurrent() {
+  speak(DATA[flashCat].words[flashIdx].en);
+}
+
+// ============================================================
+// QUIZ
+// ============================================================
+function initQuiz() {
+  const cr = document.getElementById("quizCats");
+  if (!cr.childElementCount) {
+    Object.entries(DATA).forEach(([k, v]) => {
+      const b = document.createElement("button");
+      b.className = "cat-btn" + (k === quizCat ? " active" : "");
+      b.textContent = v.emoji + " " + v.name;
+      b.onclick = () => {
+        quizCat = k; quizIdx = 0; quizScore = 0; quizAnswered = false;
+        document.querySelectorAll("#quizCats .cat-btn").forEach(x => x.classList.remove("active"));
+        b.classList.add("active");
+        document.getElementById("quizDone").style.display = "none";
+        document.getElementById("quizNextBtn").style.display = "none";
+        renderQuiz();
+      };
+      cr.appendChild(b);
+    });
+  }
+  renderQuiz();
+}
+
+function renderQuiz() {
+  quizAnswered = false;
+  const cat = DATA[quizCat].words;
+  document.getElementById("quizDone").style.display = "none";
+  document.getElementById("quizNextBtn").style.display = "none";
+
+  if (quizIdx >= cat.length) {
+    document.getElementById("quizQText").textContent = "";
+    document.getElementById("quizOpts").innerHTML = "";
+    document.getElementById("quizFeedback").className = "quiz-feedback";
+    document.getElementById("quizDone").style.display = "block";
+    document.getElementById("quizDoneText").textContent =
+      "Score : " + quizScore + " / " + cat.length + " — " +
+      (quizScore >= cat.length * 0.8 ? "Excellent travail ! 🎉" : quizScore >= cat.length * 0.5 ? "Bien, continue ! 💪" : "Continue à pratiquer 📚");
+    return;
+  }
+
+  const w = cat[quizIdx];
+  document.getElementById("quizProgress").textContent = (quizIdx + 1) + " / " + cat.length;
+  document.getElementById("quizScoreBadge").textContent = "✓ " + quizScore;
+  document.getElementById("quizQText").textContent = w.en;
+  document.getElementById("quizFeedback").className = "quiz-feedback";
+  speak(w.en);
+
+  const pool = [...cat];
+  const wrongs = pool.filter(x => x !== w).sort(() => Math.random() - .5).slice(0, 3).map(x => x.fr);
+  const opts = [w.fr, ...wrongs].sort(() => Math.random() - .5);
+  const container = document.getElementById("quizOpts");
+  container.innerHTML = "";
+  opts.forEach(o => {
+    const b = document.createElement("button");
+    b.className = "quiz-opt";
+    b.textContent = o;
+    b.onclick = () => answerQuiz(o, w.fr, b, w);
+    container.appendChild(b);
+  });
+}
+
+function answerQuiz(chosen, correct, btn, word) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+  document.querySelectorAll(".quiz-opt").forEach(b => b.disabled = true);
+  const ok = chosen === correct;
+  btn.className = "quiz-opt " + (ok ? "correct" : "wrong");
+  if (!ok) {
+    document.querySelectorAll(".quiz-opt").forEach(b => {
+      if (b.textContent === correct) b.className = "quiz-opt correct";
+    });
+  }
+  const fb = document.getElementById("quizFeedback");
+  if (ok) {
+    fb.className = "quiz-feedback ok";
+    fb.textContent = "✓ Correct ! — " + word.ctx;
+    quizScore++;
+    addScore(3);
+  } else {
+    fb.className = "quiz-feedback ko";
+    fb.textContent = "✗ La bonne réponse était : " + correct + " — " + word.ctx;
+  }
+  document.getElementById("quizNextBtn").style.display = "inline-flex";
+}
+
+function nextQuiz() { quizIdx++; renderQuiz(); }
+
+function restartQuiz() {
+  quizIdx = 0; quizScore = 0; quizAnswered = false;
+  document.getElementById("quizDone").style.display = "none";
+  renderQuiz();
+}
+
+// ============================================================
+// INTERVIEW
+// ============================================================
+function initItw() {
+  const cr = document.getElementById("itwCats");
+  if (!cr.childElementCount) {
+    [{k:"general",l:"Questions générales"},{k:"technical",l:"Questions techniques"},{k:"situational",l:"Mises en situation"}]
+    .forEach(({k, l}) => {
+      const b = document.createElement("button");
+      b.className = "cat-btn" + (k === itwCat ? " active" : "");
+      b.textContent = l;
+      b.onclick = () => {
+        itwCat = k;
+        document.querySelectorAll("#itwCats .cat-btn").forEach(x => x.classList.remove("active"));
+        b.classList.add("active");
+        renderItw();
+      };
+      cr.appendChild(b);
+    });
+  }
+  renderItw();
+}
+
+function renderItw() {
+  const list = document.getElementById("itwList");
+  list.innerHTML = "";
+  ITW[itwCat].forEach((q, i) => {
+    const d = document.createElement("div");
+    d.className = "itw-card";
+    const tipsId = "tips-" + itwCat + "-" + i;
+    const btnId  = "tbtn-" + itwCat + "-" + i;
+
+    // Build structure with DOM methods to avoid quote escaping issues
+    const qRow = document.createElement("div");
+    qRow.className = "itw-q";
+
+    const num = document.createElement("span");
+    num.className = "itw-q-num";
+    num.textContent = i + 1;
+
+    const qText = document.createElement("div");
+    qText.textContent = q.q + " ";
+
+    const speakBtn = document.createElement("button");
+    speakBtn.className = "itw-speak";
+    speakBtn.title = "Écouter la question";
+    speakBtn.textContent = "🔊";
+    speakBtn.addEventListener("click", function(e) {
+      e.stopPropagation();
+      speak(q.q, 0.82);
+      startItwTimer();
+    });
+
+    qText.appendChild(speakBtn);
+    qRow.appendChild(num);
+    qRow.appendChild(qText);
+
+    const toggleBtn = document.createElement("button");
+    toggleBtn.className = "itw-toggle";
+    toggleBtn.id = btnId;
+    toggleBtn.textContent = "Voir les conseils & exemple ▼";
+    toggleBtn.addEventListener("click", function() {
+      toggleTips(tipsId, btnId);
+    });
+
+    const tipsDiv = document.createElement("div");
+    tipsDiv.className = "itw-tips";
+    tipsDiv.id = tipsId;
+
+    const tipBox = document.createElement("div");
+    tipBox.className = "itw-tip";
+    tipBox.innerHTML = "<strong>💡 Conseil :</strong> " + q.tip;
+
+    const exBox = document.createElement("div");
+    exBox.className = "itw-example";
+    exBox.textContent = "📌 Exemple de réponse : \"" + q.ex + "\"";
+
+    tipsDiv.appendChild(tipBox);
+    tipsDiv.appendChild(exBox);
+
+    d.appendChild(qRow);
+    d.appendChild(toggleBtn);
+    d.appendChild(tipsDiv);
+    list.appendChild(d);
+  });
+}
+
+function toggleTips(tipsId, btnId) {
+  const tips = document.getElementById(tipsId);
+  const btn  = document.getElementById(btnId);
+  const open = tips.classList.toggle("visible");
+  btn.textContent = open ? "Masquer ▲" : "Voir les conseils & exemple ▼";
+}
+
+// ============================================================
+// COACH
+// ============================================================
+// ============================================================
+// COACH IA — Anthropic API
+// ============================================================
+let coachScenario = null;
+let coachHistory = [];   // [{role, content}] — historique complet de la session
+
+const COACH_SYSTEM = `You are an expert English coach for Victorine, an Ivorian archivist with 8 years of experience at the Ministry of Culture, currently based in Dimbokro. She is preparing for interviews at international organizations (AfDB/BAD, UN, UNESCO) for Knowledge Management / Archivist positions.
+
+Her profile:
+- Master in Archival Science (INSAAC) + Master in Modern Literature
+- Built LIKOAM (Google Apps Script records management system, presented to 80+ archivists at a DPC webinar)
+- Built Djelycom (offline community library system on Raspberry Pi 5, Python/Flask/SQLite)
+- Suite of offline HTML tools (Libre Outils) sold via Selar.co
+- Completing DeepLearning.AI AI/RAG certification
+- Intermediate English level — reads well, speaks with hesitation
+
+YOUR ROLE: Be a real conversational coach. Do NOT give generic feedback. Always:
+1. React specifically to what she wrote — quote her exact words when relevant
+2. Give one clear, actionable improvement per message (not a list of 5 things)
+3. Ask a follow-up question OR give her a concrete example to try next
+4. Keep the conversation going naturally — do not wrap up or summarize unless she asks
+5. Adapt your language level: use simple English, avoid complex idioms
+6. If she asks in French, answer in both French (briefly) and English
+7. If the grammar checker flag is on, note 1-2 grammar issues MAX at the end, formatted as: 🔍 [error] → [correction] — [brief reason]
+
+TONE: Warm, direct, like a senior colleague coaching you before an important interview. Not a teacher grading a paper.`;
+
+const COACH_SCENARIOS_AI = [
+  { id:"pitch",    label:"🎯 Pitch 30 secondes",      opener:"Let's practice your 30-second pitch for an AfDB interview. I'll be the interviewer. Ready?\n\n**Tell me briefly about yourself and what makes you stand out from other candidates.**" },
+  { id:"likoam",   label:"🛠️ Présenter LIKOAM",       opener:"Let's practice presenting LIKOAM to a non-technical international audience — imagine a UNESCO recruitment officer.\n\n**Tell me: what is LIKOAM, why did you build it, and what impact has it had?**" },
+  { id:"email",    label:"📧 Email formel BAD",        opener:"Let's draft a formal email together. You want to request an informational interview with the Head of Knowledge Management at the AfDB.\n\n**Start with the subject line and your opening paragraph.**" },
+  { id:"disagree", label:"⚡ Désaccord professionnel", opener:"Role play: your team has decided to use a cloud-only document system, but you know field offices have unreliable internet. You need to raise this concern without dismissing your colleagues.\n\n**How do you open this conversation?**" },
+  { id:"itw_q",    label:"🎤 Questions d'entretien",   opener:"I'll ask you real AfDB/UN interview questions one at a time. We can go as deep as you want on each one — ask me to rephrase, give you an example, or drill into a specific part of your answer.\n\n**First question: Describe a challenge you faced at work and how you resolved it.**" },
+  { id:"free",     label:"💬 Conversation libre",      opener:"Free practice mode. Talk to me about anything — your work, your projects, a question about English, or just chat. I'll gently correct and coach as we go. What's on your mind?" },
+];
+
+// ============================================================
+// PROVIDER SELECTOR
+// ============================================================
+let currentProvider = "groq";
+
+function selectProvider(p) {
+  currentProvider = p;
+  ["groq","ollama","anthropic"].forEach(id => {
+    document.getElementById("panel-" + id).style.display = id === p ? "block" : "none";
+    document.getElementById("tab-" + id).classList.toggle("active", id === p);
+  });
+}
+
+function saveApiKey() {
+  const status = document.getElementById("apiKeyStatus");
+  const box    = document.getElementById("apiKeyBox");
+  if (currentProvider === "groq") {
+    const k = document.getElementById("groqKeyInput").value.trim();
+    if (!k.startsWith("gsk_")) { status.textContent = "⚠️ La clé Groq doit commencer par gsk_"; status.style.color = "var(--rose)"; return; }
+    const m = document.getElementById("groqModelSelect").value;
+    try { localStorage.setItem("proenglish_provider", "groq"); localStorage.setItem("proenglish_groq_key", k); localStorage.setItem("proenglish_groq_model", m); } catch(e) {}
+    status.textContent = "✅ Groq enregistré (" + m + ")";
+  } else if (currentProvider === "ollama") {
+    const url = document.getElementById("ollamaUrlInput").value.trim();
+    const model = document.getElementById("ollamaModelInput").value.trim() || "qwen2.5-coder:1.5b";
+    try { localStorage.setItem("proenglish_provider", "ollama"); localStorage.setItem("proenglish_ollama_url", url); localStorage.setItem("proenglish_ollama_model", model); } catch(e) {}
+    status.textContent = "✅ Ollama enregistré — modèle : " + model;
+  } else {
+    const k = document.getElementById("anthropicKeyInput").value.trim();
+    if (!k.startsWith("sk-ant-")) { status.textContent = "⚠️ La clé Anthropic doit commencer par sk-ant-"; status.style.color = "var(--rose)"; return; }
+    try { localStorage.setItem("proenglish_provider", "anthropic"); localStorage.setItem("proenglish_apikey", k); } catch(e) {}
+    status.textContent = "✅ Anthropic enregistré";
+  }
+  status.style.color = "var(--teal)";
+  box.style.background = "var(--teal-l)"; box.style.borderColor = "var(--teal)";
+}
+
+function restoreApiKey() {
+  try {
+    const p = localStorage.getItem("proenglish_provider") || "groq";
+    selectProvider(p);
+    if (p === "groq") {
+      const k = localStorage.getItem("proenglish_groq_key") || "";
+      const m = localStorage.getItem("proenglish_groq_model") || "llama-3.3-70b-versatile";
+      if (k) { document.getElementById("groqKeyInput").value = k; document.getElementById("groqModelSelect").value = m; }
+    } else if (p === "ollama") {
+      document.getElementById("ollamaUrlInput").value = localStorage.getItem("proenglish_ollama_url") || "http://localhost:11434";
+      document.getElementById("ollamaModelInput").value = localStorage.getItem("proenglish_ollama_model") || "qwen2.5-coder:1.5b";
+    } else {
+      const k = localStorage.getItem("proenglish_apikey") || "";
+      if (k) document.getElementById("anthropicKeyInput").value = k;
+    }
+    const box = document.getElementById("apiKeyBox");
+    const status = document.getElementById("apiKeyStatus");
+    const hasKey = localStorage.getItem("proenglish_provider");
+    if (hasKey) { box.style.background = "var(--teal-l)"; box.style.borderColor = "var(--teal)"; status.textContent = "✅ Configuration restaurée."; status.style.color = "var(--teal)"; }
+  } catch(e) {}
+}
+
+async function callLLM(messages, systemPrompt) {
+  const p = currentProvider;
+  if (p === "groq") {
+    const key   = document.getElementById("groqKeyInput").value.trim() || localStorage.getItem("proenglish_groq_key") || "";
+    const model = document.getElementById("groqModelSelect").value || localStorage.getItem("proenglish_groq_model") || "llama-3.3-70b-versatile";
+    if (!key) throw new Error("Clé Groq manquante. Entre ta clé gsk_ ci-dessus.");
+    const resp = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + key },
+      body: JSON.stringify({
+        model,
+        max_tokens: 600,
+        messages: [{ role: "system", content: systemPrompt }, ...messages]
+      })
+    });
+    if (!resp.ok) { const e = await resp.json().catch(() => ({})); throw new Error(e.error?.message || "Groq error " + resp.status); }
+    const data = await resp.json();
+    return data.choices?.[0]?.message?.content || "";
+
+  } else if (p === "ollama") {
+    const url   = document.getElementById("ollamaUrlInput").value.trim() || "http://localhost:11434";
+    const model = document.getElementById("ollamaModelInput").value.trim() || "qwen2.5-coder:1.5b";
+    const resp = await fetch(url + "/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model,
+        stream: false,
+        messages: [{ role: "system", content: systemPrompt }, ...messages]
+      })
+    });
+    if (!resp.ok) throw new Error("Ollama injoignable. Lance : OLLAMA_ORIGINS=* ollama serve");
+    const data = await resp.json();
+    return data.message?.content || "";
+
+  } else {
+    // Anthropic
+    const key = document.getElementById("anthropicKeyInput").value.trim() || localStorage.getItem("proenglish_apikey") || "";
+    if (!key) throw new Error("Clé Anthropic manquante.");
+    const resp = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "anthropic-version": "2023-06-01", "x-api-key": key },
+      body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: 600, system: systemPrompt, messages })
+    });
+    if (!resp.ok) { const e = await resp.json().catch(() => ({})); throw new Error(e.error?.message || "Anthropic error " + resp.status); }
+    const data = await resp.json();
+    return data.content?.[0]?.text || "";
+  }
+}
+
+function initCoach() {
+  restoreApiKey();
+  const tb = document.getElementById("coachTopics");
+  if (tb.childElementCount) return;
+  COACH_SCENARIOS_AI.forEach(s => {
+    const b = document.createElement("button");
+    b.className = "topic-btn";
+    b.textContent = s.label;
+    b.onclick = () => {
+      document.querySelectorAll(".topic-btn").forEach(x => x.classList.remove("active"));
+      b.classList.add("active");
+      startCoach(s);
+    };
+    tb.appendChild(b);
+  });
+  const chat = document.getElementById("coachChat");
+  addMsg(chat, "bot", "👋 Configure ton moteur IA ci-dessus (Groq recommandé — clé gratuite), puis choisis un scénario. La conversation peut aller aussi loin que tu le veux.");
+}
+
+function startCoach(s) {
+  coachScenario = s.id;
+  coachHistory = [];
+  const chat = document.getElementById("coachChat");
+  chat.innerHTML = "";
+  coachHistory.push({ role: "assistant", content: s.opener });
+  addMsg(chat, "bot", s.opener);
+  document.getElementById("coachInput").focus();
+}
+
+async function sendCoach() {
+  const inp = document.getElementById("coachInput");
+  const txt = inp.value.trim();
+  if (!txt) return;
+
+  if (!coachScenario) {
+    addMsg(document.getElementById("coachChat"), "bot", "Please choose a scenario above first.");
+    return;
+  }
+
+  const chat = document.getElementById("coachChat");
+  addMsg(chat, "user", txt);
+  inp.value = "";
+  inp.disabled = true;
+  document.getElementById("coachSendBtn").disabled = true;
+  document.getElementById("coachMicBtn").disabled = true;
+  document.getElementById("coachTyping").style.display = "inline";
+
+  const grammarInstruction = document.getElementById("grammarCheck").checked
+    ? " Grammar checker ON: note 1-2 errors max at the end as: 🔍 [error] → [correction] — [brief reason]."
+    : "";
+  coachHistory.push({ role: "user", content: txt });
+
+  try {
+    const reply = await callLLM(coachHistory, COACH_SYSTEM + grammarInstruction);
+    coachHistory.push({ role: "assistant", content: reply });
+    addMsg(chat, "bot", reply);
+    // Lire la réponse à voix haute si option activée
+    if (document.getElementById("autoSpeakCheck").checked) {
+      // Nettoyer le markdown et les notes grammaire avant de lire
+      const cleanReply = reply
+        .replace(/🔍.*$/gms, "")          // supprimer notes grammaire
+        .replace(/\*\*(.*?)\*\*/g, "$1")   // supprimer **bold**
+        .replace(/\n+/g, " ")
+        .trim();
+      speak(cleanReply, 0.9);
+    }
+    addScore(3);
+    saveProgress();
+  } catch(e) {
+    addMsg(chat, "bot", "⚠️ " + e.message);
+  }
+
+  inp.disabled = false;
+  document.getElementById("coachSendBtn").disabled = false;
+  document.getElementById("coachMicBtn").disabled = false;
+  document.getElementById("coachTyping").style.display = "none";
+  inp.focus();
+}
+
+// ============================================================
+// COACH — VOICE INPUT
+// ============================================================
+let coachRecognition = null;
+let coachIsRecording = false;
+
+function toggleCoachMic() {
+  if (coachIsRecording) {
+    stopCoachMic();
+  } else {
+    startCoachMic();
+  }
+}
+
+function startCoachMic() {
+  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRec) {
+    addMsg(document.getElementById("coachChat"), "bot", "⚠️ Reconnaissance vocale non disponible. Utilise Chrome ou Edge.");
+    return;
+  }
+  // Couper la voix du coach si elle parle encore
+  if (window.speechSynthesis) speechSynthesis.cancel();
+
+  coachRecognition = new SpeechRec();
+  coachRecognition.lang = "en-US";  // Anglais américain — meilleure tolérance aux accents
+  coachRecognition.continuous = false;
+  coachRecognition.interimResults = true;
+  coachRecognition.maxAlternatives = 1;
+
+  const btn = document.getElementById("coachMicBtn");
+  const status = document.getElementById("coachMicStatus");
+  const inp = document.getElementById("coachInput");
+
+  coachRecognition.onstart = () => {
+    coachIsRecording = true;
+    btn.style.background = "var(--rose)";
+    btn.style.animation = "pulse-rec 1s ease-in-out infinite";
+    btn.textContent = "⏹️";
+    status.style.display = "block";
+    inp.value = "";
+    inp.placeholder = "Écoute en cours...";
+  };
+
+  coachRecognition.onresult = (e) => {
+    // Afficher la transcription en temps réel pendant qu'on parle
+    const transcript = Array.from(e.results)
+      .map(r => r[0].transcript).join("");
+    inp.value = transcript;
+    // Si la reconnaissance est finale, envoyer automatiquement
+    if (e.results[e.results.length - 1].isFinal) {
+      stopCoachMic();
+      setTimeout(() => sendCoach(), 300);
+    }
+  };
+
+  coachRecognition.onerror = (e) => {
+    stopCoachMic();
+    if (e.error === "not-allowed") {
+      addMsg(document.getElementById("coachChat"), "bot", "⚠️ Microphone non autorisé. Clique sur l'icône 🔒 dans la barre d'adresse pour autoriser.");
+    } else if (e.error !== "no-speech") {
+      status.style.display = "block";
+      status.textContent = "Erreur micro : " + e.error;
+    }
+  };
+
+  coachRecognition.onend = () => stopCoachMic();
+  coachRecognition.start();
+}
+
+function stopCoachMic() {
+  coachIsRecording = false;
+  const btn = document.getElementById("coachMicBtn");
+  const status = document.getElementById("coachMicStatus");
+  const inp = document.getElementById("coachInput");
+  btn.style.background = "var(--teal-l)";
+  btn.style.animation = "none";
+  btn.textContent = "🎙️";
+  btn.disabled = false;
+  status.style.display = "none";
+  inp.placeholder = "Parle (🎙️) ou tape en anglais...";
+  if (coachRecognition) { try { coachRecognition.stop(); } catch(e) {} coachRecognition = null; }
+}
+
+function clearCoachHistory() {
+  coachHistory = [];
+  coachScenario = null;
+  document.querySelectorAll(".topic-btn").forEach(x => x.classList.remove("active"));
+  const chat = document.getElementById("coachChat");
+  chat.innerHTML = "";
+  addMsg(chat, "bot", "Conversation effacée. Choisis un nouveau scénario.");
+}
+
+function addMsg(chat, role, text) {
+  const d = document.createElement("div");
+  d.className = "chat-msg " + role;
+  // Convert **bold** markdown and newlines for display
+  const formatted = text
+    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\n/g, "<br>");
+  d.innerHTML = `<div class="chat-avatar">${role === "bot" ? "🎯" : "🙋"}</div><div class="chat-bubble">${formatted}</div>`;
+  chat.appendChild(d);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+// ============================================================
+// PRONUNCIATION TRAINER
+// ============================================================
+const PHONETICS = {
+  "archival fonds": "/ɑːˈkaɪvəl fɒndz/",
+  "records management": "/ˈrekədz ˈmænɪdʒmənt/",
+  "appraisal": "/əˈpreɪzəl/",
+  "provenance": "/ˈprɒvənəns/",
+  "finding aid": "/ˈfaɪndɪŋ eɪd/",
+  "retention schedule": "/rɪˈtenʃən ˈʃedjuːl/",
+  "digitization": "/ˌdɪdʒɪtaɪˈzeɪʃən/",
+  "classification scheme": "/ˌklæsɪfɪˈkeɪʃən skiːm/",
+  "accrual": "/əˈkruːəl/",
+  "vital records": "/ˈvaɪtl ˈrekədz/",
+  "metadata": "/ˈmetədeɪtə/",
+  "preservation": "/ˌprezəˈveɪʃən/",
+  "disposition": "/ˌdɪspəˈzɪʃən/",
+  "custody": "/ˈkʌstədi/",
+  "accession": "/əkˈseʃən/",
+  "machine learning": "/məˈʃiːn ˈlɜːnɪŋ/",
+  "natural language processing": "/ˈnætʃrəl ˈlæŋɡwɪdʒ ˈprəʊsesɪŋ/",
+  "retrieval-augmented generation": "/rɪˈtriːvəl ˈɔːɡmentɪd ˌdʒenəˈreɪʃən/",
+  "large language model": "/lɑːdʒ ˈlæŋɡwɪdʒ ˈmɒdəl/",
+  "embedding": "/ɪmˈbedɪŋ/",
+  "inference": "/ˈɪnfərəns/",
+  "prompt engineering": "/prɒmpt ˌendʒɪˈnɪərɪŋ/",
+  "fine-tuning": "/faɪn ˈtjuːnɪŋ/",
+  "knowledge graph": "/ˈnɒlɪdʒ ɡrɑːf/",
+  "workflow automation": "/ˈwɜːkfləʊ ˌɔːtəˈmeɪʃən/",
+  "digital transformation": "/ˈdɪdʒɪtl trænsˌfɔːˈmeɪʃən/",
+  "interoperability": "/ˌɪntərˌɒpərəˈbɪlɪti/",
+  "open-source": "/ˈəʊpən sɔːs/",
+  "offline-first": "/ˈɒflaɪn fɜːst/",
+  "version control": "/ˈvɜːʃən kənˈtrəʊl/",
+  "terms of reference": "/tɜːmz əv ˈrefrəns/",
+  "deliverable": "/dɪˈlɪvərəbl/",
+  "stakeholder": "/ˈsteɪkˌhəʊldə/",
+  "capacity building": "/kəˈpæsɪti ˈbɪldɪŋ/",
+  "knowledge management": "/ˈnɒlɪdʒ ˈmænɪdʒmənt/",
+  "accountability": "/əˌkaʊntəˈbɪlɪti/",
+  "governance": "/ˈɡʌvənəns/",
+  "mandate": "/ˈmændeɪt/",
+  "procurement": "/prəˈkjʊəmənt/",
+  "field mission": "/fiːld ˈmɪʃən/",
+  "reporting line": "/rɪˈpɔːtɪŋ laɪn/",
+  "coordination mechanism": "/kəʊˌɔːdɪˈneɪʃən ˈmekənɪzəm/",
+  "inception report": "/ɪnˈsepʃən rɪˈpɔːt/",
+  "outcome": "/ˈaʊtkʌm/",
+  "peer review": "/pɪə rɪˈvjuː/",
+  "pursuant to": "/pəˈsuːənt tuː/",
+  "to liaise with": "/tuː liˈeɪz wɪð/",
+  "to draft": "/tuː drɑːft/",
+  "to endorse": "/tuː ɪnˈdɔːs/",
+  "to flag": "/tuː flæɡ/",
+  "to oversee": "/tuː ˌəʊvəˈsiː/",
+  "to streamline": "/tuː ˈstriːmlaɪn/",
+  "to leverage": "/tuː ˈliːvərɪdʒ/",
+  "to roll out": "/tuː rəʊl aʊt/",
+  "cross-functional": "/krɒs ˈfʌŋkʃənl/",
+  "scalable": "/ˈskeɪləbl/",
+  "hands-on": "/hændz ɒn/",
+  "tailored": "/ˈteɪləd/",
+  "turnaround": "/ˈtɜːnəraʊnd/",
+  "stakeholder engagement": "/ˈsteɪkˌhəʊldər ɪnˈɡeɪdʒmənt/"
+};
+
+const PRONUN_TIPS = {
+  "archival fonds": "Attention : 'archival' = ar-KAI-vəl. Le 'ch' se prononce /k/.",
+  "appraisal": "Accent sur la 2e syllabe : a-PRAY-zəl.",
+  "provenance": "3 syllabes : PRO-və-nəns. Le 'e' final est muet.",
+  "retrieval-augmented generation": "Mot clé difficile : 're-TREE-vəl'. Prends ton temps.",
+  "interoperability": "7 syllabes ! : in-tər-OP-ər-ə-BIL-i-tee",
+  "accountability": "Accent sur 'BIL' : ə-kown-tə-BIL-i-tee",
+  "pursuant to": "Le 'r' final de 'pursuant' est quasi muet en anglais britannique.",
+  "to liaise with": "Mot français adopté en anglais : li-AYZ. Ne pas prononcer le 's'.",
+  "scalable": "SKAY-lə-bəl. Accent sur la 1ère syllabe.",
+  "procurement": "prə-KYOOR-mənt. Accent sur la 2e syllabe.",
+  "governance": "GOV-ən-əns. 3 syllabes, pas 4.",
+  "deliverable": "dɪ-LIV-ər-ə-bəl. Accent sur la 2e syllabe."
+};
+
+let pronunCat = "archives";
+let pronunIdx = 0;
+let pronunRecognition = null;
+let pronunIsRecording = false;
+let pronunScores = [];
+let pronunWords = [];
+
+function initPronun() {
+  // Check support
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    document.getElementById("pronunNoSupport").style.display = "block";
+    document.getElementById("pronunRecordBtn").disabled = true;
+    document.getElementById("pronunRecordBtn").style.opacity = ".4";
+  }
+
+  const cr = document.getElementById("pronunCats");
+  if (cr.childElementCount) { renderPronun(); return; }
+  Object.entries(DATA).forEach(([k, v]) => {
+    const b = document.createElement("button");
+    b.className = "cat-btn" + (k === pronunCat ? " active" : "");
+    b.textContent = v.emoji + " " + v.name;
+    b.onclick = () => {
+      pronunCat = k; pronunIdx = 0; pronunScores = [];
+      document.querySelectorAll("#pronunCats .cat-btn").forEach(x => x.classList.remove("active"));
+      b.classList.add("active");
+      renderPronun();
+    };
+    cr.appendChild(b);
+  });
+  renderPronun();
+}
+
+function renderPronun() {
+  const cat = DATA[pronunCat].words;
+  pronunWords = cat;
+  const w = cat[pronunIdx];
+  document.getElementById("pronunNum").textContent = (pronunIdx + 1) + " / " + cat.length;
+  document.getElementById("pronunEmoji").textContent = DATA[pronunCat].emoji;
+  document.getElementById("pronunWord").textContent = w.en;
+  document.getElementById("pronunPhonetic").textContent = PHONETICS[w.en] || "";
+  document.getElementById("pronunFr").textContent = w.fr;
+  document.getElementById("pronunResult").style.display = "none";
+  document.getElementById("pronunStatus").textContent = "Écoute le mot puis clique sur 🎙️ Parler";
+  document.getElementById("pronunBarFill").style.width = ((pronunIdx + 1) / cat.length * 100) + "%";
+  const avg = pronunScores.length ? Math.round(pronunScores.reduce((a,b)=>a+b,0) / pronunScores.length) : null;
+  document.getElementById("pronunStats").textContent = avg !== null ? "Score moyen : " + avg + "%" : "Score moyen : —";
+
+  const recBtn = document.getElementById("pronunRecordBtn");
+  recBtn.textContent = "🎙️ Parler";
+  recBtn.classList.remove("recording");
+  pronunIsRecording = false;
+}
+
+function pronunListen() {
+  const w = pronunWords[pronunIdx];
+  speak(w.en, 0.78);
+  document.getElementById("pronunStatus").textContent = "🔊 Écoute bien la prononciation...";
+  setTimeout(() => {
+    document.getElementById("pronunStatus").textContent = "Maintenant clique sur 🎙️ Parler et répète le mot";
+  }, 2200);
+}
+
+function pronunToggleRecord() {
+  if (pronunIsRecording) {
+    pronunStopRecord();
+  } else {
+    pronunStartRecord();
+  }
+}
+
+function pronunStartRecord() {
+  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRec) return;
+
+  pronunRecognition = new SpeechRec();
+  pronunRecognition.lang = "en-GB";
+  pronunRecognition.interimResults = false;
+  pronunRecognition.maxAlternatives = 3;
+
+  pronunRecognition.onstart = () => {
+    pronunIsRecording = true;
+    const btn = document.getElementById("pronunRecordBtn");
+    btn.textContent = "⏹️ Arrêter";
+    btn.classList.add("recording");
+    document.getElementById("pronunStatus").textContent = "🎙️ Je t'écoute... Prononce le mot maintenant";
+    document.getElementById("pronunResult").style.display = "none";
+  };
+
+  pronunRecognition.onresult = (event) => {
+    const results = [];
+    for (let i = 0; i < event.results[0].length; i++) {
+      results.push(event.results[0][i].transcript.toLowerCase().trim());
+    }
+    pronunAnalyze(results);
+  };
+
+  pronunRecognition.onerror = (event) => {
+    pronunIsRecording = false;
+    const btn = document.getElementById("pronunRecordBtn");
+    btn.textContent = "🎙️ Parler";
+    btn.classList.remove("recording");
+    if (event.error === "no-speech") {
+      document.getElementById("pronunStatus").textContent = "Aucun son détecté. Réessaie en parlant plus fort.";
+    } else if (event.error === "not-allowed") {
+      document.getElementById("pronunStatus").textContent = "⚠️ Microphone non autorisé. Autorise l'accès dans Chrome.";
+    } else {
+      document.getElementById("pronunStatus").textContent = "Erreur : " + event.error + ". Réessaie.";
+    }
+  };
+
+  pronunRecognition.onend = () => {
+    pronunIsRecording = false;
+    const btn = document.getElementById("pronunRecordBtn");
+    btn.textContent = "🎙️ Parler";
+    btn.classList.remove("recording");
+  };
+
+  pronunRecognition.start();
+}
+
+function pronunStopRecord() {
+  if (pronunRecognition) pronunRecognition.stop();
+}
+
+function pronunAnalyze(heard) {
+  const target = pronunWords[pronunIdx].en.toLowerCase();
+  const targetTokens = target.replace(/[-]/g, " ").split(/\s+/);
+  const best = heard[0] || "";
+
+  // Score calculation: compare word by word
+  let matched = 0;
+  const wordResults = [];
+  targetTokens.forEach(tw => {
+    // Check if this target word appears in any of the heard alternatives
+    const found = heard.some(h => {
+      const hTokens = h.replace(/[-]/g, " ").split(/\s+/);
+      return hTokens.some(hw => {
+        if (hw === tw) return true;
+        // Partial match (first 3 chars)
+        if (tw.length > 3 && hw.length > 3 && (hw.startsWith(tw.slice(0,3)) || tw.startsWith(hw.slice(0,3)))) return true;
+        return false;
+      });
+    });
+    const partial = !found && heard.some(h => {
+      const hTokens = h.replace(/[-]/g, " ").split(/\s+/);
+      return hTokens.some(hw => tw.includes(hw) || hw.includes(tw));
+    });
+    wordResults.push({word: tw, status: found ? "match" : partial ? "partial" : "miss"});
+    if (found) matched += 1;
+    else if (partial) matched += 0.5;
+  });
+
+  const score = Math.round((matched / targetTokens.length) * 100);
+  pronunScores.push(score);
+  addScore(score >= 80 ? 5 : score >= 50 ? 2 : 1);
+
+  // Display result
+  const resultDiv = document.getElementById("pronunResult");
+  resultDiv.style.display = "block";
+
+  // Score display
+  const scoreEl = document.getElementById("pronunResultScore");
+  let emoji = score >= 90 ? "🌟 Excellent !" : score >= 70 ? "✅ Bien !" : score >= 50 ? "📈 Presque !" : "🔄 Réessaie";
+  let scoreColor = score >= 70 ? "var(--teal)" : score >= 50 ? "var(--gold)" : "var(--rose)";
+  scoreEl.innerHTML = '<span style="color:' + scoreColor + '">' + emoji + ' — ' + score + '%</span>';
+
+  // What was heard
+  document.getElementById("pronunResultHeard").textContent = 'J\'ai entendu : "' + (best || "rien") + '"';
+
+  // Word by word
+  const wordsEl = document.getElementById("pronunResultWords");
+  wordsEl.innerHTML = "";
+  wordResults.forEach(wr => {
+    const span = document.createElement("span");
+    span.className = "pw-" + wr.status;
+    span.textContent = wr.word;
+    wordsEl.appendChild(span);
+  });
+
+  // Tip
+  const tip = PRONUN_TIPS[pronunWords[pronunIdx].en];
+  const tipEl = document.getElementById("pronunResultTip");
+  if (tip) {
+    tipEl.textContent = "💡 " + tip;
+    tipEl.style.display = "block";
+  } else if (score < 70) {
+    tipEl.textContent = "💡 Réécoute le mot avec 🔊 puis réessaie en articulant chaque syllabe.";
+    tipEl.style.display = "block";
+  } else {
+    tipEl.style.display = "none";
+  }
+
+  document.getElementById("pronunStatus").textContent = score >= 80 ? "Super ! Passe au suivant →" : "Réécoute et réessaie, ou passe au suivant.";
+
+  // Update average
+  const avg = Math.round(pronunScores.reduce((a,b)=>a+b,0) / pronunScores.length);
+  document.getElementById("pronunStats").textContent = "Score moyen : " + avg + "%";
+}
+
+function pronunNav(d) {
+  if (pronunIsRecording) pronunStopRecord();
+  const cat = pronunWords;
+  pronunIdx = (pronunIdx + d + cat.length) % cat.length;
+  renderPronun();
+}
+
+// ============================================================
+// PERSISTENCE & DASHBOARD
+// ============================================================
+function saveProgress() {
+  try {
+    const today = new Date().toDateString();
+    const prev = JSON.parse(localStorage.getItem("proenglish_progress") || "{}");
+    const streak = prev.lastDay === new Date(Date.now() - 86400000).toDateString()
+      ? (prev.streak || 0) + 1
+      : (prev.lastDay === today ? (prev.streak || 1) : 1);
+    localStorage.setItem("proenglish_progress", JSON.stringify({
+      score: totalScore, lastDay: today, streak
+    }));
+  } catch(e) {}
+}
+
+function loadProgress() {
+  try {
+    const d = JSON.parse(localStorage.getItem("proenglish_progress") || "{}");
+    if (d.score) { totalScore = d.score; document.getElementById("totalScore").textContent = totalScore; }
+  } catch(e) {}
+}
+
+function updateDashboard() {
+  document.getElementById("statScore").textContent = totalScore;
+  const now = Date.now();
+  let mastered = 0, due = 0;
+  Object.entries(DATA).forEach(([cat, v]) => {
+    v.words.forEach((w, i) => {
+      const c = srsGetCard(cat, i);
+      if (c.level >= 3) mastered++;
+      if (c.due <= now) due++;
+    });
+  });
+  document.getElementById("statMastered").textContent = mastered;
+  document.getElementById("statSrsDue").textContent = due;
+  try {
+    const d = JSON.parse(localStorage.getItem("proenglish_progress") || "{}");
+    document.getElementById("statStreak").textContent = d.streak || 1;
+  } catch(e) { document.getElementById("statStreak").textContent = 1; }
+}
+
+function startAudio() {
+  speak("Welcome to ProEnglish. Let's practise together.", 0.88);
+  document.getElementById("startBanner").style.display = "none";
+}
+
+// ============================================================
+// INTERVIEW TIMER
+// ============================================================
+let itwTimer = null;
+const ITW_DURATION = 90;
+
+function startItwTimer() {
+  clearInterval(itwTimer);
+  let remaining = ITW_DURATION;
+  const bar = document.getElementById("itwTimerBar");
+  const count = document.getElementById("itwTimerCount");
+  const msg = document.getElementById("itwTimerMsg");
+  const box = document.getElementById("itwTimerBox");
+  box.style.display = "block";
+  msg.textContent = "Parle maintenant — structure : contexte, action, résultat.";
+
+  function tick() {
+    const m = Math.floor(remaining / 60);
+    const s = remaining % 60;
+    count.textContent = m + ":" + (s < 10 ? "0" : "") + s;
+    bar.style.width = (remaining / ITW_DURATION * 100) + "%";
+    if (remaining <= 15) {
+      bar.style.background = "var(--rose)";
+      count.style.color = "var(--rose)";
+      msg.textContent = remaining <= 5 ? "⏱️ Termine ta phrase !" : "⚠️ Encore " + remaining + "s — conclure !";
+    } else if (remaining <= 30) {
+      bar.style.background = "var(--gold)";
+      count.style.color = "var(--gold)";
+      msg.textContent = "30s restantes — arrive à ta conclusion.";
+    }
+    if (remaining <= 0) {
+      clearInterval(itwTimer);
+      count.textContent = "0:00";
+      bar.style.width = "0%";
+      msg.textContent = "Temps écoulé. Comment c'était ?";
+      return;
+    }
+    remaining--;
+  }
+  tick();
+  itwTimer = setInterval(tick, 1000);
+}
+
+// Patch renderItw to wire the 🔊 button to also start the timer
+const _origRenderItw = typeof renderItw !== "undefined" ? renderItw : null;
+// We'll override below after defining renderItw — see patched initItw
+
+// ============================================================
+// FILL-IN-THE-BLANK
+// ============================================================
+let fillinCat = "archives", fillinIdx = 0, fillinAnswered = false;
+
+function initFillin() {
+  const cr = document.getElementById("fillinCats");
+  if (!cr.childElementCount) {
+    Object.entries(DATA).forEach(([k, v]) => {
+      const b = document.createElement("button");
+      b.className = "cat-btn" + (k === fillinCat ? " active" : "");
+      b.textContent = v.emoji + " " + v.name;
+      b.onclick = () => {
+        fillinCat = k; fillinIdx = 0; fillinAnswered = false;
+        document.querySelectorAll("#fillinCats .cat-btn").forEach(x => x.classList.remove("active"));
+        b.classList.add("active");
+        renderFillin();
+      };
+      cr.appendChild(b);
+    });
+  }
+  renderFillin();
+}
+
+function renderFillin() {
+  const cat = DATA[fillinCat].words;
+  const w = cat[fillinIdx];
+  fillinAnswered = false;
+  document.getElementById("fillinProgress").textContent = (fillinIdx + 1) + " / " + cat.length;
+  document.getElementById("fillinBar").style.width = ((fillinIdx + 1) / cat.length * 100) + "%";
+  document.getElementById("fillinEmoji").textContent = DATA[fillinCat].emoji;
+  // Build sentence with blank
+  const sentence = w.ctx;
+  const keyword = w.en.toLowerCase();
+  // Try to blank out the keyword (case-insensitive)
+  const re = new RegExp("\\b" + keyword.replace(/[-\/\\^$*+?.()|[\]{}]/g,"\\$&") + "\\b", "i");
+  const blanked = sentence.replace(re, '<span style="display:inline-block;min-width:80px;border-bottom:2px solid var(--teal);font-weight:700;color:var(--teal);">___</span>');
+  document.getElementById("fillinSentence").innerHTML = blanked;
+  const inp = document.getElementById("fillinInput");
+  inp.value = "";
+  inp.disabled = false;
+  inp.style.borderColor = "var(--teal)";
+  const fb = document.getElementById("fillinFeedback");
+  fb.style.display = "none";
+  document.getElementById("fillinNextBtn").style.display = "none";
+}
+
+function checkFillin() {
+  if (fillinAnswered) return;
+  const w = DATA[fillinCat].words[fillinIdx];
+  const inp = document.getElementById("fillinInput");
+  const answer = inp.value.trim().toLowerCase();
+  const correct = w.en.toLowerCase();
+  const fb = document.getElementById("fillinFeedback");
+  fillinAnswered = true;
+  inp.disabled = true;
+
+  // Accept partial match (first word of multi-word terms)
+  const firstWord = correct.split(" ")[0];
+  const ok = answer === correct || answer === firstWord || correct.includes(answer) && answer.length >= 4;
+
+  if (ok) {
+    inp.style.borderColor = "#0d9950";
+    fb.style.background = "#e4f9ee"; fb.style.color = "#065a30"; fb.style.display = "block";
+    fb.innerHTML = "✅ <strong>Correct !</strong> — Le terme exact : <em>" + w.en + "</em><br><span style='font-size:12px;opacity:.8'>" + w.fr + "</span>";
+    addScore(4);
+  } else {
+    inp.style.borderColor = "var(--rose)";
+    fb.style.background = "var(--rose-l)"; fb.style.color = "var(--rose)"; fb.style.display = "block";
+    fb.innerHTML = "✗ La bonne réponse : <strong>" + w.en + "</strong> <em>(" + w.fr + ")</em>";
+    addScore(1);
+  }
+  document.getElementById("fillinNextBtn").style.display = "inline-flex";
+  saveProgress();
+}
+
+function fillinHint() {
+  const w = DATA[fillinCat].words[fillinIdx];
+  const inp = document.getElementById("fillinInput");
+  inp.value = w.en.charAt(0).toUpperCase() + w.en.slice(1, Math.ceil(w.en.length / 3));
+  inp.focus();
+}
+
+function fillinNav(d) {
+  const cat = DATA[fillinCat].words;
+  fillinIdx = (fillinIdx + d + cat.length) % cat.length;
+  renderFillin();
+}
+
+// ============================================================
+// EXAM MODE
+// ============================================================
+let examQuestions = [], examIdx = 0, examRatings = [], examTimer = null;
+
+function initExam() {
+  document.getElementById("examStart").style.display = "block";
+  document.getElementById("examSession").style.display = "none";
+  document.getElementById("examDone").style.display = "none";
+}
+
+function startExam() {
+  clearInterval(examTimer);
+  // Pick 5 random questions across all categories
+  const allQ = [];
+  Object.entries(ITW).forEach(([cat, qs]) => qs.forEach(q => allQ.push({ ...q, cat })));
+  examQuestions = allQ.sort(() => Math.random() - .5).slice(0, 5);
+  examIdx = 0; examRatings = [];
+  document.getElementById("examStart").style.display = "none";
+  document.getElementById("examDone").style.display = "none";
+  document.getElementById("examSession").style.display = "block";
+  renderExamQ();
+}
+
+function renderExamQ() {
+  const q = examQuestions[examIdx];
+  const catLabels = { general: "Question générale", technical: "Question technique", situational: "Mise en situation" };
+  document.getElementById("examProgress").textContent = "Question " + (examIdx + 1) + " / " + examQuestions.length;
+  document.getElementById("examCatLabel").textContent = catLabels[q.cat] || q.cat;
+  document.getElementById("examQuestion").textContent = q.q;
+  document.getElementById("examSelfEval").style.display = "none";
+  document.getElementById("examRevealBtn").style.display = "inline-flex";
+  startExamTimer();
+}
+
+function examSpeak() { speak(examQuestions[examIdx].q, 0.82); }
+
+function startExamTimer() {
+  clearInterval(examTimer);
+  let rem = ITW_DURATION;
+  const bar = document.getElementById("examTimerBar");
+  const count = document.getElementById("examTimerCount");
+  bar.style.background = "var(--teal)";
+  count.style.color = "var(--teal)";
+  function tick() {
+    const m = Math.floor(rem / 60), s = rem % 60;
+    count.textContent = m + ":" + (s < 10 ? "0" : "") + s;
+    bar.style.width = (rem / ITW_DURATION * 100) + "%";
+    if (rem <= 15) { bar.style.background = "var(--rose)"; count.style.color = "var(--rose)"; }
+    else if (rem <= 30) { bar.style.background = "var(--gold)"; count.style.color = "var(--gold)"; }
+    if (rem <= 0) { clearInterval(examTimer); return; }
+    rem--;
+  }
+  tick();
+  examTimer = setInterval(tick, 1000);
+}
+
+function showExamEval() {
+  clearInterval(examTimer);
+  document.getElementById("examRevealBtn").style.display = "none";
+  document.getElementById("examSelfEval").style.display = "block";
+}
+
+function examRate(r) {
+  examRatings.push(r);
+  examIdx++;
+  if (examIdx >= examQuestions.length) {
+    finishExam();
+  } else {
+    renderExamQ();
+  }
+}
+
+function finishExam() {
+  clearInterval(examTimer);
+  document.getElementById("examSession").style.display = "none";
+  document.getElementById("examDone").style.display = "block";
+  const avg = examRatings.reduce((a, b) => a + b, 0) / examRatings.length;
+  const pct = Math.round((avg / 4) * 100);
+  const msg = pct >= 80 ? "Excellent ! Tu es prêt(e) pour cet entretien. 🌟" :
+              pct >= 60 ? "Bien ! Quelques questions à retravailler. 💪" :
+              pct >= 40 ? "En progrès. Continue à pratiquer les modules Entretien et Coaching. 📚" :
+                          "Continue — chaque session te rapproche du niveau requis. 🔄";
+  document.getElementById("examDoneText").textContent = "Score de confiance : " + pct + "% — " + msg;
+  const bar = document.getElementById("examScoreBar");
+  bar.innerHTML = '<div style="height:10px;background:#e8eaf0;border-radius:5px;"><div style="height:100%;width:' + pct + '%;background:' + (pct >= 70 ? "var(--teal)" : pct >= 40 ? "var(--gold)" : "var(--rose)") + ';border-radius:5px;transition:width .5s;"></div></div><div style="font-size:12px;color:var(--ink2);text-align:center;margin-top:6px;">' + pct + '% de confiance</div>';
+  addScore(Math.round(pct / 5));
+  saveProgress();
+}
+
+// ============================================================
+// GRAMMAR CHECKER (correcteur intégré au Coaching)
+// ============================================================
+const GRAMMAR_RULES = [
+  { re: /\bI has\b/gi,          fix: "I have",           exp: "'I' prend 'have', pas 'has'." },
+  { re: /\bhe have\b/gi,        fix: "he has",           exp: "3e personne singulier → 'has'." },
+  { re: /\bshe have\b/gi,       fix: "she has",          exp: "3e personne singulier → 'has'." },
+  { re: /\bI am working since\b/gi, fix: "I have been working since", exp: "Durée depuis un moment précis → present perfect continuous." },
+  { re: /\bI work since\b/gi,   fix: "I have been working since", exp: "Durée depuis → present perfect continuous." },
+  { re: /\bdepend of\b/gi,      fix: "depend on",        exp: "La préposition correcte est 'on' : depend on." },
+  { re: /\binterested to\b/gi,  fix: "interested in",    exp: "'interested in', pas 'interested to'." },
+  { re: /\bexplain me\b/gi,     fix: "explain to me",    exp: "'explain' ne peut pas avoir de COI direct : 'explain to me'." },
+  { re: /\bgood english\b/gi,   fix: "good English",     exp: "Les langues prennent une majuscule en anglais." },
+  { re: /\bin the other hand\b/gi, fix: "on the other hand", exp: "'On the other hand', pas 'in'." },
+  { re: /\bfor exemple\b/gi,    fix: "for example",      exp: "Faux ami : 'exemple' → 'example' en anglais." },
+  { re: /\bactually\b/gi,       fix: "actually (≠ actuellement)", exp: "'Actually' = en fait/vraiment. Pour 'actuellement' utilise 'currently'." },
+  { re: /\bI look forward to meet\b/gi, fix: "I look forward to meeting", exp: "Après 'look forward to', verbe en -ing." },
+  { re: /\bmore easier\b/gi,    fix: "easier",           exp: "Double comparatif : 'more' + adjectif court → incorrecte. 'Easier' suffit." },
+  { re: /\bmore better\b/gi,    fix: "better",           exp: "'Better' est déjà le comparatif. 'More better' est redondant." },
+  { re: /\bmake a research\b/gi, fix: "conduct research", exp: "'Research' est indénombrable : pas d'article. 'Conduct research'." },
+  { re: /\bsince \d+ years\b/gi, fix: "for X years",     exp: "Durée = 'for'. 'Since' précède un point dans le temps, pas une durée." },
+  { re: /\bI am agree\b/gi,     fix: "I agree",          exp: "'Agree' est un verbe, pas un adjectif. 'I agree', pas 'I am agree'." },
+  { re: /\bI am disagree\b/gi,  fix: "I disagree",       exp: "'Disagree' est un verbe. 'I disagree', pas 'I am disagree'." },
+];
+
+function checkGrammar(text) {
+  if (!document.getElementById("grammarCheck").checked) return [];
+  const errors = [];
+  GRAMMAR_RULES.forEach(rule => {
+    if (rule.re.test(text)) {
+      errors.push({ fix: rule.fix, exp: rule.exp });
+    }
+    rule.re.lastIndex = 0;
+  });
+  return errors;
+}
+
+// ============================================================
+// SHADOW SPEAKING
+// ============================================================
+const SHADOW_PHRASES = [
+  { sentence: "I have been managing archival records for over eight years, primarily in a government context.", fr: "Je gère des archives depuis plus de 8 ans, principalement en contexte gouvernemental.", ctx: "Pitch professionnel" },
+  { sentence: "What sets me apart is that I also build the digital tools I need to do my job more effectively.", fr: "Ce qui me distingue, c'est que je construis aussi les outils numériques dont j'ai besoin.", ctx: "Valeur ajoutée" },
+  { sentence: "I look forward to contributing to your organization's knowledge management objectives.", fr: "J'ai hâte de contribuer aux objectifs de gestion des connaissances de votre organisation.", ctx: "Lettre de motivation" },
+  { sentence: "In my current role, I oversee the digitization of thousands of documents annually.", fr: "Dans mon poste actuel, je supervise la numérisation de milliers de documents chaque année.", ctx: "Expérience" },
+  { sentence: "I believe that sustainable archival systems must be designed with the end user in mind.", fr: "Je pense que les systèmes d'archives durables doivent être conçus en pensant à l'utilisateur final.", ctx: "Vision professionnelle" },
+  { sentence: "The proposed solution would significantly streamline our document approval workflow.", fr: "La solution proposée rationaliserait considérablement notre flux d'approbation de documents.", ctx: "Communication pro" },
+  { sentence: "I would be happy to present a detailed implementation plan at your earliest convenience.", fr: "Je serais ravi(e) de présenter un plan d'implémentation détaillé à votre convenance.", ctx: "Email formel" },
+  { sentence: "My approach combines domain expertise with practical, technology-driven solutions.", fr: "Mon approche combine expertise métier et solutions pratiques basées sur la technologie.", ctx: "Pitch" },
+  { sentence: "Pursuant to the data protection guidelines, all sensitive records must be encrypted at rest.", fr: "Conformément aux directives de protection des données, tous les documents sensibles doivent être chiffrés.", ctx: "Vocabulaire formel" },
+  { sentence: "We need to ensure full interoperability between the new system and existing legacy databases.", fr: "Nous devons assurer une interopérabilité totale entre le nouveau système et les bases de données existantes.", ctx: "Technique" },
+  { sentence: "I would like to raise one concern regarding the proposed timeline before we move forward.", fr: "J'aimerais soulever une préoccupation concernant le calendrier proposé avant d'avancer.", ctx: "Désaccord professionnel" },
+  { sentence: "Could we schedule a brief call to discuss the terms of reference in more detail?", fr: "Pourrions-nous planifier un bref appel pour discuter des termes de référence plus en détail ?", ctx: "Email formel" },
+  { sentence: "The retention schedule defines how long each category of records must be kept.", fr: "Le calendrier de conservation définit combien de temps chaque catégorie de documents doit être conservée.", ctx: "Archivistique" },
+  { sentence: "I designed an offline-first system that works without internet access, which is critical in field settings.", fr: "J'ai conçu un système fonctionnant hors connexion, ce qui est essentiel en contexte terrain.", ctx: "Présentation LIKOAM" },
+  { sentence: "Capacity building workshops helped local staff take ownership of the new procedures.", fr: "Les ateliers de renforcement des capacités ont aidé le personnel local à s'approprier les nouvelles procédures.", ctx: "Organisations internationales" },
+  { sentence: "I appreciate your feedback and will incorporate your suggestions into the revised version.", fr: "J'apprécie vos retours et intégrerai vos suggestions dans la version révisée.", ctx: "Email pro" },
+  { sentence: "The inception report outlines the project scope, methodology, and key deliverables.", fr: "Le rapport de démarrage définit la portée du projet, la méthodologie et les livrables clés.", ctx: "Gestion de projet" },
+  { sentence: "I took a hands-on approach to implementing the new filing system across all three offices.", fr: "J'ai adopté une approche pratique pour mettre en œuvre le nouveau système de classement dans les trois bureaux.", ctx: "Expérience" },
+  { sentence: "Strong governance structures ensure that records are managed consistently across all departments.", fr: "Des structures de gouvernance solides garantissent une gestion cohérente des documents dans tous les départements.", ctx: "Gouvernance" },
+  { sentence: "I remain at your disposal should you require any additional information.", fr: "Je reste à votre disposition si vous avez besoin d'informations complémentaires.", ctx: "Closing email" }
+];
+
+let shadowIdx = 0, shadowRecognition = null, shadowListening = false;
+
+function initShadow() {
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    document.getElementById("shadowNoSupport").style.display = "block";
+    document.getElementById("shadowRecordBtn").style.display = "none";
+  }
+  renderShadow();
+}
+
+function renderShadow() {
+  const p = SHADOW_PHRASES[shadowIdx];
+  document.getElementById("shadowProgress").textContent = (shadowIdx + 1) + " / " + SHADOW_PHRASES.length;
+  document.getElementById("shadowBar").style.width = ((shadowIdx + 1) / SHADOW_PHRASES.length * 100) + "%";
+  document.getElementById("shadowNum").textContent = "Phrase " + (shadowIdx + 1);
+  document.getElementById("shadowContext").textContent = p.ctx;
+  document.getElementById("shadowSentence").textContent = p.sentence;
+  document.getElementById("shadowFr").textContent = p.fr;
+  document.getElementById("shadowResult").style.display = "none";
+  document.getElementById("shadowStatus").textContent = "Clique sur 🔊 Écouter pour commencer";
+  const recBtn = document.getElementById("shadowRecordBtn");
+  recBtn.style.opacity = ".5";
+  recBtn.style.pointerEvents = "none";
+}
+
+function shadowListen() {
+  const p = SHADOW_PHRASES[shadowIdx];
+  speak(p.sentence, 0.82);
+  document.getElementById("shadowStatus").textContent = "🔊 Écoute attentivement le rythme et l'intonation...";
+  const recBtn = document.getElementById("shadowRecordBtn");
+  // Enable record button after phrase has been spoken (~3s per 10 words heuristic)
+  const delay = Math.max(2500, p.sentence.split(" ").length * 350);
+  setTimeout(() => {
+    recBtn.style.opacity = "1";
+    recBtn.style.pointerEvents = "auto";
+    document.getElementById("shadowStatus").textContent = "🎙️ Maintenant ! Répète la phrase immédiatement";
+    recBtn.style.background = "var(--rose)";
+    // Auto-reset after 5s if user doesn't click
+    setTimeout(() => {
+      recBtn.style.background = "var(--gold)";
+      document.getElementById("shadowStatus").textContent = "Clique sur 🎙️ À toi pour enregistrer, ou réecoute";
+    }, 5000);
+  }, delay);
+}
+
+function shadowRecord() {
+  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRec) return;
+  const rec = new SpeechRec();
+  rec.lang = "en-GB";
+  rec.interimResults = false;
+  rec.maxAlternatives = 2;
+  const recBtn = document.getElementById("shadowRecordBtn");
+  recBtn.textContent = "⏹️ Enregistrement...";
+  recBtn.style.background = "var(--rose)";
+  document.getElementById("shadowStatus").textContent = "🎙️ Je t'écoute...";
+  rec.onresult = (e) => {
+    const heard = e.results[0][0].transcript;
+    const target = SHADOW_PHRASES[shadowIdx].sentence;
+    // Simple word-overlap score
+    const tw = target.toLowerCase().replace(/[^a-z ]/g,"").split(" ");
+    const hw = heard.toLowerCase().replace(/[^a-z ]/g,"").split(" ");
+    const matched = tw.filter(w => hw.includes(w)).length;
+    const pct = Math.round(matched / tw.length * 100);
+    const msg = pct >= 80 ? "🌟 Excellent ! Rythme et mots très proches." :
+                pct >= 55 ? "✅ Bien ! Continue à travailler le rythme." :
+                pct >= 30 ? "📈 Bonne tentative. Réecoute et réessaie." :
+                            "🔄 Réecoute plusieurs fois avant de répéter.";
+    document.getElementById("shadowResultText").innerHTML =
+      '<strong>' + pct + '%</strong> de correspondance — ' + msg +
+      '<br><span style="font-size:12px;color:var(--ink2);margin-top:6px;display:block;">Entendu : «' + heard + '»</span>';
+    document.getElementById("shadowResult").style.display = "block";
+    document.getElementById("shadowStatus").textContent = pct >= 70 ? "Super ! Passe au suivant →" : "Réecoute et réessaie ou passe à la phrase suivante.";
+    recBtn.textContent = "🎙️ À toi !";
+    recBtn.style.background = "var(--gold)";
+    addScore(pct >= 70 ? 3 : 1);
+    saveProgress();
+  };
+  rec.onerror = () => {
+    recBtn.textContent = "🎙️ À toi !";
+    document.getElementById("shadowStatus").textContent = "Micro non détecté. Vérifie les permissions Chrome.";
+  };
+  rec.onend = () => { recBtn.textContent = "🎙️ À toi !"; };
+  rec.start();
+}
+
+function shadowNav(d) {
+  shadowIdx = (shadowIdx + d + SHADOW_PHRASES.length) % SHADOW_PHRASES.length;
+  renderShadow();
+}
+
+// ============================================================
+// INIT
+// ============================================================
+loadSrs();
+loadProgress();
+updateDashboard();
+
+// Enregistrement du Service Worker (PWA)
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  });
+}
+
+window.addEventListener("load", () => {
+  // Voix déclenchée uniquement par le bouton Démarrer (fix mobile)
+});
+</script>
+</body>
+</html>
