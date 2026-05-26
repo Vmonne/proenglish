@@ -1,7 +1,7 @@
 # ProEnglish — Victorine
 
-Application d'apprentissage de l'anglais professionnel pour archivistes.  
-Cible : postes BAD/AfDB, ONU, UNESCO.
+Application d'apprentissage de l'anglais professionnel pour archivistes 
+
 
 ## Modules
 - 🗂️ Flashcards avec répétition espacée (SRS / SM-2)
