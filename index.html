@@ -394,13 +394,11 @@
       <div class="sec-title">Bonjour Victorine 👋</div>
       <div class="sec-sub">Ton espace d'anglais professionnel — 100% offline, voix intégrée, 8 modules. Ouvre ce fichier dans Chrome ou Edge pour la meilleure expérience vocale.</div>
 
-      <!-- Bouton démarrer (fix mobile : voix nécessite un geste utilisateur) -->
       <div id="startBanner" style="background:var(--teal-l);border-radius:16px;padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
         <div style="font-size:14px;color:var(--teal-d);font-weight:600;">🔊 Active la voix pour la meilleure expérience</div>
         <button class="btn btn-primary" onclick="startAudio()">▶ Démarrer avec la voix</button>
       </div>
 
-      <!-- Tableau de bord progression -->
       <div id="progressDashboard" style="margin-bottom:20px;">
         <div style="font-size:13px;font-weight:600;color:var(--ink2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.08em;">Ma progression</div>
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;" id="progressCards">
@@ -457,8 +455,8 @@
         <div class="mod-card" onclick="showTab('coach')">
           <span class="mod-icon">💬</span>
           <div class="mod-name">Coaching + correcteur</div>
-          <div class="mod-desc">Pratique guidée avec feedback sur le fond ET sur ta grammaire. Erreurs détectées et expliquées en contexte.</div>
-          <div class="mod-count">6 scénarios · correcteur grammatical</div>
+          <div class="mod-desc">Coach IA libre : entretiens, grammaire, vocabulaire, conversation, conseils. Pose n'importe quelle question.</div>
+          <div class="mod-count">6 scénarios · conversation libre · correcteur grammatical</div>
         </div>
         <div class="mod-card" onclick="showTab('shadow')">
           <span class="mod-icon">🗣️</span>
@@ -480,7 +478,6 @@
       <div class="sec-title">Flashcards</div>
       <div class="cat-row" id="flashCats"></div>
 
-      <!-- SRS mode toggle -->
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
         <div class="flash-progress" id="flashProgress" style="margin:0"></div>
         <button id="srsToggleBtn" onclick="toggleSrsMode()"
@@ -491,10 +488,9 @@
         </button>
       </div>
 
-      <!-- SRS stats (hidden by default) -->
       <div id="srsStats" style="display:none;background:var(--teal-l);border-radius:12px;
            padding:10px 16px;margin-bottom:14px;font-size:12px;color:var(--teal-d);
-           display:none;justify-content:space-between;flex-wrap:wrap;gap:6px;">
+           justify-content:space-between;flex-wrap:wrap;gap:6px;">
         <span>📚 À revoir : <strong id="srsDue">0</strong></span>
         <span>✅ Maîtrisés : <strong id="srsMastered">0</strong></span>
         <span>🔄 Session : <strong id="srsSession">0</strong> revues</span>
@@ -504,7 +500,6 @@
       <div class="flash-card" onclick="revealCard()" id="flashCard">
         <span class="flash-emoji" id="flashEmoji"></span>
         <div class="flash-word" id="flashWord"></div>
-        <!-- SRS level badge -->
         <div id="srsLevelBadge" style="display:none;font-size:11px;font-weight:600;
              padding:3px 10px;border-radius:20px;background:#f0f4f8;color:var(--ink2);">
         </div>
@@ -513,14 +508,12 @@
         <div class="flash-ctx" id="flashCtx"></div>
       </div>
 
-      <!-- Normal controls (mode normal) -->
       <div class="flash-controls" id="flashNormalControls">
         <button class="btn btn-ghost" onclick="navCard(-1)">← Précédent</button>
         <button class="speak-btn" onclick="speakCurrent()" title="Écouter la prononciation">🔊</button>
         <button class="btn btn-primary" onclick="navCard(1)">Suivant →</button>
       </div>
 
-      <!-- SRS controls (mode répétition espacée, visible après révélation) -->
       <div class="flash-controls" id="flashSrsControls" style="display:none;">
         <button class="btn" onclick="srsRate(1)"
           style="background:var(--rose-l);color:var(--rose);border:1.5px solid var(--rose);">
@@ -566,7 +559,6 @@
       <div class="sec-title">Simulation d'entretien</div>
       <div class="sec-sub">Clic 🔊 pour écouter et lancer le timer. Clic sur le bouton pour voir les conseils.</div>
       <div class="cat-row" id="itwCats"></div>
-      <!-- Timer 90s -->
       <div id="itwTimerBox" style="display:none;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 20px;margin-bottom:16px;box-shadow:var(--shadow);">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
           <div style="font-size:13px;font-weight:600;color:var(--ink2);">⏱️ Temps de réponse</div>
@@ -583,7 +575,7 @@
     <!-- FILL IN THE BLANK -->
     <div class="scene" id="scene-fillin">
       <div class="sec-title">Fill-in-the-blank ✍️</div>
-      <div class="sec-sub">Complète la phrase en tapant le mot manquant en anglais. Les phrases viennent directement du vocabulaire professionnel.</div>
+      <div class="sec-sub">Complète la phrase en tapant le mot manquant en anglais.</div>
       <div class="cat-row" id="fillinCats"></div>
       <div style="text-align:center;font-size:13px;color:var(--ink2);margin-bottom:8px;" id="fillinProgress"></div>
       <div style="height:4px;background:#e8eaf0;border-radius:2px;margin-bottom:20px;"><div id="fillinBar" style="height:100%;background:var(--teal);border-radius:2px;transition:width .3s;width:0%"></div></div>
@@ -611,7 +603,7 @@
       <div class="sec-sub">5 questions d'entretien aléatoires. Pas de conseils. Réponds à voix haute ou dans ta tête, puis évalue ton niveau de confiance honnêtement.</div>
       <div id="examStart" style="text-align:center;padding:30px 0;">
         <div style="font-size:56px;margin-bottom:16px;">🎯</div>
-        <div style="font-size:15px;color:var(--ink2);max-width:340px;margin:0 auto 24px;line-height:1.6;">Simule un vrai entretien BAD/ONU. 5 questions, une à la fois, sans filet. Tu évalues toi-même ta réponse à la fin de chaque question.</div>
+        <div style="font-size:15px;color:var(--ink2);max-width:340px;margin:0 auto 24px;line-height:1.6;">Simule un vrai entretien BAD/ONU. 5 questions, une à la fois, sans filet.</div>
         <button class="btn btn-primary" style="font-size:16px;padding:14px 32px;" onclick="startExam()">Commencer l'examen →</button>
       </div>
       <div id="examSession" style="display:none;">
@@ -650,7 +642,7 @@
     <!-- SHADOW SPEAKING -->
     <div class="scene" id="scene-shadow">
       <div class="sec-title">Shadow Speaking 🗣️</div>
-      <div class="sec-sub">Écoute la phrase à vitesse naturelle. Dès que le micro s'ouvre, répète-la immédiatement en copiant le rythme et l'intonation. La technique la plus efficace contre la peur de parler.</div>
+      <div class="sec-sub">Écoute la phrase à vitesse naturelle. Dès que le micro s'ouvre, répète-la immédiatement en copiant le rythme et l'intonation.</div>
       <div style="text-align:center;font-size:13px;color:var(--ink2);margin-bottom:8px;" id="shadowProgress">1 / 20</div>
       <div style="height:4px;background:#e8eaf0;border-radius:2px;margin-bottom:20px;"><div id="shadowBar" style="height:100%;background:var(--gold);border-radius:2px;transition:width .3s;width:5%"></div></div>
       <div id="shadowCard" style="background:linear-gradient(135deg,#fffdf5 0%,#fdf3e3 100%);border:1px solid var(--border);border-radius:24px;padding:32px 28px;text-align:center;max-width:480px;margin:0 auto 20px;box-shadow:var(--shadow);">
@@ -672,28 +664,25 @@
         <button class="btn btn-primary btn-sm" onclick="shadowNav(1)">Suivant →</button>
       </div>
       <div id="shadowNoSupport" style="display:none;background:var(--gold-l);border:1px solid #f0d89a;border-radius:16px;padding:16px 20px;font-size:14px;color:var(--ink);margin-top:16px;">
-        ⚠️ La reconnaissance vocale nécessite <strong>Chrome</strong> ou <strong>Edge</strong>. L'écoute et la répétition fonctionnent quand même sans micro.
+        ⚠️ La reconnaissance vocale nécessite <strong>Chrome</strong> ou <strong>Edge</strong>.
       </div>
     </div>
 
     <!-- COACH -->
     <div class="scene" id="scene-coach">
       <div class="sec-title">Coaching IA</div>
-      <div class="sec-sub">Un vrai coach alimenté par Claude. Conversation libre, feedback personnalisé sur le fond ET la grammaire. La conversation continue aussi longtemps que tu le veux.</div>
+      <div class="sec-sub">Coach personnel alimenté par IA. Entretiens, grammaire, vocabulaire, conversation libre — pose n'importe quelle question en anglais ou en français.</div>
 
-      <!-- Sélecteur de provider LLM -->
       <div id="apiKeyBox" style="background:var(--gold-l);border:1px solid #f0d89a;border-radius:14px;padding:14px 18px;margin-bottom:16px;">
         <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:10px;">🔑 Choisis ton moteur IA</div>
-        <!-- Onglets provider -->
         <div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;">
           <button class="provider-tab active" onclick="selectProvider('groq')"   id="tab-groq">⚡ Groq (gratuit)</button>
           <button class="provider-tab"        onclick="selectProvider('ollama')" id="tab-ollama">🏠 Ollama (local)</button>
           <button class="provider-tab"        onclick="selectProvider('anthropic')" id="tab-anthropic">🤖 Anthropic</button>
         </div>
-        <!-- Groq -->
         <div id="panel-groq">
           <div style="font-size:12px;color:var(--ink2);margin-bottom:8px;line-height:1.5;">
-           Llama 3.3 70B, rapide et gratuit.
+            Llama 3.3 70B, rapide et gratuit.
             <a href="https://console.groq.com/keys" target="_blank" style="color:var(--teal);">Obtenir une clé →</a>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
@@ -707,11 +696,9 @@
             <button class="btn btn-primary btn-sm" onclick="saveApiKey()">Enregistrer</button>
           </div>
         </div>
-        <!-- Ollama -->
         <div id="panel-ollama" style="display:none;">
           <div style="font-size:12px;color:var(--ink2);margin-bottom:8px;line-height:1.5;">
-            Lance Ollama avec : <code style="background:#f0f4f8;padding:2px 6px;border-radius:4px;">OLLAMA_ORIGINS=* ollama serve</code><br>
-            Puis choisis ton modèle installé. Fonctionne 100% offline.
+            Lance Ollama avec : <code style="background:#f0f4f8;padding:2px 6px;border-radius:4px;">OLLAMA_ORIGINS=* ollama serve</code>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
             <input id="ollamaUrlInput" value="http://localhost:11434"
@@ -721,7 +708,6 @@
             <button class="btn btn-primary btn-sm" onclick="saveApiKey()">Enregistrer</button>
           </div>
         </div>
-        <!-- Anthropic -->
         <div id="panel-anthropic" style="display:none;">
           <div style="font-size:12px;color:var(--ink2);margin-bottom:8px;line-height:1.5;">
             Clé Anthropic — quelques centimes par session.
@@ -758,11 +744,12 @@
                  display:inline-flex;align-items:center;justify-content:center;
                  transition:background .2s,transform .15s;">🎙️</button>
         <input class="coach-input" id="coachInput"
-          placeholder="Parle (🎙️) ou tape en anglais..."
+          placeholder="Parle (🎙️) ou tape en anglais ou en français..."
           onkeydown="if(event.key==='Enter'&&!event.shiftKey)sendCoach()"/>
         <button class="btn btn-primary" onclick="sendCoach()" id="coachSendBtn">Envoyer</button>
       </div>
-      <div id="coachMicStatus" style="font-size:12px;color:var(--ink2);margin-top:6px;min-height:16px;text-align:center;display:none;">
+      <div id="coachMicStatus" style="font-size:12px;color:var(--teal-d);margin-top:6px;min-height:16px;text-align:center;display:none;
+           background:var(--teal-l);border-radius:8px;padding:6px 12px;">
         🎙️ Je t'écoute... Parle en anglais, puis arrête-toi.
       </div>
       <div style="text-align:right;margin-top:6px;">
@@ -785,12 +772,8 @@
       </div>
 
       <div class="pronun-controls">
-        <button class="pronun-btn-listen" id="pronunListenBtn" onclick="pronunListen()">
-          🔊 Écouter
-        </button>
-        <button class="pronun-btn-record" id="pronunRecordBtn" onclick="pronunToggleRecord()">
-          🎙️ Parler
-        </button>
+        <button class="pronun-btn-listen" id="pronunListenBtn" onclick="pronunListen()">🔊 Écouter</button>
+        <button class="pronun-btn-record" id="pronunRecordBtn" onclick="pronunToggleRecord()">🎙️ Parler</button>
       </div>
 
       <div class="pronun-status" id="pronunStatus">Écoute le mot puis clique sur 🎙️ Parler</div>
@@ -813,7 +796,7 @@
       </div>
 
       <div class="pronun-no-support" id="pronunNoSupport" style="display:none">
-        ⚠️ La reconnaissance vocale n'est pas disponible dans ce navigateur. Ouvre ce fichier dans <strong>Chrome</strong> ou <strong>Edge</strong> pour utiliser ce module.
+        ⚠️ La reconnaissance vocale n'est pas disponible dans ce navigateur. Ouvre ce fichier dans <strong>Chrome</strong> ou <strong>Edge</strong>.
       </div>
     </div>
 
@@ -821,7 +804,6 @@
 </div>
 
 <style>
-  /* PRONUNCIATION TRAINER */
   .pronun-card {
     background: linear-gradient(135deg, #f0faf9 0%, #e0f5f3 100%);
     border: 1px solid var(--border);
@@ -829,113 +811,31 @@
     text-align: center; max-width: 480px; margin: 0 auto 20px;
     box-shadow: var(--shadow); position: relative;
   }
-  .pronun-num {
-    font-size: 11px; font-weight: 600; color: var(--teal);
-    text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px;
-  }
+  .pronun-num { font-size: 11px; font-weight: 600; color: var(--teal); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px; }
   .pronun-emoji { font-size: 50px; margin-bottom: 10px; display: block; }
-  .pronun-word {
-    font-family: 'DM Serif Display', serif;
-    font-size: 34px; color: var(--teal); line-height: 1.1; margin-bottom: 6px;
-  }
-  .pronun-phonetic {
-    font-size: 15px; color: var(--ink2); margin-bottom: 8px;
-    font-style: italic; letter-spacing: .02em;
-  }
-  .pronun-fr {
-    font-size: 13px; font-weight: 600; color: var(--gold);
-    background: var(--gold-l); padding: 4px 14px;
-    border-radius: 20px; display: inline-block;
-  }
-  .pronun-controls {
-    display: flex; gap: 14px; justify-content: center;
-    margin-bottom: 14px; flex-wrap: wrap;
-  }
-  .pronun-btn-listen {
-    padding: 12px 24px; border-radius: 999px; border: none;
-    background: var(--teal-l); color: var(--teal-d);
-    font-size: 15px; font-weight: 600; cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    transition: background .2s, transform .12s;
-  }
-  .pronun-btn-listen:hover { background: #b2ece7; transform: translateY(-1px); }
-  .pronun-btn-record {
-    padding: 12px 24px; border-radius: 999px; border: none;
-    background: var(--teal); color: #fff;
-    font-size: 15px; font-weight: 600; cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    transition: background .2s, transform .12s;
-  }
-  .pronun-btn-record:hover { background: var(--teal-d); transform: translateY(-1px); }
-  .pronun-btn-record.recording {
-    background: var(--rose); animation: pulse-rec 1s ease-in-out infinite;
-  }
-  @keyframes pulse-rec {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(192,56,90,.4); }
-    50% { box-shadow: 0 0 0 10px rgba(192,56,90,0); }
-  }
-  .pronun-status {
-    text-align: center; font-size: 13px; color: var(--ink2);
-    margin-bottom: 14px; min-height: 20px;
-  }
-  .pronun-result {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 18px 20px;
-    max-width: 480px; margin: 0 auto 16px; box-shadow: var(--shadow);
-  }
-  .pronun-result-score {
-    font-family: 'DM Serif Display', serif;
-    font-size: 28px; text-align: center; margin-bottom: 8px;
-  }
-  .pronun-result-heard {
-    font-size: 13px; color: var(--ink2); text-align: center;
-    margin-bottom: 10px; font-style: italic;
-  }
-  .pronun-result-words {
-    display: flex; gap: 6px; flex-wrap: wrap;
-    justify-content: center; margin-bottom: 10px;
-  }
-  .pw-match {
-    background: #e4f9ee; color: #065a30;
-    border: 1px solid #9fe5b8; border-radius: 8px;
-    padding: 4px 10px; font-size: 13px; font-weight: 600;
-  }
-  .pw-miss {
-    background: var(--rose-l); color: var(--rose);
-    border: 1px solid #f4a0b5; border-radius: 8px;
-    padding: 4px 10px; font-size: 13px; font-weight: 600;
-  }
-  .pw-partial {
-    background: var(--gold-l); color: var(--gold);
-    border: 1px solid #f5c878; border-radius: 8px;
-    padding: 4px 10px; font-size: 13px; font-weight: 600;
-  }
-  .pronun-result-tip {
-    font-size: 12px; color: var(--ink2); text-align: center;
-    line-height: 1.5; padding-top: 8px;
-    border-top: 1px solid var(--border);
-  }
-  .pronun-nav {
-    display: flex; gap: 12px; justify-content: center; margin-bottom: 16px;
-  }
-  .pronun-progress-row {
-    max-width: 480px; margin: 0 auto;
-  }
-  .pronun-bar {
-    height: 4px; background: #e8eaf0; border-radius: 2px; margin-bottom: 6px;
-  }
-  .pronun-bar-fill {
-    height: 100%; background: var(--teal); border-radius: 2px; transition: width .35s;
-  }
-  .pronun-stats {
-    font-size: 12px; color: var(--ink2); text-align: right;
-  }
-  .pronun-no-support {
-    background: var(--gold-l); border: 1px solid #f0d89a;
-    border-radius: var(--radius); padding: 16px 20px;
-    font-size: 14px; color: var(--ink); line-height: 1.6;
-    max-width: 480px; margin: 0 auto;
-  }
+  .pronun-word { font-family: 'DM Serif Display', serif; font-size: 34px; color: var(--teal); line-height: 1.1; margin-bottom: 6px; }
+  .pronun-phonetic { font-size: 15px; color: var(--ink2); margin-bottom: 8px; font-style: italic; }
+  .pronun-fr { font-size: 13px; font-weight: 600; color: var(--gold); background: var(--gold-l); padding: 4px 14px; border-radius: 20px; display: inline-block; }
+  .pronun-controls { display: flex; gap: 14px; justify-content: center; margin-bottom: 14px; flex-wrap: wrap; }
+  .pronun-btn-listen { padding: 12px 24px; border-radius: 999px; border: none; background: var(--teal-l); color: var(--teal-d); font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+  .pronun-btn-record { padding: 12px 24px; border-radius: 999px; border: none; background: var(--teal); color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+  .pronun-btn-record.recording { background: var(--rose); animation: pulse-rec 1s ease-in-out infinite; }
+  @keyframes pulse-rec { 0%, 100% { box-shadow: 0 0 0 0 rgba(192,56,90,.4); } 50% { box-shadow: 0 0 0 10px rgba(192,56,90,0); } }
+  .pronun-status { text-align: center; font-size: 13px; color: var(--ink2); margin-bottom: 14px; min-height: 20px; }
+  .pronun-result { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; max-width: 480px; margin: 0 auto 16px; box-shadow: var(--shadow); }
+  .pronun-result-score { font-family: 'DM Serif Display', serif; font-size: 28px; text-align: center; margin-bottom: 8px; }
+  .pronun-result-heard { font-size: 13px; color: var(--ink2); text-align: center; margin-bottom: 10px; font-style: italic; }
+  .pronun-result-words { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-bottom: 10px; }
+  .pw-match { background: #e4f9ee; color: #065a30; border: 1px solid #9fe5b8; border-radius: 8px; padding: 4px 10px; font-size: 13px; font-weight: 600; }
+  .pw-miss { background: var(--rose-l); color: var(--rose); border: 1px solid #f4a0b5; border-radius: 8px; padding: 4px 10px; font-size: 13px; font-weight: 600; }
+  .pw-partial { background: var(--gold-l); color: var(--gold); border: 1px solid #f5c878; border-radius: 8px; padding: 4px 10px; font-size: 13px; font-weight: 600; }
+  .pronun-result-tip { font-size: 12px; color: var(--ink2); text-align: center; line-height: 1.5; padding-top: 8px; border-top: 1px solid var(--border); }
+  .pronun-nav { display: flex; gap: 12px; justify-content: center; margin-bottom: 16px; }
+  .pronun-progress-row { max-width: 480px; margin: 0 auto; }
+  .pronun-bar { height: 4px; background: #e8eaf0; border-radius: 2px; margin-bottom: 6px; }
+  .pronun-bar-fill { height: 100%; background: var(--teal); border-radius: 2px; transition: width .35s; }
+  .pronun-stats { font-size: 12px; color: var(--ink2); text-align: right; }
+  .pronun-no-support { background: var(--gold-l); border: 1px solid #f0d89a; border-radius: var(--radius); padding: 16px 20px; font-size: 14px; color: var(--ink); line-height: 1.6; max-width: 480px; margin: 0 auto; }
 </style>
 
 <script>
@@ -1055,129 +955,95 @@ const ITW = {
      ex:"I have applied AI practically — I built a Streamlit training application using the Groq API with Llama 3, and I am implementing Ollama with RAG for the second phase of Djelycom. I am also completing a DeepLearning.AI course to build a stronger theoretical foundation."},
     {q:"How would you approach digitizing a large paper collection with limited resources?",
      tip:"Prioritize by value and risk, establish a batch processing workflow, automate metadata extraction with OCR, and build in quality control gates.",
-     ex:"I would start with an appraisal to identify high-priority records — those most frequently requested or at greatest risk. Then I would establish a phased workflow: batch scanning, consistent file naming, automated OCR-based metadata extraction, and quality validation at each stage."},
+     ex:"I would start with an appraisal to identify high-priority records. Then I would establish a phased workflow: batch scanning, consistent file naming, automated OCR-based metadata extraction, and quality validation at each stage."},
     {q:"Explain the difference between records management and archival management.",
      tip:"Records management covers the active and semi-active lifecycle. Archival management takes over when records are no longer operationally needed but retain permanent value.",
-     ex:"Records management covers documents in active and semi-active use — creating, classifying, and controlling them while they support daily operations. Archival management takes over when records are no longer needed operationally but have lasting historical, legal, or evidential value. The two phases are linked through a disposition schedule."}
+     ex:"Records management covers documents in active and semi-active use. Archival management takes over when records are no longer needed operationally but have lasting historical, legal, or evidential value. The two phases are linked through a disposition schedule."}
   ],
   situational: [
     {q:"How would you handle a situation where a senior manager asks you to destroy records before their scheduled retention date?",
      tip:"Show professional integrity, reference the legal framework, propose compliant alternatives, and explain escalation procedures.",
-     ex:"I would explain calmly that early destruction could expose the institution to legal and reputational risk. I would reference the applicable retention schedule and offer alternatives — such as restricting access while records complete their retention period. If pressure continued, I would escalate to the legal or compliance office."},
+     ex:"I would explain calmly that early destruction could expose the institution to legal and reputational risk. I would reference the applicable retention schedule and offer alternatives. If pressure continued, I would escalate to the legal or compliance office."},
     {q:"You are assigned to a country office where archival practices are minimal. How do you begin?",
      tip:"Assessment first, then quick wins to build trust, then a co-designed long-term plan. Always involve local staff from the start.",
-     ex:"I would begin with a rapid assessment — understanding what records exist, how they are managed, and the biggest risks. I would identify quick wins to build credibility, such as a simple filing structure. Then I would co-develop a phased implementation plan with local staff to ensure ownership and sustainability."},
+     ex:"I would begin with a rapid assessment — understanding what records exist, how they are managed, and the biggest risks. I would identify quick wins to build credibility, then co-develop a phased implementation plan with local staff."},
     {q:"A colleague disagrees with your proposed classification scheme. How do you respond?",
      tip:"Listen genuinely, explain your rationale with reference to standards, seek common ground, and propose a pilot test if needed.",
-     ex:"I would listen carefully to understand their concerns — there may be valid operational considerations I missed. I would explain my rationale, referencing applicable standards. If we cannot agree, I would propose piloting both approaches on a small subset of records and letting the results guide the decision."},
+     ex:"I would listen carefully to understand their concerns. I would explain my rationale, referencing applicable standards. If we cannot agree, I would propose piloting both approaches on a small subset of records."},
     {q:"You discover a significant gap in the organization's data protection practices. What do you do?",
      tip:"Document precisely, assess the risk, report through proper channels, and arrive with solutions — not just problems.",
-     ex:"I would document the gap precisely, assess its impact on the organization and affected individuals, and report through the appropriate channel — the data protection officer or my supervisor. I would also prepare a concrete set of recommendations so that I am presenting a solution, not just a problem."},
+     ex:"I would document the gap precisely, assess its impact, and report through the appropriate channel. I would also prepare concrete recommendations so that I am presenting a solution, not just a problem."},
     {q:"How do you stay current with developments in your field?",
-     tip:"Name specific professional communities and learning activities: ICA, DPC, STIA, Coursera, building tools as a form of learning.",
-     ex:"I follow the ICA and the Digital Preservation Coalition actively. I participate in networks like STIA and ICA mailing lists. I also learn by building — developing applications like LIKOAM and Djelycom forces me to engage with the latest tools. Currently I am completing a DeepLearning.AI course to formalize my AI expertise."}
+     tip:"Name specific professional communities: ICA, DPC, STIA, Coursera, building tools as a form of learning.",
+     ex:"I follow the ICA and the Digital Preservation Coalition actively. I participate in networks like STIA. I also learn by building — developing LIKOAM and Djelycom forces me to engage with the latest tools. Currently I am completing a DeepLearning.AI course."}
   ]
 };
 
-const COACH_SCENARIOS = [
-  {id:"pitch",   label:"Pitch professionnel 30s",   bot:"Let's practice your 30-second professional pitch. When I ask 'Tell me about yourself', give a concise, structured answer. Ready? — So, tell me briefly about your background and what makes you stand out."},
-  {id:"email",   label:"Email formel",              bot:"Let's draft a formal email together. Imagine you need to request a meeting with the Head of Archives at UNESCO to discuss a collaboration. What would your subject line and opening be?"},
-  {id:"present", label:"Présenter LIKOAM",          bot:"Practice presenting your LIKOAM project in English. Describe what it does, why you built it, and what impact it has had — in 3 to 4 sentences, as if speaking to an international audience."},
-  {id:"negociate",label:"Négocier une deadline",   bot:"You need to ask your supervisor for a 2-week extension on a project deliverable. How would you frame that request professionally and persuasively?"},
-  {id:"disagree", label:"Désaccord professionnel", bot:"Your team wants to use a cloud-only solution, but you know connectivity in the field is unreliable. How do you raise this concern professionally without dismissing your colleagues' proposal?"},
-  {id:"feedback", label:"Donner du feedback",       bot:"You need to give constructive feedback to a colleague whose report lacks clear structure. How would you open that conversation in English?"}
+const COACH_SCENARIOS_AI = [
+  { id:"pitch",    label:"🎯 Pitch 30 secondes",      opener:"Let's practice your 30-second pitch for an AfDB interview. I'll be the interviewer. Ready?\n\n**Tell me briefly about yourself and what makes you stand out from other candidates.**" },
+  { id:"likoam",   label:"🛠️ Présenter LIKOAM",       opener:"Let's practice presenting LIKOAM to a non-technical international audience — imagine a UNESCO recruitment officer.\n\n**Tell me: what is LIKOAM, why did you build it, and what impact has it had?**" },
+  { id:"email",    label:"📧 Email formel BAD",        opener:"Let's draft a formal email together. You want to request an informational interview with the Head of Knowledge Management at the AfDB.\n\n**Start with the subject line and your opening paragraph.**" },
+  { id:"disagree", label:"⚡ Désaccord professionnel", opener:"Role play: your team has decided to use a cloud-only document system, but you know field offices have unreliable internet. You need to raise this concern without dismissing your colleagues.\n\n**How do you open this conversation?**" },
+  { id:"itw_q",    label:"🎤 Questions d'entretien",   opener:"I'll ask you real AfDB/UN interview questions one at a time. We can go as deep as you want on each one.\n\n**First question: Describe a challenge you faced at work and how you resolved it.**" },
+  { id:"free",     label:"💬 Conversation libre",      opener:"Free practice mode — talk to me about anything. Your work, your projects, a grammar question, general English practice, anything. What's on your mind?" },
 ];
 
-const COACH_REPLIES = {
-  pitch: [
-    {kw:["archivist","archive","records","ministry","culture","ivorian"],
-     fb:"Good foundation! Now add what makes you unique — your coding dimension. Try: 'What sets me apart is that I also build the tools I need. I developed an integrated records management system called LIKOAM which has been presented at an international DPC webinar.'"},
-    {kw:["years","experience","work","worked","background"],
-     fb:"You're addressing your experience well. Make sure to also include your current focus and a forward-looking statement: 'Currently, I am expanding into AI-assisted archival solutions and seeking international opportunities to apply this expertise at scale.'"},
-    {kw:[],
-     fb:"Good attempt. A strong 30-second pitch has three parts: 1) Who you are now, 2) Your key achievement, 3) Where you're headed. Try again with that structure in mind."}
-  ],
-  email: [
-    {kw:["subject","re:","regarding","request","meeting","collaboration"],
-     fb:"Good — you're thinking about the subject line. A strong subject for this context would be: 'Request for Meeting — Archival Technology Collaboration'. It is specific and signals a clear purpose."},
-    {kw:["dear","to whom","madam","sir","hello","greetings","ms","mr"],
-     fb:"Good opening. For formal UN/UNESCO correspondence, 'Dear Ms./Mr. [Name]' is standard. If the name is unavailable, 'Dear Madam/Sir' is acceptable — but always try to find the name first. It shows diligence."},
-    {kw:[],
-     fb:"For a formal email opening, try: 'Dear Ms. [Name], I hope this message finds you well. I am writing to request a brief meeting to discuss a potential collaboration on archival technology for West African institutions.' — then explain the value proposition in 2 sentences."}
-  ],
-  present: [
-    {kw:["likoam","system","manage","tool","built","develop","records"],
-     fb:"Excellent — you're describing the tool clearly. Now add the impact with numbers: 'Since its beta phase, LIKOAM has been tested by archivists from 3 countries and was presented at a DPC webinar attended by over 80 international professionals.' Numbers make your pitch credible."},
-    {kw:["offline","python","flask","sqlite","google","apps script"],
-     fb:"Good technical specificity. For a non-technical international audience, translate that into benefits: 'Unlike cloud-based solutions, LIKOAM works without internet access — which is essential for institutions in areas with unreliable connectivity, which describes most of our target users.'"},
-    {kw:[],
-     fb:"Try the Problem → Solution → Impact structure: 'Archivists in Côte d'Ivoire lacked affordable records management tools [Problem] → I built LIKOAM using open-source technology at zero budget [Solution] → It is now piloted locally and has received validation from the international archival community [Impact].'"}
-  ],
-  negociate: [
-    {kw:["additional","extend","extension","time","delay","week","date","deadline"],
-     fb:"You're making the request. Strengthen it by: 1) Acknowledging the original deadline, 2) Stating the specific reason concisely, 3) Proposing a precise new date. Try: 'I want to ensure this deliverable meets the quality standard we discussed. Would it be possible to move the deadline to [specific date]? I can share an interim progress update by [earlier date] if that would help.'"},
-    {kw:["sorry","apologize","unfortunately","regret"],
-     fb:"It is appropriate to acknowledge the situation, but avoid over-apologizing — it weakens your negotiating position. State the situation factually and focus on the solution: 'Due to [specific reason], I need an additional two weeks to deliver this to the required standard.'"},
-    {kw:[],
-     fb:"A professional extension request sounds like: 'I wanted to discuss the timeline for [deliverable name]. To ensure the quality we discussed, I would need until [new date]. I can share a progress update by [interim date] if that would be helpful.' Keep it factual and solution-focused."}
-  ],
-  disagree: [
-    {kw:["connectivity","offline","internet","concern","issue","risk","field","access"],
-     fb:"You're naming the concern clearly. Frame it as a risk to the mission rather than a personal preference: 'My concern is that a cloud-only solution could limit access in field offices with unreliable connectivity, which would affect the very users we are trying to serve — and undermine the project's stated objectives.'"},
-    {kw:["suggest","propose","alternative","hybrid","both","combine"],
-     fb:"Proposing an alternative is excellent professional communication. Follow with something concrete: 'I would propose piloting a hybrid approach — synchronizing with the cloud when connectivity is available, while remaining fully functional offline otherwise. This would give us the best of both solutions.'"},
-    {kw:[],
-     fb:"Try the 'Yes, and' technique: acknowledge the proposal's merits before introducing your concern. For example: 'I see real advantages to the cloud-based approach, especially for collaboration. I'd like to raise one consideration around field connectivity before we finalize — could we discuss whether a hybrid architecture might address both needs?'"}
-  ],
-  feedback: [
-    {kw:["structure","clear","section","organize","flow","heading","navigation","summary"],
-     fb:"You've identified a specific, actionable issue. Effective feedback describes the behavior (not the person) and its impact: 'I noticed the report does not have clear section headings, which makes it difficult to navigate quickly.' Then offer support: 'I'd be happy to share a template that might be useful for this type of document.'"},
-    {kw:["good","appreciate","like","however","but","although","though"],
-     fb:"You're using a balanced approach — that's professional. Make sure the constructive part is specific enough to be acted on: not just 'the structure could be clearer', but 'the key findings are embedded in the body text, which makes them easy to miss. An executive summary or highlighted section would strengthen the report significantly.'"},
-    {kw:[],
-     fb:"A strong feedback conversation has three parts: 1) Specific observable behavior, 2) Its impact, 3) A concrete suggestion. For example: 'I noticed the key findings are embedded in the narrative rather than highlighted separately [behavior]. This makes it hard for a reader to extract the main points quickly [impact]. Would it help to add a short executive summary at the beginning? [suggestion]'"}
-  ]
-};
+// ============================================================
+// ★ CORRECTIF 1 — SYSTÈME PROMPT OUVERT ★
+// ============================================================
+const COACH_SYSTEM = `You are Alex, Victorine's personal English coach and language partner. Victorine is an Ivorian archivist with 8 years of experience at the Ministry of Culture, currently based in Dimbokro. She is preparing for interviews at international organizations (AfDB/BAD, UN, UNESCO) for Knowledge Management / Archivist positions.
+
+Her profile:
+- Built LIKOAM (Google Apps Script records management system, presented to 80+ archivists at a DPC webinar)
+- Built Djelycom (offline community library on Raspberry Pi 5, Python/Flask/SQLite)
+- Suite of offline HTML tools (Libre Outils)
+- Completing DeepLearning.AI AI/RAG certification
+- Intermediate English — reads well, speaks with hesitation
+
+YOU CAN HELP WITH ANYTHING:
+- Interview practice and coaching (AfDB, UN, UNESCO questions)
+- Grammar questions ("why is this wrong?", "how do I use 'since' vs 'for'?")
+- Vocabulary, expressions, idioms, professional writing
+- General conversation in English on any topic she wants
+- Translation help (French ↔ English)
+- Career advice on how to express herself in English
+- Pronunciation tips
+- Anything else she asks — follow her lead
+
+YOUR STYLE:
+1. React specifically to what she wrote — quote her exact words when relevant
+2. Give one clear, actionable improvement per message — not a list of 5 things
+3. Keep the conversation going — ask a follow-up question OR give her something concrete to try
+4. Use simple English — avoid complex idioms. If she writes in French, respond in French briefly + English
+5. Warm and direct, like a senior colleague coaching before an important interview — not a teacher grading a paper
+
+GRAMMAR (only when grammarCheck is ON): Note 1-2 issues MAX at the end, formatted as:
+🔍 [error] → [correction] — [brief reason]
+
+CRITICAL: Never refuse to answer a question because it seems off-topic. There is no off-topic. If she asks about grammar rules, answer them. If she wants to chat in English, chat. If she asks for translation, translate. Always follow the learner — she decides the direction of the session.`;
 
 // ============================================================
 // STATE
 // ============================================================
 let muted = false, totalScore = 0;
 let flashCat = "archives", flashIdx = 0, flashRevealed = false;
-
-// ============================================================
-// SRS — Répétition Espacée (algorithme SM-2 simplifié)
-// ============================================================
-// Structure par mot : { interval, easeFactor, due, level }
-// interval  : nb de jours avant la prochaine révision
-// easeFactor: facteur de facilité (2.5 par défaut, min 1.3)
-// due       : timestamp (ms) de la prochaine révision
-// level     : 0=nouveau 1=vu 2=appris 3=maîtrisé
-let srsMode = false;
-let srsData = {};       // clé = "cat__wordIndex"
-let srsQueue = [];      // liste ordonnée des mots à revoir en session
-let srsQueueIdx = 0;
-let srsSessionCount = 0;
+let srsMode = false, srsData = {}, srsQueue = [], srsQueueIdx = 0, srsSessionCount = 0;
 
 function srsKey(cat, idx) { return cat + "__" + idx; }
-
 function srsGetCard(cat, idx) {
   const k = srsKey(cat, idx);
   if (!srsData[k]) srsData[k] = { interval: 1, easeFactor: 2.5, due: Date.now(), level: 0 };
   return srsData[k];
 }
-
-// Calcul SM-2 simplifié : q = qualité de réponse (1=difficile, 3=hésitant, 5=connu)
 function srsUpdate(cat, idx, q) {
   const c = srsGetCard(cat, idx);
   if (q >= 3) {
-    if (c.interval === 1)      c.interval = 3;
+    if (c.interval === 1) c.interval = 3;
     else if (c.interval === 3) c.interval = 7;
-    else                        c.interval = Math.round(c.interval * c.easeFactor);
+    else c.interval = Math.round(c.interval * c.easeFactor);
     c.easeFactor = Math.max(1.3, c.easeFactor + 0.1 - (5 - q) * (0.08 + (5 - q) * 0.02));
     c.level = Math.min(3, c.level + 1);
   } else {
-    // Réponse difficile : retour au début
     c.interval = 1;
     c.level = Math.max(0, c.level - 1);
   }
@@ -1185,16 +1051,12 @@ function srsUpdate(cat, idx, q) {
   srsData[srsKey(cat, idx)] = c;
   saveSrs();
 }
-
 function saveSrs()  { try { localStorage.setItem("proenglish_srs", JSON.stringify(srsData)); } catch(e) {} }
 function loadSrs()  { try { const d = localStorage.getItem("proenglish_srs"); if (d) srsData = JSON.parse(d); } catch(e) {} }
-
 function buildSrsQueue(cat) {
   const words = DATA[cat].words;
   const now = Date.now();
-  // 1. Mots en retard (due <= now), triés du plus ancien au plus récent
-  const due = [];
-  const fresh = [];
+  const due = [], fresh = [];
   words.forEach((w, i) => {
     const c = srsGetCard(cat, i);
     if (c.due <= now) due.push({ i, due: c.due, level: c.level });
@@ -1202,10 +1064,8 @@ function buildSrsQueue(cat) {
   });
   due.sort((a, b) => a.due - b.due);
   fresh.sort((a, b) => a.level - b.level);
-  // File = d'abord les en retard, puis les moins connus
   return [...due, ...fresh].map(x => x.i);
 }
-
 function updateSrsStats(cat) {
   const words = DATA[cat].words;
   const now = Date.now();
@@ -1219,7 +1079,6 @@ function updateSrsStats(cat) {
   document.getElementById("srsMastered").textContent = mastered;
   document.getElementById("srsSession").textContent = srsSessionCount;
 }
-
 function toggleSrsMode() {
   srsMode = !srsMode;
   const btn = document.getElementById("srsToggleBtn");
@@ -1237,18 +1096,13 @@ function toggleSrsMode() {
   }
   renderFlash();
 }
-
 function srsRate(q) {
   srsUpdate(flashCat, srsQueue[srsQueueIdx], q);
   srsSessionCount++;
   updateSrsStats(flashCat);
-  if (q < 3) {
-    // Mot difficile : le remettre en fin de file pour revoir dans la même session
-    srsQueue.push(srsQueue[srsQueueIdx]);
-  }
+  if (q < 3) srsQueue.push(srsQueue[srsQueueIdx]);
   srsQueueIdx++;
   if (srsQueueIdx >= srsQueue.length) {
-    // Session terminée : recalcul
     srsQueue = buildSrsQueue(flashCat);
     srsQueueIdx = 0;
   }
@@ -1256,9 +1110,8 @@ function srsRate(q) {
   renderFlash();
   addScore(q >= 5 ? 4 : q >= 3 ? 2 : 1);
 }
-
-// Charger les données SRS au démarrage
 loadSrs();
+
 let quizCat = "archives", quizIdx = 0, quizScore = 0, quizAnswered = false;
 let itwCat = "general";
 
@@ -1270,9 +1123,7 @@ function speak(text, rate) {
   rate = rate || 0.88;
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
-  u.lang = "en-GB";
-  u.rate = rate;
-  u.pitch = 1;
+  u.lang = "en-GB"; u.rate = rate; u.pitch = 1;
   const voices = speechSynthesis.getVoices();
   const pref = voices.find(v => v.lang.startsWith("en-GB") && !v.name.includes("Google"))
             || voices.find(v => v.lang.startsWith("en-US"))
@@ -1280,9 +1131,7 @@ function speak(text, rate) {
   if (pref) u.voice = pref;
   speechSynthesis.speak(u);
 }
-if (window.speechSynthesis) {
-  speechSynthesis.onvoiceschanged = function() {};
-}
+if (window.speechSynthesis) speechSynthesis.onvoiceschanged = function() {};
 
 document.getElementById("muteBtn").onclick = function() {
   muted = !muted;
@@ -1301,9 +1150,7 @@ function addScore(n) {
 // ============================================================
 function showTab(tab) {
   const tabs = ["home","flash","quiz","fillin","itw","exam","coach","shadow","pronun"];
-  document.querySelectorAll(".nav-tab").forEach((t, i) => {
-    t.classList.toggle("active", tabs[i] === tab);
-  });
+  document.querySelectorAll(".nav-tab").forEach((t, i) => t.classList.toggle("active", tabs[i] === tab));
   document.querySelectorAll(".scene").forEach(s => s.classList.remove("active"));
   document.getElementById("scene-" + tab).classList.add("active");
   if (tab === "home")   updateDashboard();
@@ -1344,23 +1191,18 @@ function initFlash() {
   });
   renderFlash();
 }
-
 function renderFlash() {
   const cat = DATA[flashCat].words;
   const w = cat[flashIdx];
   flashRevealed = false;
-
-  // Progression
   if (srsMode) {
-    const pos = srsQueueIdx + 1;
-    const total = srsQueue.length;
+    const pos = srsQueueIdx + 1, total = srsQueue.length;
     document.getElementById("flashProgress").textContent = pos + " / " + total + " (file SRS)";
     document.getElementById("flashBarFill").style.width = (pos / total * 100) + "%";
   } else {
     document.getElementById("flashProgress").textContent = (flashIdx + 1) + " / " + cat.length;
     document.getElementById("flashBarFill").style.width = ((flashIdx + 1) / cat.length * 100) + "%";
   }
-
   document.getElementById("flashEmoji").textContent = DATA[flashCat].emoji;
   document.getElementById("flashWord").textContent = w.en;
   document.getElementById("flashHint").style.display = "";
@@ -1368,8 +1210,6 @@ function renderFlash() {
   document.getElementById("flashTrans").textContent = w.fr;
   document.getElementById("flashCtx").className = "flash-ctx";
   document.getElementById("flashCtx").textContent = '"' + w.ctx + '"';
-
-  // Badge niveau SRS
   const badge = document.getElementById("srsLevelBadge");
   if (srsMode) {
     const c = srsGetCard(flashCat, flashIdx);
@@ -1377,43 +1217,28 @@ function renderFlash() {
     const colors = ["#f0f4f8,var(--ink2)", "var(--gold-l),var(--gold)", "var(--teal-l),var(--teal-d)", "#e4f9ee,#065a30"];
     const [bg, col] = colors[c.level].split(",");
     badge.textContent = labels[c.level] + (c.interval > 1 ? " · revu dans " + c.interval + "j" : "");
-    badge.style.background = bg;
-    badge.style.color = col;
-    badge.style.display = "inline-block";
-  } else {
-    badge.style.display = "none";
-  }
-
-  // Contrôles : en mode SRS on cache les boutons jusqu'à révélation
+    badge.style.background = bg; badge.style.color = col; badge.style.display = "inline-block";
+  } else { badge.style.display = "none"; }
   document.getElementById("flashNormalControls").style.display = srsMode ? "none" : "flex";
   document.getElementById("flashSrsControls").style.display = "none";
-
   speak(w.en);
 }
-
 function revealCard() {
   if (!flashRevealed) {
     flashRevealed = true;
     document.getElementById("flashHint").style.display = "none";
     document.getElementById("flashTrans").className = "flash-translation visible";
     document.getElementById("flashCtx").className = "flash-ctx visible";
-    if (srsMode) {
-      document.getElementById("flashSrsControls").style.display = "flex";
-    } else {
-      addScore(1);
-    }
+    if (srsMode) document.getElementById("flashSrsControls").style.display = "flex";
+    else addScore(1);
   }
 }
-
 function navCard(d) {
   const cat = DATA[flashCat].words;
   flashIdx = (flashIdx + d + cat.length) % cat.length;
   renderFlash();
 }
-
-function speakCurrent() {
-  speak(DATA[flashCat].words[flashIdx].en);
-}
+function speakCurrent() { speak(DATA[flashCat].words[flashIdx].en); }
 
 // ============================================================
 // QUIZ
@@ -1438,31 +1263,26 @@ function initQuiz() {
   }
   renderQuiz();
 }
-
 function renderQuiz() {
   quizAnswered = false;
   const cat = DATA[quizCat].words;
   document.getElementById("quizDone").style.display = "none";
   document.getElementById("quizNextBtn").style.display = "none";
-
   if (quizIdx >= cat.length) {
     document.getElementById("quizQText").textContent = "";
     document.getElementById("quizOpts").innerHTML = "";
     document.getElementById("quizFeedback").className = "quiz-feedback";
     document.getElementById("quizDone").style.display = "block";
-    document.getElementById("quizDoneText").textContent =
-      "Score : " + quizScore + " / " + cat.length + " — " +
+    document.getElementById("quizDoneText").textContent = "Score : " + quizScore + " / " + cat.length + " — " +
       (quizScore >= cat.length * 0.8 ? "Excellent travail ! 🎉" : quizScore >= cat.length * 0.5 ? "Bien, continue ! 💪" : "Continue à pratiquer 📚");
     return;
   }
-
   const w = cat[quizIdx];
   document.getElementById("quizProgress").textContent = (quizIdx + 1) + " / " + cat.length;
   document.getElementById("quizScoreBadge").textContent = "✓ " + quizScore;
   document.getElementById("quizQText").textContent = w.en;
   document.getElementById("quizFeedback").className = "quiz-feedback";
   speak(w.en);
-
   const pool = [...cat];
   const wrongs = pool.filter(x => x !== w).sort(() => Math.random() - .5).slice(0, 3).map(x => x.fr);
   const opts = [w.fr, ...wrongs].sort(() => Math.random() - .5);
@@ -1470,44 +1290,25 @@ function renderQuiz() {
   container.innerHTML = "";
   opts.forEach(o => {
     const b = document.createElement("button");
-    b.className = "quiz-opt";
-    b.textContent = o;
+    b.className = "quiz-opt"; b.textContent = o;
     b.onclick = () => answerQuiz(o, w.fr, b, w);
     container.appendChild(b);
   });
 }
-
 function answerQuiz(chosen, correct, btn, word) {
   if (quizAnswered) return;
   quizAnswered = true;
   document.querySelectorAll(".quiz-opt").forEach(b => b.disabled = true);
   const ok = chosen === correct;
   btn.className = "quiz-opt " + (ok ? "correct" : "wrong");
-  if (!ok) {
-    document.querySelectorAll(".quiz-opt").forEach(b => {
-      if (b.textContent === correct) b.className = "quiz-opt correct";
-    });
-  }
+  if (!ok) document.querySelectorAll(".quiz-opt").forEach(b => { if (b.textContent === correct) b.className = "quiz-opt correct"; });
   const fb = document.getElementById("quizFeedback");
-  if (ok) {
-    fb.className = "quiz-feedback ok";
-    fb.textContent = "✓ Correct ! — " + word.ctx;
-    quizScore++;
-    addScore(3);
-  } else {
-    fb.className = "quiz-feedback ko";
-    fb.textContent = "✗ La bonne réponse était : " + correct + " — " + word.ctx;
-  }
+  if (ok) { fb.className = "quiz-feedback ok"; fb.textContent = "✓ Correct ! — " + word.ctx; quizScore++; addScore(3); }
+  else { fb.className = "quiz-feedback ko"; fb.textContent = "✗ La bonne réponse était : " + correct + " — " + word.ctx; }
   document.getElementById("quizNextBtn").style.display = "inline-flex";
 }
-
 function nextQuiz() { quizIdx++; renderQuiz(); }
-
-function restartQuiz() {
-  quizIdx = 0; quizScore = 0; quizAnswered = false;
-  document.getElementById("quizDone").style.display = "none";
-  renderQuiz();
-}
+function restartQuiz() { quizIdx = 0; quizScore = 0; quizAnswered = false; document.getElementById("quizDone").style.display = "none"; renderQuiz(); }
 
 // ============================================================
 // INTERVIEW
@@ -1531,7 +1332,6 @@ function initItw() {
   }
   renderItw();
 }
-
 function renderItw() {
   const list = document.getElementById("itwList");
   list.innerHTML = "";
@@ -1540,62 +1340,34 @@ function renderItw() {
     d.className = "itw-card";
     const tipsId = "tips-" + itwCat + "-" + i;
     const btnId  = "tbtn-" + itwCat + "-" + i;
-
-    // Build structure with DOM methods to avoid quote escaping issues
     const qRow = document.createElement("div");
     qRow.className = "itw-q";
-
     const num = document.createElement("span");
-    num.className = "itw-q-num";
-    num.textContent = i + 1;
-
+    num.className = "itw-q-num"; num.textContent = i + 1;
     const qText = document.createElement("div");
     qText.textContent = q.q + " ";
-
     const speakBtn = document.createElement("button");
-    speakBtn.className = "itw-speak";
-    speakBtn.title = "Écouter la question";
-    speakBtn.textContent = "🔊";
-    speakBtn.addEventListener("click", function(e) {
-      e.stopPropagation();
-      speak(q.q, 0.82);
-      startItwTimer();
-    });
-
+    speakBtn.className = "itw-speak"; speakBtn.title = "Écouter la question"; speakBtn.textContent = "🔊";
+    speakBtn.addEventListener("click", function(e) { e.stopPropagation(); speak(q.q, 0.82); startItwTimer(); });
     qText.appendChild(speakBtn);
-    qRow.appendChild(num);
-    qRow.appendChild(qText);
-
+    qRow.appendChild(num); qRow.appendChild(qText);
     const toggleBtn = document.createElement("button");
-    toggleBtn.className = "itw-toggle";
-    toggleBtn.id = btnId;
+    toggleBtn.className = "itw-toggle"; toggleBtn.id = btnId;
     toggleBtn.textContent = "Voir les conseils & exemple ▼";
-    toggleBtn.addEventListener("click", function() {
-      toggleTips(tipsId, btnId);
-    });
-
+    toggleBtn.addEventListener("click", function() { toggleTips(tipsId, btnId); });
     const tipsDiv = document.createElement("div");
-    tipsDiv.className = "itw-tips";
-    tipsDiv.id = tipsId;
-
+    tipsDiv.className = "itw-tips"; tipsDiv.id = tipsId;
     const tipBox = document.createElement("div");
     tipBox.className = "itw-tip";
     tipBox.innerHTML = "<strong>💡 Conseil :</strong> " + q.tip;
-
     const exBox = document.createElement("div");
     exBox.className = "itw-example";
     exBox.textContent = "📌 Exemple de réponse : \"" + q.ex + "\"";
-
-    tipsDiv.appendChild(tipBox);
-    tipsDiv.appendChild(exBox);
-
-    d.appendChild(qRow);
-    d.appendChild(toggleBtn);
-    d.appendChild(tipsDiv);
+    tipsDiv.appendChild(tipBox); tipsDiv.appendChild(exBox);
+    d.appendChild(qRow); d.appendChild(toggleBtn); d.appendChild(tipsDiv);
     list.appendChild(d);
   });
 }
-
 function toggleTips(tipsId, btnId) {
   const tips = document.getElementById(tipsId);
   const btn  = document.getElementById(btnId);
@@ -1604,49 +1376,9 @@ function toggleTips(tipsId, btnId) {
 }
 
 // ============================================================
-// COACH
-// ============================================================
-// ============================================================
-// COACH IA — Anthropic API
-// ============================================================
-let coachScenario = null;
-let coachHistory = [];   // [{role, content}] — historique complet de la session
-
-const COACH_SYSTEM = `You are an expert English coach for Victorine, an Ivorian archivist with 8 years of experience at the Ministry of Culture, currently based in Dimbokro. She is preparing for interviews at international organizations (AfDB/BAD, UN, UNESCO) for Knowledge Management / Archivist positions.
-
-Her profile:
-- Master in Archival Science (INSAAC) + Master in Modern Literature
-- Built LIKOAM (Google Apps Script records management system, presented to 80+ archivists at a DPC webinar)
-- Built Djelycom (offline community library system on Raspberry Pi 5, Python/Flask/SQLite)
-- Suite of offline HTML tools (Libre Outils) sold via Selar.co
-- Completing DeepLearning.AI AI/RAG certification
-- Intermediate English level — reads well, speaks with hesitation
-
-YOUR ROLE: Be a real conversational coach. Do NOT give generic feedback. Always:
-1. React specifically to what she wrote — quote her exact words when relevant
-2. Give one clear, actionable improvement per message (not a list of 5 things)
-3. Ask a follow-up question OR give her a concrete example to try next
-4. Keep the conversation going naturally — do not wrap up or summarize unless she asks
-5. Adapt your language level: use simple English, avoid complex idioms
-6. If she asks in French, answer in both French (briefly) and English
-7. If the grammar checker flag is on, note 1-2 grammar issues MAX at the end, formatted as: 🔍 [error] → [correction] — [brief reason]
-
-TONE: Warm, direct, like a senior colleague coaching you before an important interview. Not a teacher grading a paper.`;
-
-const COACH_SCENARIOS_AI = [
-  { id:"pitch",    label:"🎯 Pitch 30 secondes",      opener:"Let's practice your 30-second pitch for an AfDB interview. I'll be the interviewer. Ready?\n\n**Tell me briefly about yourself and what makes you stand out from other candidates.**" },
-  { id:"likoam",   label:"🛠️ Présenter LIKOAM",       opener:"Let's practice presenting LIKOAM to a non-technical international audience — imagine a UNESCO recruitment officer.\n\n**Tell me: what is LIKOAM, why did you build it, and what impact has it had?**" },
-  { id:"email",    label:"📧 Email formel BAD",        opener:"Let's draft a formal email together. You want to request an informational interview with the Head of Knowledge Management at the AfDB.\n\n**Start with the subject line and your opening paragraph.**" },
-  { id:"disagree", label:"⚡ Désaccord professionnel", opener:"Role play: your team has decided to use a cloud-only document system, but you know field offices have unreliable internet. You need to raise this concern without dismissing your colleagues.\n\n**How do you open this conversation?**" },
-  { id:"itw_q",    label:"🎤 Questions d'entretien",   opener:"I'll ask you real AfDB/UN interview questions one at a time. We can go as deep as you want on each one — ask me to rephrase, give you an example, or drill into a specific part of your answer.\n\n**First question: Describe a challenge you faced at work and how you resolved it.**" },
-  { id:"free",     label:"💬 Conversation libre",      opener:"Free practice mode. Talk to me about anything — your work, your projects, a question about English, or just chat. I'll gently correct and coach as we go. What's on your mind?" },
-];
-
-// ============================================================
 // PROVIDER SELECTOR
 // ============================================================
 let currentProvider = "groq";
-
 function selectProvider(p) {
   currentProvider = p;
   ["groq","ollama","anthropic"].forEach(id => {
@@ -1654,7 +1386,6 @@ function selectProvider(p) {
     document.getElementById("tab-" + id).classList.toggle("active", id === p);
   });
 }
-
 function saveApiKey() {
   const status = document.getElementById("apiKeyStatus");
   const box    = document.getElementById("apiKeyBox");
@@ -1678,7 +1409,6 @@ function saveApiKey() {
   status.style.color = "var(--teal)";
   box.style.background = "var(--teal-l)"; box.style.borderColor = "var(--teal)";
 }
-
 function restoreApiKey() {
   try {
     const p = localStorage.getItem("proenglish_provider") || "groq";
@@ -1696,11 +1426,9 @@ function restoreApiKey() {
     }
     const box = document.getElementById("apiKeyBox");
     const status = document.getElementById("apiKeyStatus");
-    const hasKey = localStorage.getItem("proenglish_provider");
-    if (hasKey) { box.style.background = "var(--teal-l)"; box.style.borderColor = "var(--teal)"; status.textContent = "✅ Configuration restaurée."; status.style.color = "var(--teal)"; }
+    if (localStorage.getItem("proenglish_provider")) { box.style.background = "var(--teal-l)"; box.style.borderColor = "var(--teal)"; status.textContent = "✅ Configuration restaurée."; status.style.color = "var(--teal)"; }
   } catch(e) {}
 }
-
 async function callLLM(messages, systemPrompt) {
   const p = currentProvider;
   if (p === "groq") {
@@ -1710,34 +1438,22 @@ async function callLLM(messages, systemPrompt) {
     const resp = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: { "Content-Type": "application/json", "Authorization": "Bearer " + key },
-      body: JSON.stringify({
-        model,
-        max_tokens: 600,
-        messages: [{ role: "system", content: systemPrompt }, ...messages]
-      })
+      body: JSON.stringify({ model, max_tokens: 600, messages: [{ role: "system", content: systemPrompt }, ...messages] })
     });
     if (!resp.ok) { const e = await resp.json().catch(() => ({})); throw new Error(e.error?.message || "Groq error " + resp.status); }
     const data = await resp.json();
     return data.choices?.[0]?.message?.content || "";
-
   } else if (p === "ollama") {
     const url   = document.getElementById("ollamaUrlInput").value.trim() || "http://localhost:11434";
     const model = document.getElementById("ollamaModelInput").value.trim() || "qwen2.5-coder:1.5b";
     const resp = await fetch(url + "/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model,
-        stream: false,
-        messages: [{ role: "system", content: systemPrompt }, ...messages]
-      })
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ model, stream: false, messages: [{ role: "system", content: systemPrompt }, ...messages] })
     });
     if (!resp.ok) throw new Error("Ollama injoignable. Lance : OLLAMA_ORIGINS=* ollama serve");
     const data = await resp.json();
     return data.message?.content || "";
-
   } else {
-    // Anthropic
     const key = document.getElementById("anthropicKeyInput").value.trim() || localStorage.getItem("proenglish_apikey") || "";
     if (!key) throw new Error("Clé Anthropic manquante.");
     const resp = await fetch("https://api.anthropic.com/v1/messages", {
@@ -1751,14 +1467,18 @@ async function callLLM(messages, systemPrompt) {
   }
 }
 
+// ============================================================
+// COACH
+// ============================================================
+let coachScenario = null, coachHistory = [];
+
 function initCoach() {
   restoreApiKey();
   const tb = document.getElementById("coachTopics");
   if (tb.childElementCount) return;
   COACH_SCENARIOS_AI.forEach(s => {
     const b = document.createElement("button");
-    b.className = "topic-btn";
-    b.textContent = s.label;
+    b.className = "topic-btn"; b.textContent = s.label;
     b.onclick = () => {
       document.querySelectorAll(".topic-btn").forEach(x => x.classList.remove("active"));
       b.classList.add("active");
@@ -1767,9 +1487,8 @@ function initCoach() {
     tb.appendChild(b);
   });
   const chat = document.getElementById("coachChat");
-  addMsg(chat, "bot", "👋 Configure ton moteur IA ci-dessus (Groq recommandé — clé gratuite), puis choisis un scénario. La conversation peut aller aussi loin que tu le veux.");
+  addMsg(chat, "bot", "👋 Configure ton moteur IA ci-dessus (Groq recommandé — clé gratuite), puis choisis un scénario.\n\nTu peux aussi me poser n'importe quelle question en anglais ou en français : grammaire, vocabulaire, traduction, prononciation — je suis là pour tout ça.");
 }
-
 function startCoach(s) {
   coachScenario = s.id;
   coachHistory = [];
@@ -1779,17 +1498,16 @@ function startCoach(s) {
   addMsg(chat, "bot", s.opener);
   document.getElementById("coachInput").focus();
 }
-
 async function sendCoach() {
   const inp = document.getElementById("coachInput");
   const txt = inp.value.trim();
   if (!txt) return;
-
   if (!coachScenario) {
-    addMsg(document.getElementById("coachChat"), "bot", "Please choose a scenario above first.");
+    addMsg(document.getElementById("coachChat"), "bot", "Choisis d'abord un scénario ci-dessus, ou pose-moi directement une question en anglais ou en français !");
+    coachScenario = "free";
+    coachHistory = [];
     return;
   }
-
   const chat = document.getElementById("coachChat");
   addMsg(chat, "user", txt);
   inp.value = "";
@@ -1797,24 +1515,16 @@ async function sendCoach() {
   document.getElementById("coachSendBtn").disabled = true;
   document.getElementById("coachMicBtn").disabled = true;
   document.getElementById("coachTyping").style.display = "inline";
-
   const grammarInstruction = document.getElementById("grammarCheck").checked
     ? " Grammar checker ON: note 1-2 errors max at the end as: 🔍 [error] → [correction] — [brief reason]."
     : "";
   coachHistory.push({ role: "user", content: txt });
-
   try {
     const reply = await callLLM(coachHistory, COACH_SYSTEM + grammarInstruction);
     coachHistory.push({ role: "assistant", content: reply });
     addMsg(chat, "bot", reply);
-    // Lire la réponse à voix haute si option activée
     if (document.getElementById("autoSpeakCheck").checked) {
-      // Nettoyer le markdown et les notes grammaire avant de lire
-      const cleanReply = reply
-        .replace(/🔍.*$/gms, "")          // supprimer notes grammaire
-        .replace(/\*\*(.*?)\*\*/g, "$1")   // supprimer **bold**
-        .replace(/\n+/g, " ")
-        .trim();
+      const cleanReply = reply.replace(/🔍.*$/gms, "").replace(/\*\*(.*?)\*\*/g, "$1").replace(/\n+/g, " ").trim();
       speak(cleanReply, 0.9);
     }
     addScore(3);
@@ -1822,7 +1532,6 @@ async function sendCoach() {
   } catch(e) {
     addMsg(chat, "bot", "⚠️ " + e.message);
   }
-
   inp.disabled = false;
   document.getElementById("coachSendBtn").disabled = false;
   document.getElementById("coachMicBtn").disabled = false;
@@ -1831,37 +1540,31 @@ async function sendCoach() {
 }
 
 // ============================================================
-// COACH — VOICE INPUT
+// ★ CORRECTIF 2 — MICRO : TRANSCRIPTION SANS ENVOI AUTO ★
 // ============================================================
-let coachRecognition = null;
-let coachIsRecording = false;
+let coachRecognition = null, coachIsRecording = false;
 
 function toggleCoachMic() {
-  if (coachIsRecording) {
-    stopCoachMic();
-  } else {
-    startCoachMic();
-  }
+  if (coachIsRecording) stopCoachMic();
+  else startCoachMic();
 }
-
 function startCoachMic() {
   const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SpeechRec) {
     addMsg(document.getElementById("coachChat"), "bot", "⚠️ Reconnaissance vocale non disponible. Utilise Chrome ou Edge.");
     return;
   }
-  // Couper la voix du coach si elle parle encore
   if (window.speechSynthesis) speechSynthesis.cancel();
 
   coachRecognition = new SpeechRec();
-  coachRecognition.lang = "en-US";  // Anglais américain — meilleure tolérance aux accents
+  coachRecognition.lang = "en-US";
   coachRecognition.continuous = false;
   coachRecognition.interimResults = true;
   coachRecognition.maxAlternatives = 1;
 
-  const btn = document.getElementById("coachMicBtn");
+  const btn    = document.getElementById("coachMicBtn");
   const status = document.getElementById("coachMicStatus");
-  const inp = document.getElementById("coachInput");
+  const inp    = document.getElementById("coachInput");
 
   coachRecognition.onstart = () => {
     coachIsRecording = true;
@@ -1869,26 +1572,30 @@ function startCoachMic() {
     btn.style.animation = "pulse-rec 1s ease-in-out infinite";
     btn.textContent = "⏹️";
     status.style.display = "block";
+    status.textContent = "🎙️ Je t'écoute... Parle en anglais.";
     inp.value = "";
     inp.placeholder = "Écoute en cours...";
   };
 
   coachRecognition.onresult = (e) => {
-    // Afficher la transcription en temps réel pendant qu'on parle
-    const transcript = Array.from(e.results)
-      .map(r => r[0].transcript).join("");
+    // Affiche la transcription en temps réel dans le champ
+    const transcript = Array.from(e.results).map(r => r[0].transcript).join("");
     inp.value = transcript;
-    // Si la reconnaissance est finale, envoyer automatiquement
+
     if (e.results[e.results.length - 1].isFinal) {
+      // ★ On arrête le micro mais on N'ENVOIE PAS automatiquement
+      // L'utilisateur lit la transcription, corrige si besoin, puis appuie sur Envoyer
       stopCoachMic();
-      setTimeout(() => sendCoach(), 300);
+      status.textContent = "✅ Transcription prête — vérifie et appuie sur Envoyer ↗";
+      status.style.display = "block";
+      inp.focus();
     }
   };
 
   coachRecognition.onerror = (e) => {
     stopCoachMic();
     if (e.error === "not-allowed") {
-      addMsg(document.getElementById("coachChat"), "bot", "⚠️ Microphone non autorisé. Clique sur l'icône 🔒 dans la barre d'adresse pour autoriser.");
+      addMsg(document.getElementById("coachChat"), "bot", "⚠️ Microphone non autorisé. Clique sur 🔒 dans la barre d'adresse pour autoriser.");
     } else if (e.error !== "no-speech") {
       status.style.display = "block";
       status.textContent = "Erreur micro : " + e.error;
@@ -1898,37 +1605,28 @@ function startCoachMic() {
   coachRecognition.onend = () => stopCoachMic();
   coachRecognition.start();
 }
-
 function stopCoachMic() {
   coachIsRecording = false;
   const btn = document.getElementById("coachMicBtn");
-  const status = document.getElementById("coachMicStatus");
   const inp = document.getElementById("coachInput");
   btn.style.background = "var(--teal-l)";
   btn.style.animation = "none";
   btn.textContent = "🎙️";
   btn.disabled = false;
-  status.style.display = "none";
-  inp.placeholder = "Parle (🎙️) ou tape en anglais...";
+  inp.placeholder = "Parle (🎙️) ou tape en anglais ou en français...";
   if (coachRecognition) { try { coachRecognition.stop(); } catch(e) {} coachRecognition = null; }
 }
-
 function clearCoachHistory() {
-  coachHistory = [];
-  coachScenario = null;
+  coachHistory = []; coachScenario = null;
   document.querySelectorAll(".topic-btn").forEach(x => x.classList.remove("active"));
   const chat = document.getElementById("coachChat");
   chat.innerHTML = "";
-  addMsg(chat, "bot", "Conversation effacée. Choisis un nouveau scénario.");
+  addMsg(chat, "bot", "Conversation effacée. Choisis un scénario ou pose-moi directement une question.");
 }
-
 function addMsg(chat, role, text) {
   const d = document.createElement("div");
   d.className = "chat-msg " + role;
-  // Convert **bold** markdown and newlines for display
-  const formatted = text
-    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-    .replace(/\n/g, "<br>");
+  const formatted = text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>").replace(/\n/g, "<br>");
   d.innerHTML = `<div class="chat-avatar">${role === "bot" ? "🎯" : "🙋"}</div><div class="chat-bubble">${formatted}</div>`;
   chat.appendChild(d);
   chat.scrollTop = chat.scrollHeight;
@@ -1938,68 +1636,34 @@ function addMsg(chat, role, text) {
 // PRONUNCIATION TRAINER
 // ============================================================
 const PHONETICS = {
-  "archival fonds": "/ɑːˈkaɪvəl fɒndz/",
-  "records management": "/ˈrekədz ˈmænɪdʒmənt/",
-  "appraisal": "/əˈpreɪzəl/",
-  "provenance": "/ˈprɒvənəns/",
-  "finding aid": "/ˈfaɪndɪŋ eɪd/",
-  "retention schedule": "/rɪˈtenʃən ˈʃedjuːl/",
-  "digitization": "/ˌdɪdʒɪtaɪˈzeɪʃən/",
-  "classification scheme": "/ˌklæsɪfɪˈkeɪʃən skiːm/",
-  "accrual": "/əˈkruːəl/",
-  "vital records": "/ˈvaɪtl ˈrekədz/",
-  "metadata": "/ˈmetədeɪtə/",
-  "preservation": "/ˌprezəˈveɪʃən/",
-  "disposition": "/ˌdɪspəˈzɪʃən/",
-  "custody": "/ˈkʌstədi/",
-  "accession": "/əkˈseʃən/",
-  "machine learning": "/məˈʃiːn ˈlɜːnɪŋ/",
-  "natural language processing": "/ˈnætʃrəl ˈlæŋɡwɪdʒ ˈprəʊsesɪŋ/",
+  "archival fonds": "/ɑːˈkaɪvəl fɒndz/","records management": "/ˈrekədz ˈmænɪdʒmənt/",
+  "appraisal": "/əˈpreɪzəl/","provenance": "/ˈprɒvənəns/","finding aid": "/ˈfaɪndɪŋ eɪd/",
+  "retention schedule": "/rɪˈtenʃən ˈʃedjuːl/","digitization": "/ˌdɪdʒɪtaɪˈzeɪʃən/",
+  "classification scheme": "/ˌklæsɪfɪˈkeɪʃən skiːm/","accrual": "/əˈkruːəl/",
+  "vital records": "/ˈvaɪtl ˈrekədz/","metadata": "/ˈmetədeɪtə/","preservation": "/ˌprezəˈveɪʃən/",
+  "disposition": "/ˌdɪspəˈzɪʃən/","custody": "/ˈkʌstədi/","accession": "/əkˈseʃən/",
+  "machine learning": "/məˈʃiːn ˈlɜːnɪŋ/","natural language processing": "/ˈnætʃrəl ˈlæŋɡwɪdʒ ˈprəʊsesɪŋ/",
   "retrieval-augmented generation": "/rɪˈtriːvəl ˈɔːɡmentɪd ˌdʒenəˈreɪʃən/",
-  "large language model": "/lɑːdʒ ˈlæŋɡwɪdʒ ˈmɒdəl/",
-  "embedding": "/ɪmˈbedɪŋ/",
-  "inference": "/ˈɪnfərəns/",
-  "prompt engineering": "/prɒmpt ˌendʒɪˈnɪərɪŋ/",
-  "fine-tuning": "/faɪn ˈtjuːnɪŋ/",
-  "knowledge graph": "/ˈnɒlɪdʒ ɡrɑːf/",
-  "workflow automation": "/ˈwɜːkfləʊ ˌɔːtəˈmeɪʃən/",
-  "digital transformation": "/ˈdɪdʒɪtl trænsˌfɔːˈmeɪʃən/",
-  "interoperability": "/ˌɪntərˌɒpərəˈbɪlɪti/",
-  "open-source": "/ˈəʊpən sɔːs/",
-  "offline-first": "/ˈɒflaɪn fɜːst/",
-  "version control": "/ˈvɜːʃən kənˈtrəʊl/",
-  "terms of reference": "/tɜːmz əv ˈrefrəns/",
-  "deliverable": "/dɪˈlɪvərəbl/",
-  "stakeholder": "/ˈsteɪkˌhəʊldə/",
-  "capacity building": "/kəˈpæsɪti ˈbɪldɪŋ/",
-  "knowledge management": "/ˈnɒlɪdʒ ˈmænɪdʒmənt/",
-  "accountability": "/əˌkaʊntəˈbɪlɪti/",
-  "governance": "/ˈɡʌvənəns/",
-  "mandate": "/ˈmændeɪt/",
-  "procurement": "/prəˈkjʊəmənt/",
-  "field mission": "/fiːld ˈmɪʃən/",
-  "reporting line": "/rɪˈpɔːtɪŋ laɪn/",
-  "coordination mechanism": "/kəʊˌɔːdɪˈneɪʃən ˈmekənɪzəm/",
-  "inception report": "/ɪnˈsepʃən rɪˈpɔːt/",
-  "outcome": "/ˈaʊtkʌm/",
-  "peer review": "/pɪə rɪˈvjuː/",
-  "pursuant to": "/pəˈsuːənt tuː/",
-  "to liaise with": "/tuː liˈeɪz wɪð/",
-  "to draft": "/tuː drɑːft/",
-  "to endorse": "/tuː ɪnˈdɔːs/",
-  "to flag": "/tuː flæɡ/",
-  "to oversee": "/tuː ˌəʊvəˈsiː/",
-  "to streamline": "/tuː ˈstriːmlaɪn/",
-  "to leverage": "/tuː ˈliːvərɪdʒ/",
-  "to roll out": "/tuː rəʊl aʊt/",
-  "cross-functional": "/krɒs ˈfʌŋkʃənl/",
-  "scalable": "/ˈskeɪləbl/",
-  "hands-on": "/hændz ɒn/",
-  "tailored": "/ˈteɪləd/",
-  "turnaround": "/ˈtɜːnəraʊnd/",
+  "large language model": "/lɑːdʒ ˈlæŋɡwɪdʒ ˈmɒdəl/","embedding": "/ɪmˈbedɪŋ/",
+  "inference": "/ˈɪnfərəns/","prompt engineering": "/prɒmpt ˌendʒɪˈnɪərɪŋ/",
+  "fine-tuning": "/faɪn ˈtjuːnɪŋ/","knowledge graph": "/ˈnɒlɪdʒ ɡrɑːf/",
+  "workflow automation": "/ˈwɜːkfləʊ ˌɔːtəˈmeɪʃən/","digital transformation": "/ˈdɪdʒɪtl trænsˌfɔːˈmeɪʃən/",
+  "interoperability": "/ˌɪntərˌɒpərəˈbɪlɪti/","open-source": "/ˈəʊpən sɔːs/",
+  "offline-first": "/ˈɒflaɪn fɜːst/","version control": "/ˈvɜːʃən kənˈtrəʊl/",
+  "terms of reference": "/tɜːmz əv ˈrefrəns/","deliverable": "/dɪˈlɪvərəbl/",
+  "stakeholder": "/ˈsteɪkˌhəʊldə/","capacity building": "/kəˈpæsɪti ˈbɪldɪŋ/",
+  "knowledge management": "/ˈnɒlɪdʒ ˈmænɪdʒmənt/","accountability": "/əˌkaʊntəˈbɪlɪti/",
+  "governance": "/ˈɡʌvənəns/","mandate": "/ˈmændeɪt/","procurement": "/prəˈkjʊəmənt/",
+  "field mission": "/fiːld ˈmɪʃən/","reporting line": "/rɪˈpɔːtɪŋ laɪn/",
+  "coordination mechanism": "/kəʊˌɔːdɪˈneɪʃən ˈmekənɪzəm/","inception report": "/ɪnˈsepʃən rɪˈpɔːt/",
+  "outcome": "/ˈaʊtkʌm/","peer review": "/pɪə rɪˈvjuː/","pursuant to": "/pəˈsuːənt tuː/",
+  "to liaise with": "/tuː liˈeɪz wɪð/","to draft": "/tuː drɑːft/","to endorse": "/tuː ɪnˈdɔːs/",
+  "to flag": "/tuː flæɡ/","to oversee": "/tuː ˌəʊvəˈsiː/","to streamline": "/tuː ˈstriːmlaɪn/",
+  "to leverage": "/tuː ˈliːvərɪdʒ/","to roll out": "/tuː rəʊl aʊt/",
+  "cross-functional": "/krɒs ˈfʌŋkʃənl/","scalable": "/ˈskeɪləbl/","hands-on": "/hændz ɒn/",
+  "tailored": "/ˈteɪləd/","turnaround": "/ˈtɜːnəraʊnd/",
   "stakeholder engagement": "/ˈsteɪkˌhəʊldər ɪnˈɡeɪdʒmənt/"
 };
-
 const PRONUN_TIPS = {
   "archival fonds": "Attention : 'archival' = ar-KAI-vəl. Le 'ch' se prononce /k/.",
   "appraisal": "Accent sur la 2e syllabe : a-PRAY-zəl.",
@@ -2015,21 +1679,14 @@ const PRONUN_TIPS = {
   "deliverable": "dɪ-LIV-ər-ə-bəl. Accent sur la 2e syllabe."
 };
 
-let pronunCat = "archives";
-let pronunIdx = 0;
-let pronunRecognition = null;
-let pronunIsRecording = false;
-let pronunScores = [];
-let pronunWords = [];
+let pronunCat = "archives", pronunIdx = 0, pronunRecognition = null, pronunIsRecording = false, pronunScores = [], pronunWords = [];
 
 function initPronun() {
-  // Check support
   if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
     document.getElementById("pronunNoSupport").style.display = "block";
     document.getElementById("pronunRecordBtn").disabled = true;
     document.getElementById("pronunRecordBtn").style.opacity = ".4";
   }
-
   const cr = document.getElementById("pronunCats");
   if (cr.childElementCount) { renderPronun(); return; }
   Object.entries(DATA).forEach(([k, v]) => {
@@ -2039,14 +1696,12 @@ function initPronun() {
     b.onclick = () => {
       pronunCat = k; pronunIdx = 0; pronunScores = [];
       document.querySelectorAll("#pronunCats .cat-btn").forEach(x => x.classList.remove("active"));
-      b.classList.add("active");
-      renderPronun();
+      b.classList.add("active"); renderPronun();
     };
     cr.appendChild(b);
   });
   renderPronun();
 }
-
 function renderPronun() {
   const cat = DATA[pronunCat].words;
   pronunWords = cat;
@@ -2061,159 +1716,75 @@ function renderPronun() {
   document.getElementById("pronunBarFill").style.width = ((pronunIdx + 1) / cat.length * 100) + "%";
   const avg = pronunScores.length ? Math.round(pronunScores.reduce((a,b)=>a+b,0) / pronunScores.length) : null;
   document.getElementById("pronunStats").textContent = avg !== null ? "Score moyen : " + avg + "%" : "Score moyen : —";
-
   const recBtn = document.getElementById("pronunRecordBtn");
-  recBtn.textContent = "🎙️ Parler";
-  recBtn.classList.remove("recording");
-  pronunIsRecording = false;
+  recBtn.textContent = "🎙️ Parler"; recBtn.classList.remove("recording"); pronunIsRecording = false;
 }
-
 function pronunListen() {
-  const w = pronunWords[pronunIdx];
-  speak(w.en, 0.78);
+  const w = pronunWords[pronunIdx]; speak(w.en, 0.78);
   document.getElementById("pronunStatus").textContent = "🔊 Écoute bien la prononciation...";
-  setTimeout(() => {
-    document.getElementById("pronunStatus").textContent = "Maintenant clique sur 🎙️ Parler et répète le mot";
-  }, 2200);
+  setTimeout(() => { document.getElementById("pronunStatus").textContent = "Maintenant clique sur 🎙️ Parler et répète le mot"; }, 2200);
 }
-
-function pronunToggleRecord() {
-  if (pronunIsRecording) {
-    pronunStopRecord();
-  } else {
-    pronunStartRecord();
-  }
-}
-
+function pronunToggleRecord() { if (pronunIsRecording) pronunStopRecord(); else pronunStartRecord(); }
 function pronunStartRecord() {
   const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SpeechRec) return;
-
   pronunRecognition = new SpeechRec();
-  pronunRecognition.lang = "en-GB";
-  pronunRecognition.interimResults = false;
-  pronunRecognition.maxAlternatives = 3;
-
+  pronunRecognition.lang = "en-GB"; pronunRecognition.interimResults = false; pronunRecognition.maxAlternatives = 3;
   pronunRecognition.onstart = () => {
     pronunIsRecording = true;
     const btn = document.getElementById("pronunRecordBtn");
-    btn.textContent = "⏹️ Arrêter";
-    btn.classList.add("recording");
+    btn.textContent = "⏹️ Arrêter"; btn.classList.add("recording");
     document.getElementById("pronunStatus").textContent = "🎙️ Je t'écoute... Prononce le mot maintenant";
     document.getElementById("pronunResult").style.display = "none";
   };
-
   pronunRecognition.onresult = (event) => {
     const results = [];
-    for (let i = 0; i < event.results[0].length; i++) {
-      results.push(event.results[0][i].transcript.toLowerCase().trim());
-    }
+    for (let i = 0; i < event.results[0].length; i++) results.push(event.results[0][i].transcript.toLowerCase().trim());
     pronunAnalyze(results);
   };
-
   pronunRecognition.onerror = (event) => {
     pronunIsRecording = false;
     const btn = document.getElementById("pronunRecordBtn");
-    btn.textContent = "🎙️ Parler";
-    btn.classList.remove("recording");
-    if (event.error === "no-speech") {
-      document.getElementById("pronunStatus").textContent = "Aucun son détecté. Réessaie en parlant plus fort.";
-    } else if (event.error === "not-allowed") {
-      document.getElementById("pronunStatus").textContent = "⚠️ Microphone non autorisé. Autorise l'accès dans Chrome.";
-    } else {
-      document.getElementById("pronunStatus").textContent = "Erreur : " + event.error + ". Réessaie.";
-    }
+    btn.textContent = "🎙️ Parler"; btn.classList.remove("recording");
+    if (event.error === "no-speech") document.getElementById("pronunStatus").textContent = "Aucun son détecté. Réessaie en parlant plus fort.";
+    else if (event.error === "not-allowed") document.getElementById("pronunStatus").textContent = "⚠️ Microphone non autorisé.";
+    else document.getElementById("pronunStatus").textContent = "Erreur : " + event.error;
   };
-
-  pronunRecognition.onend = () => {
-    pronunIsRecording = false;
-    const btn = document.getElementById("pronunRecordBtn");
-    btn.textContent = "🎙️ Parler";
-    btn.classList.remove("recording");
-  };
-
+  pronunRecognition.onend = () => { pronunIsRecording = false; const btn = document.getElementById("pronunRecordBtn"); btn.textContent = "🎙️ Parler"; btn.classList.remove("recording"); };
   pronunRecognition.start();
 }
-
-function pronunStopRecord() {
-  if (pronunRecognition) pronunRecognition.stop();
-}
-
+function pronunStopRecord() { if (pronunRecognition) pronunRecognition.stop(); }
 function pronunAnalyze(heard) {
   const target = pronunWords[pronunIdx].en.toLowerCase();
   const targetTokens = target.replace(/[-]/g, " ").split(/\s+/);
   const best = heard[0] || "";
-
-  // Score calculation: compare word by word
   let matched = 0;
   const wordResults = [];
   targetTokens.forEach(tw => {
-    // Check if this target word appears in any of the heard alternatives
-    const found = heard.some(h => {
-      const hTokens = h.replace(/[-]/g, " ").split(/\s+/);
-      return hTokens.some(hw => {
-        if (hw === tw) return true;
-        // Partial match (first 3 chars)
-        if (tw.length > 3 && hw.length > 3 && (hw.startsWith(tw.slice(0,3)) || tw.startsWith(hw.slice(0,3)))) return true;
-        return false;
-      });
-    });
-    const partial = !found && heard.some(h => {
-      const hTokens = h.replace(/[-]/g, " ").split(/\s+/);
-      return hTokens.some(hw => tw.includes(hw) || hw.includes(tw));
-    });
+    const found = heard.some(h => { const hTokens = h.replace(/[-]/g, " ").split(/\s+/); return hTokens.some(hw => hw === tw || (tw.length > 3 && hw.length > 3 && (hw.startsWith(tw.slice(0,3)) || tw.startsWith(hw.slice(0,3))))); });
+    const partial = !found && heard.some(h => { const hTokens = h.replace(/[-]/g, " ").split(/\s+/); return hTokens.some(hw => tw.includes(hw) || hw.includes(tw)); });
     wordResults.push({word: tw, status: found ? "match" : partial ? "partial" : "miss"});
-    if (found) matched += 1;
-    else if (partial) matched += 0.5;
+    if (found) matched += 1; else if (partial) matched += 0.5;
   });
-
   const score = Math.round((matched / targetTokens.length) * 100);
-  pronunScores.push(score);
-  addScore(score >= 80 ? 5 : score >= 50 ? 2 : 1);
-
-  // Display result
-  const resultDiv = document.getElementById("pronunResult");
-  resultDiv.style.display = "block";
-
-  // Score display
+  pronunScores.push(score); addScore(score >= 80 ? 5 : score >= 50 ? 2 : 1);
+  const resultDiv = document.getElementById("pronunResult"); resultDiv.style.display = "block";
   const scoreEl = document.getElementById("pronunResultScore");
   let emoji = score >= 90 ? "🌟 Excellent !" : score >= 70 ? "✅ Bien !" : score >= 50 ? "📈 Presque !" : "🔄 Réessaie";
   let scoreColor = score >= 70 ? "var(--teal)" : score >= 50 ? "var(--gold)" : "var(--rose)";
   scoreEl.innerHTML = '<span style="color:' + scoreColor + '">' + emoji + ' — ' + score + '%</span>';
-
-  // What was heard
   document.getElementById("pronunResultHeard").textContent = 'J\'ai entendu : "' + (best || "rien") + '"';
-
-  // Word by word
-  const wordsEl = document.getElementById("pronunResultWords");
-  wordsEl.innerHTML = "";
-  wordResults.forEach(wr => {
-    const span = document.createElement("span");
-    span.className = "pw-" + wr.status;
-    span.textContent = wr.word;
-    wordsEl.appendChild(span);
-  });
-
-  // Tip
+  const wordsEl = document.getElementById("pronunResultWords"); wordsEl.innerHTML = "";
+  wordResults.forEach(wr => { const span = document.createElement("span"); span.className = "pw-" + wr.status; span.textContent = wr.word; wordsEl.appendChild(span); });
   const tip = PRONUN_TIPS[pronunWords[pronunIdx].en];
   const tipEl = document.getElementById("pronunResultTip");
-  if (tip) {
-    tipEl.textContent = "💡 " + tip;
-    tipEl.style.display = "block";
-  } else if (score < 70) {
-    tipEl.textContent = "💡 Réécoute le mot avec 🔊 puis réessaie en articulant chaque syllabe.";
-    tipEl.style.display = "block";
-  } else {
-    tipEl.style.display = "none";
-  }
-
+  if (tip) { tipEl.textContent = "💡 " + tip; tipEl.style.display = "block"; }
+  else if (score < 70) { tipEl.textContent = "💡 Réécoute le mot avec 🔊 puis réessaie en articulant chaque syllabe."; tipEl.style.display = "block"; }
+  else { tipEl.style.display = "none"; }
   document.getElementById("pronunStatus").textContent = score >= 80 ? "Super ! Passe au suivant →" : "Réécoute et réessaie, ou passe au suivant.";
-
-  // Update average
   const avg = Math.round(pronunScores.reduce((a,b)=>a+b,0) / pronunScores.length);
   document.getElementById("pronunStats").textContent = "Score moyen : " + avg + "%";
 }
-
 function pronunNav(d) {
   if (pronunIsRecording) pronunStopRecord();
   const cat = pronunWords;
@@ -2229,51 +1800,31 @@ function saveProgress() {
     const today = new Date().toDateString();
     const prev = JSON.parse(localStorage.getItem("proenglish_progress") || "{}");
     const streak = prev.lastDay === new Date(Date.now() - 86400000).toDateString()
-      ? (prev.streak || 0) + 1
-      : (prev.lastDay === today ? (prev.streak || 1) : 1);
-    localStorage.setItem("proenglish_progress", JSON.stringify({
-      score: totalScore, lastDay: today, streak
-    }));
+      ? (prev.streak || 0) + 1 : (prev.lastDay === today ? (prev.streak || 1) : 1);
+    localStorage.setItem("proenglish_progress", JSON.stringify({ score: totalScore, lastDay: today, streak }));
   } catch(e) {}
 }
-
 function loadProgress() {
   try {
     const d = JSON.parse(localStorage.getItem("proenglish_progress") || "{}");
     if (d.score) { totalScore = d.score; document.getElementById("totalScore").textContent = totalScore; }
   } catch(e) {}
 }
-
 function updateDashboard() {
   document.getElementById("statScore").textContent = totalScore;
-  const now = Date.now();
-  let mastered = 0, due = 0;
-  Object.entries(DATA).forEach(([cat, v]) => {
-    v.words.forEach((w, i) => {
-      const c = srsGetCard(cat, i);
-      if (c.level >= 3) mastered++;
-      if (c.due <= now) due++;
-    });
-  });
+  const now = Date.now(); let mastered = 0, due = 0;
+  Object.entries(DATA).forEach(([cat, v]) => { v.words.forEach((w, i) => { const c = srsGetCard(cat, i); if (c.level >= 3) mastered++; if (c.due <= now) due++; }); });
   document.getElementById("statMastered").textContent = mastered;
   document.getElementById("statSrsDue").textContent = due;
-  try {
-    const d = JSON.parse(localStorage.getItem("proenglish_progress") || "{}");
-    document.getElementById("statStreak").textContent = d.streak || 1;
-  } catch(e) { document.getElementById("statStreak").textContent = 1; }
+  try { const d = JSON.parse(localStorage.getItem("proenglish_progress") || "{}"); document.getElementById("statStreak").textContent = d.streak || 1; } catch(e) { document.getElementById("statStreak").textContent = 1; }
 }
-
-function startAudio() {
-  speak("Welcome to ProEnglish. Let's practise together.", 0.88);
-  document.getElementById("startBanner").style.display = "none";
-}
+function startAudio() { speak("Welcome to ProEnglish. Let's practise together.", 0.88); document.getElementById("startBanner").style.display = "none"; }
 
 // ============================================================
 // INTERVIEW TIMER
 // ============================================================
 let itwTimer = null;
 const ITW_DURATION = 90;
-
 function startItwTimer() {
   clearInterval(itwTimer);
   let remaining = ITW_DURATION;
@@ -2282,44 +1833,24 @@ function startItwTimer() {
   const msg = document.getElementById("itwTimerMsg");
   const box = document.getElementById("itwTimerBox");
   box.style.display = "block";
+  bar.style.background = "var(--teal)"; count.style.color = "var(--teal)";
   msg.textContent = "Parle maintenant — structure : contexte, action, résultat.";
-
   function tick() {
-    const m = Math.floor(remaining / 60);
-    const s = remaining % 60;
+    const m = Math.floor(remaining / 60), s = remaining % 60;
     count.textContent = m + ":" + (s < 10 ? "0" : "") + s;
     bar.style.width = (remaining / ITW_DURATION * 100) + "%";
-    if (remaining <= 15) {
-      bar.style.background = "var(--rose)";
-      count.style.color = "var(--rose)";
-      msg.textContent = remaining <= 5 ? "⏱️ Termine ta phrase !" : "⚠️ Encore " + remaining + "s — conclure !";
-    } else if (remaining <= 30) {
-      bar.style.background = "var(--gold)";
-      count.style.color = "var(--gold)";
-      msg.textContent = "30s restantes — arrive à ta conclusion.";
-    }
-    if (remaining <= 0) {
-      clearInterval(itwTimer);
-      count.textContent = "0:00";
-      bar.style.width = "0%";
-      msg.textContent = "Temps écoulé. Comment c'était ?";
-      return;
-    }
+    if (remaining <= 15) { bar.style.background = "var(--rose)"; count.style.color = "var(--rose)"; msg.textContent = remaining <= 5 ? "⏱️ Termine ta phrase !" : "⚠️ Encore " + remaining + "s — conclure !"; }
+    else if (remaining <= 30) { bar.style.background = "var(--gold)"; count.style.color = "var(--gold)"; msg.textContent = "30s restantes — arrive à ta conclusion."; }
+    if (remaining <= 0) { clearInterval(itwTimer); count.textContent = "0:00"; bar.style.width = "0%"; msg.textContent = "Temps écoulé. Comment c'était ?"; return; }
     remaining--;
   }
-  tick();
-  itwTimer = setInterval(tick, 1000);
+  tick(); itwTimer = setInterval(tick, 1000);
 }
-
-// Patch renderItw to wire the 🔊 button to also start the timer
-const _origRenderItw = typeof renderItw !== "undefined" ? renderItw : null;
-// We'll override below after defining renderItw — see patched initItw
 
 // ============================================================
 // FILL-IN-THE-BLANK
 // ============================================================
 let fillinCat = "archives", fillinIdx = 0, fillinAnswered = false;
-
 function initFillin() {
   const cr = document.getElementById("fillinCats");
   if (!cr.childElementCount) {
@@ -2327,107 +1858,55 @@ function initFillin() {
       const b = document.createElement("button");
       b.className = "cat-btn" + (k === fillinCat ? " active" : "");
       b.textContent = v.emoji + " " + v.name;
-      b.onclick = () => {
-        fillinCat = k; fillinIdx = 0; fillinAnswered = false;
-        document.querySelectorAll("#fillinCats .cat-btn").forEach(x => x.classList.remove("active"));
-        b.classList.add("active");
-        renderFillin();
-      };
+      b.onclick = () => { fillinCat = k; fillinIdx = 0; fillinAnswered = false; document.querySelectorAll("#fillinCats .cat-btn").forEach(x => x.classList.remove("active")); b.classList.add("active"); renderFillin(); };
       cr.appendChild(b);
     });
   }
   renderFillin();
 }
-
 function renderFillin() {
-  const cat = DATA[fillinCat].words;
-  const w = cat[fillinIdx];
+  const cat = DATA[fillinCat].words; const w = cat[fillinIdx];
   fillinAnswered = false;
   document.getElementById("fillinProgress").textContent = (fillinIdx + 1) + " / " + cat.length;
   document.getElementById("fillinBar").style.width = ((fillinIdx + 1) / cat.length * 100) + "%";
   document.getElementById("fillinEmoji").textContent = DATA[fillinCat].emoji;
-  // Build sentence with blank
-  const sentence = w.ctx;
-  const keyword = w.en.toLowerCase();
-  // Try to blank out the keyword (case-insensitive)
+  const sentence = w.ctx; const keyword = w.en.toLowerCase();
   const re = new RegExp("\\b" + keyword.replace(/[-\/\\^$*+?.()|[\]{}]/g,"\\$&") + "\\b", "i");
   const blanked = sentence.replace(re, '<span style="display:inline-block;min-width:80px;border-bottom:2px solid var(--teal);font-weight:700;color:var(--teal);">___</span>');
   document.getElementById("fillinSentence").innerHTML = blanked;
-  const inp = document.getElementById("fillinInput");
-  inp.value = "";
-  inp.disabled = false;
-  inp.style.borderColor = "var(--teal)";
-  const fb = document.getElementById("fillinFeedback");
-  fb.style.display = "none";
+  const inp = document.getElementById("fillinInput"); inp.value = ""; inp.disabled = false; inp.style.borderColor = "var(--teal)";
+  const fb = document.getElementById("fillinFeedback"); fb.style.display = "none";
   document.getElementById("fillinNextBtn").style.display = "none";
 }
-
 function checkFillin() {
   if (fillinAnswered) return;
-  const w = DATA[fillinCat].words[fillinIdx];
-  const inp = document.getElementById("fillinInput");
-  const answer = inp.value.trim().toLowerCase();
-  const correct = w.en.toLowerCase();
-  const fb = document.getElementById("fillinFeedback");
-  fillinAnswered = true;
-  inp.disabled = true;
-
-  // Accept partial match (first word of multi-word terms)
+  const w = DATA[fillinCat].words[fillinIdx]; const inp = document.getElementById("fillinInput");
+  const answer = inp.value.trim().toLowerCase(); const correct = w.en.toLowerCase();
+  const fb = document.getElementById("fillinFeedback"); fillinAnswered = true; inp.disabled = true;
   const firstWord = correct.split(" ")[0];
-  const ok = answer === correct || answer === firstWord || correct.includes(answer) && answer.length >= 4;
-
-  if (ok) {
-    inp.style.borderColor = "#0d9950";
-    fb.style.background = "#e4f9ee"; fb.style.color = "#065a30"; fb.style.display = "block";
-    fb.innerHTML = "✅ <strong>Correct !</strong> — Le terme exact : <em>" + w.en + "</em><br><span style='font-size:12px;opacity:.8'>" + w.fr + "</span>";
-    addScore(4);
-  } else {
-    inp.style.borderColor = "var(--rose)";
-    fb.style.background = "var(--rose-l)"; fb.style.color = "var(--rose)"; fb.style.display = "block";
-    fb.innerHTML = "✗ La bonne réponse : <strong>" + w.en + "</strong> <em>(" + w.fr + ")</em>";
-    addScore(1);
-  }
+  const ok = answer === correct || answer === firstWord || (correct.includes(answer) && answer.length >= 4);
+  if (ok) { inp.style.borderColor = "#0d9950"; fb.style.background = "#e4f9ee"; fb.style.color = "#065a30"; fb.style.display = "block"; fb.innerHTML = "✅ <strong>Correct !</strong> — Le terme exact : <em>" + w.en + "</em><br><span style='font-size:12px;opacity:.8'>" + w.fr + "</span>"; addScore(4); }
+  else { inp.style.borderColor = "var(--rose)"; fb.style.background = "var(--rose-l)"; fb.style.color = "var(--rose)"; fb.style.display = "block"; fb.innerHTML = "✗ La bonne réponse : <strong>" + w.en + "</strong> <em>(" + w.fr + ")</em>"; addScore(1); }
   document.getElementById("fillinNextBtn").style.display = "inline-flex";
   saveProgress();
 }
-
-function fillinHint() {
-  const w = DATA[fillinCat].words[fillinIdx];
-  const inp = document.getElementById("fillinInput");
-  inp.value = w.en.charAt(0).toUpperCase() + w.en.slice(1, Math.ceil(w.en.length / 3));
-  inp.focus();
-}
-
-function fillinNav(d) {
-  const cat = DATA[fillinCat].words;
-  fillinIdx = (fillinIdx + d + cat.length) % cat.length;
-  renderFillin();
-}
+function fillinHint() { const w = DATA[fillinCat].words[fillinIdx]; const inp = document.getElementById("fillinInput"); inp.value = w.en.charAt(0).toUpperCase() + w.en.slice(1, Math.ceil(w.en.length / 3)); inp.focus(); }
+function fillinNav(d) { const cat = DATA[fillinCat].words; fillinIdx = (fillinIdx + d + cat.length) % cat.length; renderFillin(); }
 
 // ============================================================
 // EXAM MODE
 // ============================================================
 let examQuestions = [], examIdx = 0, examRatings = [], examTimer = null;
-
-function initExam() {
-  document.getElementById("examStart").style.display = "block";
-  document.getElementById("examSession").style.display = "none";
-  document.getElementById("examDone").style.display = "none";
-}
-
+function initExam() { document.getElementById("examStart").style.display = "block"; document.getElementById("examSession").style.display = "none"; document.getElementById("examDone").style.display = "none"; }
 function startExam() {
   clearInterval(examTimer);
-  // Pick 5 random questions across all categories
   const allQ = [];
   Object.entries(ITW).forEach(([cat, qs]) => qs.forEach(q => allQ.push({ ...q, cat })));
   examQuestions = allQ.sort(() => Math.random() - .5).slice(0, 5);
   examIdx = 0; examRatings = [];
-  document.getElementById("examStart").style.display = "none";
-  document.getElementById("examDone").style.display = "none";
-  document.getElementById("examSession").style.display = "block";
+  document.getElementById("examStart").style.display = "none"; document.getElementById("examDone").style.display = "none"; document.getElementById("examSession").style.display = "block";
   renderExamQ();
 }
-
 function renderExamQ() {
   const q = examQuestions[examIdx];
   const catLabels = { general: "Question générale", technical: "Question technique", situational: "Mise en situation" };
@@ -2438,97 +1917,32 @@ function renderExamQ() {
   document.getElementById("examRevealBtn").style.display = "inline-flex";
   startExamTimer();
 }
-
 function examSpeak() { speak(examQuestions[examIdx].q, 0.82); }
-
 function startExamTimer() {
-  clearInterval(examTimer);
-  let rem = ITW_DURATION;
-  const bar = document.getElementById("examTimerBar");
-  const count = document.getElementById("examTimerCount");
-  bar.style.background = "var(--teal)";
-  count.style.color = "var(--teal)";
+  clearInterval(examTimer); let rem = ITW_DURATION;
+  const bar = document.getElementById("examTimerBar"); const count = document.getElementById("examTimerCount");
+  bar.style.background = "var(--teal)"; count.style.color = "var(--teal)";
   function tick() {
     const m = Math.floor(rem / 60), s = rem % 60;
-    count.textContent = m + ":" + (s < 10 ? "0" : "") + s;
-    bar.style.width = (rem / ITW_DURATION * 100) + "%";
+    count.textContent = m + ":" + (s < 10 ? "0" : "") + s; bar.style.width = (rem / ITW_DURATION * 100) + "%";
     if (rem <= 15) { bar.style.background = "var(--rose)"; count.style.color = "var(--rose)"; }
     else if (rem <= 30) { bar.style.background = "var(--gold)"; count.style.color = "var(--gold)"; }
     if (rem <= 0) { clearInterval(examTimer); return; }
     rem--;
   }
-  tick();
-  examTimer = setInterval(tick, 1000);
+  tick(); examTimer = setInterval(tick, 1000);
 }
-
-function showExamEval() {
-  clearInterval(examTimer);
-  document.getElementById("examRevealBtn").style.display = "none";
-  document.getElementById("examSelfEval").style.display = "block";
-}
-
-function examRate(r) {
-  examRatings.push(r);
-  examIdx++;
-  if (examIdx >= examQuestions.length) {
-    finishExam();
-  } else {
-    renderExamQ();
-  }
-}
-
+function showExamEval() { clearInterval(examTimer); document.getElementById("examRevealBtn").style.display = "none"; document.getElementById("examSelfEval").style.display = "block"; }
+function examRate(r) { examRatings.push(r); examIdx++; if (examIdx >= examQuestions.length) finishExam(); else renderExamQ(); }
 function finishExam() {
   clearInterval(examTimer);
-  document.getElementById("examSession").style.display = "none";
-  document.getElementById("examDone").style.display = "block";
-  const avg = examRatings.reduce((a, b) => a + b, 0) / examRatings.length;
-  const pct = Math.round((avg / 4) * 100);
-  const msg = pct >= 80 ? "Excellent ! Tu es prêt(e) pour cet entretien. 🌟" :
-              pct >= 60 ? "Bien ! Quelques questions à retravailler. 💪" :
-              pct >= 40 ? "En progrès. Continue à pratiquer les modules Entretien et Coaching. 📚" :
-                          "Continue — chaque session te rapproche du niveau requis. 🔄";
+  document.getElementById("examSession").style.display = "none"; document.getElementById("examDone").style.display = "block";
+  const avg = examRatings.reduce((a, b) => a + b, 0) / examRatings.length; const pct = Math.round((avg / 4) * 100);
+  const msg = pct >= 80 ? "Excellent ! Tu es prêt(e) pour cet entretien. 🌟" : pct >= 60 ? "Bien ! Quelques questions à retravailler. 💪" : pct >= 40 ? "En progrès. Continue à pratiquer. 📚" : "Continue — chaque session te rapproche. 🔄";
   document.getElementById("examDoneText").textContent = "Score de confiance : " + pct + "% — " + msg;
   const bar = document.getElementById("examScoreBar");
   bar.innerHTML = '<div style="height:10px;background:#e8eaf0;border-radius:5px;"><div style="height:100%;width:' + pct + '%;background:' + (pct >= 70 ? "var(--teal)" : pct >= 40 ? "var(--gold)" : "var(--rose)") + ';border-radius:5px;transition:width .5s;"></div></div><div style="font-size:12px;color:var(--ink2);text-align:center;margin-top:6px;">' + pct + '% de confiance</div>';
-  addScore(Math.round(pct / 5));
-  saveProgress();
-}
-
-// ============================================================
-// GRAMMAR CHECKER (correcteur intégré au Coaching)
-// ============================================================
-const GRAMMAR_RULES = [
-  { re: /\bI has\b/gi,          fix: "I have",           exp: "'I' prend 'have', pas 'has'." },
-  { re: /\bhe have\b/gi,        fix: "he has",           exp: "3e personne singulier → 'has'." },
-  { re: /\bshe have\b/gi,       fix: "she has",          exp: "3e personne singulier → 'has'." },
-  { re: /\bI am working since\b/gi, fix: "I have been working since", exp: "Durée depuis un moment précis → present perfect continuous." },
-  { re: /\bI work since\b/gi,   fix: "I have been working since", exp: "Durée depuis → present perfect continuous." },
-  { re: /\bdepend of\b/gi,      fix: "depend on",        exp: "La préposition correcte est 'on' : depend on." },
-  { re: /\binterested to\b/gi,  fix: "interested in",    exp: "'interested in', pas 'interested to'." },
-  { re: /\bexplain me\b/gi,     fix: "explain to me",    exp: "'explain' ne peut pas avoir de COI direct : 'explain to me'." },
-  { re: /\bgood english\b/gi,   fix: "good English",     exp: "Les langues prennent une majuscule en anglais." },
-  { re: /\bin the other hand\b/gi, fix: "on the other hand", exp: "'On the other hand', pas 'in'." },
-  { re: /\bfor exemple\b/gi,    fix: "for example",      exp: "Faux ami : 'exemple' → 'example' en anglais." },
-  { re: /\bactually\b/gi,       fix: "actually (≠ actuellement)", exp: "'Actually' = en fait/vraiment. Pour 'actuellement' utilise 'currently'." },
-  { re: /\bI look forward to meet\b/gi, fix: "I look forward to meeting", exp: "Après 'look forward to', verbe en -ing." },
-  { re: /\bmore easier\b/gi,    fix: "easier",           exp: "Double comparatif : 'more' + adjectif court → incorrecte. 'Easier' suffit." },
-  { re: /\bmore better\b/gi,    fix: "better",           exp: "'Better' est déjà le comparatif. 'More better' est redondant." },
-  { re: /\bmake a research\b/gi, fix: "conduct research", exp: "'Research' est indénombrable : pas d'article. 'Conduct research'." },
-  { re: /\bsince \d+ years\b/gi, fix: "for X years",     exp: "Durée = 'for'. 'Since' précède un point dans le temps, pas une durée." },
-  { re: /\bI am agree\b/gi,     fix: "I agree",          exp: "'Agree' est un verbe, pas un adjectif. 'I agree', pas 'I am agree'." },
-  { re: /\bI am disagree\b/gi,  fix: "I disagree",       exp: "'Disagree' est un verbe. 'I disagree', pas 'I am disagree'." },
-];
-
-function checkGrammar(text) {
-  if (!document.getElementById("grammarCheck").checked) return [];
-  const errors = [];
-  GRAMMAR_RULES.forEach(rule => {
-    if (rule.re.test(text)) {
-      errors.push({ fix: rule.fix, exp: rule.exp });
-    }
-    rule.re.lastIndex = 0;
-  });
-  return errors;
+  addScore(Math.round(pct / 5)); saveProgress();
 }
 
 // ============================================================
@@ -2557,16 +1971,11 @@ const SHADOW_PHRASES = [
   { sentence: "I remain at your disposal should you require any additional information.", fr: "Je reste à votre disposition si vous avez besoin d'informations complémentaires.", ctx: "Closing email" }
 ];
 
-let shadowIdx = 0, shadowRecognition = null, shadowListening = false;
-
+let shadowIdx = 0;
 function initShadow() {
-  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-    document.getElementById("shadowNoSupport").style.display = "block";
-    document.getElementById("shadowRecordBtn").style.display = "none";
-  }
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) { document.getElementById("shadowNoSupport").style.display = "block"; document.getElementById("shadowRecordBtn").style.display = "none"; }
   renderShadow();
 }
-
 function renderShadow() {
   const p = SHADOW_PHRASES[shadowIdx];
   document.getElementById("shadowProgress").textContent = (shadowIdx + 1) + " / " + SHADOW_PHRASES.length;
@@ -2577,76 +1986,43 @@ function renderShadow() {
   document.getElementById("shadowFr").textContent = p.fr;
   document.getElementById("shadowResult").style.display = "none";
   document.getElementById("shadowStatus").textContent = "Clique sur 🔊 Écouter pour commencer";
-  const recBtn = document.getElementById("shadowRecordBtn");
-  recBtn.style.opacity = ".5";
-  recBtn.style.pointerEvents = "none";
+  const recBtn = document.getElementById("shadowRecordBtn"); recBtn.style.opacity = ".5"; recBtn.style.pointerEvents = "none";
 }
-
 function shadowListen() {
-  const p = SHADOW_PHRASES[shadowIdx];
-  speak(p.sentence, 0.82);
+  const p = SHADOW_PHRASES[shadowIdx]; speak(p.sentence, 0.82);
   document.getElementById("shadowStatus").textContent = "🔊 Écoute attentivement le rythme et l'intonation...";
   const recBtn = document.getElementById("shadowRecordBtn");
-  // Enable record button after phrase has been spoken (~3s per 10 words heuristic)
   const delay = Math.max(2500, p.sentence.split(" ").length * 350);
   setTimeout(() => {
-    recBtn.style.opacity = "1";
-    recBtn.style.pointerEvents = "auto";
+    recBtn.style.opacity = "1"; recBtn.style.pointerEvents = "auto";
     document.getElementById("shadowStatus").textContent = "🎙️ Maintenant ! Répète la phrase immédiatement";
     recBtn.style.background = "var(--rose)";
-    // Auto-reset after 5s if user doesn't click
-    setTimeout(() => {
-      recBtn.style.background = "var(--gold)";
-      document.getElementById("shadowStatus").textContent = "Clique sur 🎙️ À toi pour enregistrer, ou réecoute";
-    }, 5000);
+    setTimeout(() => { recBtn.style.background = "var(--gold)"; document.getElementById("shadowStatus").textContent = "Clique sur 🎙️ À toi pour enregistrer, ou réecoute"; }, 5000);
   }, delay);
 }
-
 function shadowRecord() {
   const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SpeechRec) return;
-  const rec = new SpeechRec();
-  rec.lang = "en-GB";
-  rec.interimResults = false;
-  rec.maxAlternatives = 2;
+  const rec = new SpeechRec(); rec.lang = "en-GB"; rec.interimResults = false; rec.maxAlternatives = 2;
   const recBtn = document.getElementById("shadowRecordBtn");
-  recBtn.textContent = "⏹️ Enregistrement...";
-  recBtn.style.background = "var(--rose)";
+  recBtn.textContent = "⏹️ Enregistrement..."; recBtn.style.background = "var(--rose)";
   document.getElementById("shadowStatus").textContent = "🎙️ Je t'écoute...";
   rec.onresult = (e) => {
-    const heard = e.results[0][0].transcript;
-    const target = SHADOW_PHRASES[shadowIdx].sentence;
-    // Simple word-overlap score
+    const heard = e.results[0][0].transcript; const target = SHADOW_PHRASES[shadowIdx].sentence;
     const tw = target.toLowerCase().replace(/[^a-z ]/g,"").split(" ");
     const hw = heard.toLowerCase().replace(/[^a-z ]/g,"").split(" ");
-    const matched = tw.filter(w => hw.includes(w)).length;
-    const pct = Math.round(matched / tw.length * 100);
-    const msg = pct >= 80 ? "🌟 Excellent ! Rythme et mots très proches." :
-                pct >= 55 ? "✅ Bien ! Continue à travailler le rythme." :
-                pct >= 30 ? "📈 Bonne tentative. Réecoute et réessaie." :
-                            "🔄 Réecoute plusieurs fois avant de répéter.";
-    document.getElementById("shadowResultText").innerHTML =
-      '<strong>' + pct + '%</strong> de correspondance — ' + msg +
-      '<br><span style="font-size:12px;color:var(--ink2);margin-top:6px;display:block;">Entendu : «' + heard + '»</span>';
+    const matched = tw.filter(w => hw.includes(w)).length; const pct = Math.round(matched / tw.length * 100);
+    const msg = pct >= 80 ? "🌟 Excellent ! Rythme et mots très proches." : pct >= 55 ? "✅ Bien ! Continue à travailler le rythme." : pct >= 30 ? "📈 Bonne tentative. Réecoute et réessaie." : "🔄 Réecoute plusieurs fois avant de répéter.";
+    document.getElementById("shadowResultText").innerHTML = '<strong>' + pct + '%</strong> de correspondance — ' + msg + '<br><span style="font-size:12px;color:var(--ink2);margin-top:6px;display:block;">Entendu : «' + heard + '»</span>';
     document.getElementById("shadowResult").style.display = "block";
     document.getElementById("shadowStatus").textContent = pct >= 70 ? "Super ! Passe au suivant →" : "Réecoute et réessaie ou passe à la phrase suivante.";
-    recBtn.textContent = "🎙️ À toi !";
-    recBtn.style.background = "var(--gold)";
-    addScore(pct >= 70 ? 3 : 1);
-    saveProgress();
+    recBtn.textContent = "🎙️ À toi !"; recBtn.style.background = "var(--gold)"; addScore(pct >= 70 ? 3 : 1); saveProgress();
   };
-  rec.onerror = () => {
-    recBtn.textContent = "🎙️ À toi !";
-    document.getElementById("shadowStatus").textContent = "Micro non détecté. Vérifie les permissions Chrome.";
-  };
+  rec.onerror = () => { recBtn.textContent = "🎙️ À toi !"; document.getElementById("shadowStatus").textContent = "Micro non détecté. Vérifie les permissions Chrome."; };
   rec.onend = () => { recBtn.textContent = "🎙️ À toi !"; };
   rec.start();
 }
-
-function shadowNav(d) {
-  shadowIdx = (shadowIdx + d + SHADOW_PHRASES.length) % SHADOW_PHRASES.length;
-  renderShadow();
-}
+function shadowNav(d) { shadowIdx = (shadowIdx + d + SHADOW_PHRASES.length) % SHADOW_PHRASES.length; renderShadow(); }
 
 // ============================================================
 // INIT
@@ -2655,16 +2031,9 @@ loadSrs();
 loadProgress();
 updateDashboard();
 
-// Enregistrement du Service Worker (PWA)
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("sw.js").catch(() => {});
-  });
+  window.addEventListener("load", () => { navigator.serviceWorker.register("sw.js").catch(() => {}); });
 }
-
-window.addEventListener("load", () => {
-  // Voix déclenchée uniquement par le bouton Démarrer (fix mobile)
-});
 </script>
 </body>
 </html>
